@@ -1,0 +1,15 @@
+{{#
+	@name Buttons
+	@desc Multiple buttons component calling in `resources/views/components/_button.antlers.html`.
+#}}
+
+{{ if buttons }}
+    <div
+        {{ js }}
+        class="inline-flex flex-col md:flex-row justify-start md:items-center flex-wrap space-y-8 md:space-y-0 md:space-x-6 {{ class }}"
+    >
+        {{ buttons }}
+            {{ partial:components/button js="" }}
+        {{ /buttons }}
+    </div>
+{{ /if }}

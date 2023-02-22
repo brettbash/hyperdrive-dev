@@ -1,0 +1,32 @@
+{{#
+	@name Header
+	@desc The sites header rendered on each page.
+#}}
+
+<header class="fixed z-30 inset-x-0 top-0 w-full py-4">
+    <div class="fluid-container flex justify-between items-center">
+        <div
+            x-data="fadeIn()"
+            x-init="
+                scrollTrigger = false;
+                delay = $store.site.enterDelay;
+                mounted();
+            "
+            x-ref="element"
+        >
+            {{ partial:components/logo width="w-48 md:w-80" }}
+        </div>
+
+        <div
+            x-data="fadeIn()"
+            x-init="
+                scrollTrigger = false;
+                delay = $store.site.enterDelay + 0.2;
+                mounted();
+            "
+            x-ref="element"
+        >
+            {{ partial:modules/navigation }}
+        </div>
+    </div>
+</header>

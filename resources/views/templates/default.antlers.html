@@ -1,0 +1,12 @@
+{{#
+	@name Default
+	@desc The default template with an outer wrapper grid as defined in tailwind.config.js. It makes sure all blocks on a page get evenly spaced without having to worry about margins or paddings.
+#}}
+
+{{ partial:modules/hero }}
+
+<main class="relative outer-grid {{ !spacing_top ?= "!pt-0" }} {{ !spacing_bottom ?= "!pb-0" }}  bg-white">
+    {{ blocks scope="block" }}
+        {{ partial src="blocks/{type}" }}
+    {{ /blocks }}
+</main>

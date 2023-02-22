@@ -1,0 +1,20 @@
+{{#
+	@name Button attributes
+	@desc A single button component. Faux is used when a button is displayed inside a link (for example in link blocks).
+#}}
+
+{{ if label }}
+    <div
+        x-data="magnetic()"
+        x-ref="element"
+        @mousemove="magnetize($event, $el, $refs.element)"
+        @mouseleave="demagnetize($refs.element)"
+        class="relative hover:z-10"
+    >
+        {{ if button_type === "primary-light" }}
+            {{ partial:components/button_primary_light }}
+        {{ else }}
+            {{ partial:components/button_primary_dark }}
+        {{ /if }}
+    </div>
+{{ /if }}

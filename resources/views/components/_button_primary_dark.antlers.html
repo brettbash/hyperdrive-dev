@@ -1,0 +1,16 @@
+{{#
+	@name Button: Primary Dark
+	@desc A single button component to be used inside of the button component.
+#}}
+
+<{{ as or "a" }}
+    {{ js }}
+    class="inline-flex items-center px-4 pt-2 pb-1 bg-blue hover:bg-blue-500 focus-visible:ring focus-visible:ring-offset-2 focus-visible:ring-yellow rounded-full text-yellow hover:text-yellow-100 text-lg xl:text-xl font-sans focus:outline-none leading-none select-none whitespace-nowrap motion-safe:transition
+    {{ class }}"
+
+    {{ unless faux }}
+        {{ partial:snippets/button_attributes }}
+    {{ /unless }}
+>
+    {{ label }}
+</{{ as or "a" }}>

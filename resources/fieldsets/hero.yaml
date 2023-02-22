@@ -1,0 +1,27 @@
+title: 'Module: Hero'
+fields:
+  -
+    import: background
+  -
+    handle: title
+    field:
+      input_type: text
+      display: Title
+      type: text
+      icon: text
+      listable: hidden
+      width: 66
+  -
+    handle: subtitle
+    field:
+      input_type: text
+      display: Subtitle
+      type: text
+      icon: text
+      listable: hidden
+      width: 33
+  -
+    handle: text
+    field: common.text_plain
+  -
+    import: buttons

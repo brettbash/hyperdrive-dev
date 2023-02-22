@@ -1,0 +1,13 @@
+{{#
+	@name h1
+	@desc The typography h1 partial to render an h1 with `class`, `as`, `color` and `content` attributes.
+#}}
+
+<{{ as or "h1" }}
+    {{ js }}
+    class="text-5xl md:text-7xl xl:text-8xl font-sans leading-tight
+    {{ color or "text-inherit" }}
+    {{ class }}"
+>
+        {{ content | nl2br }}
+</{{ as or "h1" }}>

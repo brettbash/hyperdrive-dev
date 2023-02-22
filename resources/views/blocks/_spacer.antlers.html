@@ -1,0 +1,13 @@
+{{#
+	@name Spacer
+	@desc Adds spacing between blocks
+#}}
+
+<div
+    class="flex w-full
+    {{ if block:space === "lg" }}
+        pt-10 md:pt-16 lg:pt-24
+    {{ elseif block:space === "md" }}
+        pt-8 md:pt-12 lg:pt-16
+    {{ /if }}"
+></div>

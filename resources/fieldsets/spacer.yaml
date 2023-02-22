@@ -1,0 +1,14 @@
+title: 'Block: Spacer'
+fields:
+  -
+    handle: space
+    field:
+      options:
+        sm: SM
+        md: MD
+        lg: LG
+      display: Space
+      default: md
+      type: button_group
+      icon: button_group
+      listable: hidden

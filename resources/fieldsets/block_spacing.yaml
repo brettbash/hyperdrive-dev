@@ -1,0 +1,11 @@
+title: 'Block Spacing'
+fields:
+  -
+    handle: set_top_padding
+    field:
+      display: 'Top Padding'
+      default: true
+      type: toggle
+      icon: toggle
+      instructions: 'If a block has a sibling block above it, this block will have top padding when this is enabled (enabled by default).'
+      listable: hidden

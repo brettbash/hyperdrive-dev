@@ -1,0 +1,34 @@
+{{#
+	@name Button attributes
+	@desc Button attributes snippet used in `resources/views/components/_button.antlers.html` and `resources/views/page_builder/_link_blocks.antlers.html`.
+#}}
+
+{{ if action == "entry" }}
+    href="{{ entry:url }}"
+{{ elseif action == "url" }}
+    href="{{ url }}"
+{{ elseif action == "email" }}
+    href="mailto:{{ email }}"
+{{ elseif action == "tel" }}
+    href="tel:{{ tel }}"
+{{ elseif action == "asset" }}
+    href="{{ asset }}" download
+{{ elseif action == "anchor" }}
+    href="#{{ anchor }}"
+{{ /if }}
+
+{{ if action === "anchor" }}
+    @click.prevent="$scroll('#{{ anchor }}', {offset:120})"
+{{ /if }}
+
+{{ if target_blank }}
+    rel="noopener" target="_blank"
+{{ /if }}
+
+{{ if attr_title }}
+    title="{{ attr_title }}"
+{{ /if }}
+
+{{ if attr_aria }}
+    aria-label="{{ attr_aria }}"
+{{ /if }}

@@ -1,0 +1,71 @@
+title: 'Component: Background'
+fields:
+  -
+    handle: asset_type
+    field:
+      options:
+        image: Image
+        video: Video
+      inline: true
+      default: image
+      type: button_group
+      icon: button_group
+      listable: hidden
+      display: 'Background Type'
+      validate:
+        - required
+  -
+    handle: image
+    field:
+      container: assets
+      mode: grid
+      restrict: false
+      allow_uploads: true
+      max_files: 1
+      type: assets
+      listable: hidden
+      display: Image
+      if:
+        asset_type: 'equals image'
+  -
+    handle: mp4
+    field:
+      container: assets
+      mode: grid
+      restrict: false
+      allow_uploads: true
+      max_files: 1
+      type: assets
+      listable: hidden
+      display: MP4
+      width: 33
+      if:
+        asset_type: 'equals video'
+  -
+    handle: webm
+    field:
+      container: assets
+      mode: grid
+      restrict: false
+      allow_uploads: true
+      max_files: 1
+      type: assets
+      width: 33
+      listable: hidden
+      display: WebM
+      if:
+        asset_type: video
+  -
+    handle: poster
+    field:
+      container: assets
+      mode: grid
+      restrict: false
+      allow_uploads: true
+      max_files: 1
+      type: assets
+      width: 33
+      listable: hidden
+      display: Poster
+      if:
+        asset_type: video

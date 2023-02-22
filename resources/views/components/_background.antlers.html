@@ -1,0 +1,36 @@
+{{#
+	@name Background
+	@desc Used to add cover backgrounds in elements
+#}}
+
+<div
+    {{ js }}
+    class="absolute inset-0 w-full h-full {{ class }}"
+>
+    {{ if asset_type === "video" }}
+        <video
+            class="absolute inset-0 w-full h-full object-cover"
+            autoplay
+            muted
+            loop
+            poster="{{ poster }}"
+        >
+
+            {{ if mp4 }}
+                <source src="{{ mp4 }}" type="video/mp4" />
+            {{ endif }}
+
+            {{ if webm }}
+                <source src="{{ webm }}" type="video/webm" />
+            {{ endif }}
+        </video>
+
+    {{ else }}
+        {{ partial:components/picture
+            :image="image"
+            class="w-full h-full"
+            cover="true"
+            sizes="100vw"
+        }}
+    {{ /if }}
+</div>

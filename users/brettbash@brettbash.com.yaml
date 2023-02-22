@@ -1,0 +1,8 @@
+name: 'Brett Bash'
+super: true
+id: 6bbf9d1c-4040-4f7e-ae79-1186e94f7a36
+password_hash: $2y$10$7lR2EbC/4HPFbKH0aZ1tYOIgNCM5TARmYfaXMEQMaFpxsP59C1Tde
+preferences:
+  collections:
+    pages:
+      after_save: continue_editing

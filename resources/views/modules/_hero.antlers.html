@@ -1,0 +1,133 @@
+{{#
+	@name Hero
+	@desc Primary Hero
+#}}
+
+<section class="relative flex items-center w-full min-h-screen bg-blue-900 text-white">
+    {{# -- π ----
+    // :: BACKGROUND
+    // : ------------------------------------ #}}
+    <div
+        x-data="fadeIn()"
+        x-init="
+            scrollTrigger = false;
+            delay = $store.site.enterDelay + 1 + {{ increment }};
+            mounted();
+        "
+        x-ref="element"
+        class="absolute inset-0 w-full h-full"
+    >
+        <div
+            x-data="parallaxBackground()"
+            x-init="
+                container = $refs.container;
+                yStart = 0;
+                start = 'top top';
+                mounted();
+            "
+            x-ref="container"
+            x-cloak
+            class="absolute inset-0 w-full h-full overflow-hidden"
+        >
+            {{ partial:components/background
+                :asset_type="hero_asset_type"
+                :image="hero_image"
+                js="x-ref='background'"
+            }}
+        </div>
+    </div>
+
+    <div class="absolute right-0 top-0 w-full h-full bg-gradient-to-bl from-black to-transparent opacity-25"></div>
+    <div class="absolute left-0 inset-y-0 w-1/3 h-full bg-gradient-to-r from-black to-transparent opacity-25"></div>
+    <div class="absolute inset-0 w-full h-full bg-blue-900 opacity-50"></div>
+
+    {{# -- π ----
+    // :: CONTENT
+    // : ------------------------------------ #}}
+    <div
+        x-data="parallax()"
+        x-init="
+            container = $refs.container;
+            start = 'top top';
+            yStart = 0;
+            yEnd = -60;
+            fade = 'out';
+            mounted();
+        "
+        x-ref="container"
+        class="relative flex items-center w-full min-h-screen pt-20 pb-16"
+    >
+        <div x-ref="element" class="relative container">
+            {{# :: Subtitle
+            {+} ------------------------------------ #}}
+            {{ if hero_subtitle }}
+                {{ partial:typography/h6
+                    as="p"
+                    :content="hero_subtitle"
+                    color="text-green"
+                    class="mb-8"
+                    js="
+                        x-data='wordsUp()'
+                        x-init='
+                            scrollTrigger = false;
+                            delay = $store.site.enterDelay + {increment by="0.3"};
+                            mounted();
+                        '
+                        x-ref='wrapper'
+                    "
+                }}
+            {{ /if }}
+
+            {{# :: Title
+            {+} ------------------------------------ #}}
+            {{ partial:typography/h1
+                content="{{ hero_title or title }}"
+                class="mb-2"
+                js="
+                    x-data='wordsUp()'
+                    x-init='
+                        scrollTrigger = false;
+                        delay = $store.site.enterDelay + {increment by="0.3"};
+                        mounted();
+                    '
+                    x-ref='wrapper'
+                "
+            }}
+
+            {{# :: Text
+            {+} ------------------------------------ #}}
+            {{ if hero_text }}
+                {{ partial:typography/paragraph
+                    as="p"
+                    :content="hero_text"
+                    class="max-w-md mb-8 overflow-hidden"
+                    js="
+                        x-data='linesRight()'
+                        x-init='
+                            scrollTrigger = false;
+                            delay = $store.site.enterDelay + {increment by="0.5"};
+                            mounted();
+                        '
+                        x-ref='wrapper'
+                    "
+                }}
+            {{ /if }}
+
+            {{# :: Buttons
+            {+} ------------------------------------ #}}
+            {{ partial:components/buttons
+                :buttons="hero_buttons"
+                button_type="primary-light"
+                js="
+                    x-data='fadeIn()'
+                    x-init='
+                        scrollTrigger = false;
+                        delay = $store.site.enterDelay + {increment by="0.4"};
+                        mounted();
+                    '
+                    x-ref='element'
+                "
+            }}
+        </div>
+    </div>
+</section>

@@ -1,0 +1,13 @@
+{{#
+	@name Paragraph
+	@desc The typography paragraph partial to render a paragraph with `class`, `as`, `color` and `content` attributes.
+#}}
+
+<{{ as or 'p' }}
+    {{ js }}
+    class="mt-0 mb-8 last:mb-0 leading-relaxed
+    {{ color or 'text-inherit' }}
+    {{ class }}"
+>
+    {{ content | nl2br }}
+</{{ as or 'p' }}>

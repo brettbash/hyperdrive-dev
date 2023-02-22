@@ -1,0 +1,12 @@
+title: 'Anchor'
+fields:
+  -
+    handle: anchor
+    field:
+      display: 'Anchor ID'
+      placeholder: 'your-section-id'
+      input_type: text
+      type: text
+      instructions: 'Allows button linking to this area using the ID'
+      localizable: true
+      listable: hidden

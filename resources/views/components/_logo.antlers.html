@@ -1,0 +1,12 @@
+{{#
+	@name Logo
+	@desc The logo component with a `width` attribute.
+#}}
+
+<a
+    href="{{ site:url }}"
+    class="inline-block {{ width }}"
+    aria-label="Logo {{ config:app:name }}"
+>
+    {{ svg src="visuals/logo" class="w-full" }}
+</a>

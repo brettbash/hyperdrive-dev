@@ -6,8 +6,10 @@
 {{# Page title #}}
 <title>
     {{ yield:seo_title }}
-    {{ seo_title ? seo_title : title }}
-    {{ seo:title_separator ? seo:title_separator : " &#124; " }}
+    {{ if slug !== "home" }}
+        {{ seo_title ? seo_title : title | smartypants }}
+        {{ seo:title_separator ? seo:title_separator : " &#124; " }}
+    {{ /if }}
     {{ seo:site_name ? seo:site_name : config:app:name }}
 </title>
 

@@ -1,0 +1,30 @@
+{{#
+	@name Card Tall Small
+#}}
+
+<div class="w-40 lg:w-48">
+    <a
+        {{ action }}
+            {{ partial:snippets/link_attributes }}
+        {{ /action }}
+        class="w-full group"
+    >
+    {{# <{{ partial:snippets/link_tag_generator }}> #}}
+
+        <div class="relative flex justify-center items-end w-full aspect-[4/6] p-8 bg-neutral overflow-hidden group-hover:scale-110 transition-transform duration-300 ease-in-out-circ">;
+            {{ media }}
+                {{ partial:components/background }}
+            {{ /media }}
+        </div>
+
+        {{ if title }}
+            {{ partial:typography/h6
+                :content="title"
+                color="relative text-white group-hover:text-primary text-center"
+                class="mt-4 transition"
+            }}
+        {{ /if }}
+
+    {{# </{{ partial:snippets/link_tag_generator }}> #}}
+    </a>
+</div>

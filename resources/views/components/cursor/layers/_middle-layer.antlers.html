@@ -1,0 +1,15 @@
+{{#
+	@name Middle Cursor Layer
+	@desc Sits in the middle of the cursor layers
+#}}
+
+<div
+    x-ref="layerMiddle"
+    class="fixed z-50 top-0 left-0"
+>
+    {{# :: Default Cursor
+    {+} ------------------------------------ #}}
+
+    {{# :: Hover -------------- #}}
+    {{ partial:components/cursor/ring class="opacity-0" }}
+</div>

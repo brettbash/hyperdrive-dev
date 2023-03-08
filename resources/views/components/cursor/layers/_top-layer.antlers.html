@@ -1,0 +1,40 @@
+{{#
+	@name Top Cursor Layer
+	@desc Below the cursor layer king, thy layer reigns at the top position within thee layer kingdom.
+#}}
+
+<div
+    x-ref="layerTop"
+    class="fixed z-50 top-0 left-0"
+>
+    {{ partial:components/cursor/dot
+        ref="productCardDot"
+        size="w-12 h-12"
+        no_border="true"
+    }}
+        <div class="relative w-full h-full p-3 text-white">
+            <div class="relative flex justify-center items-center w-full h-full overflow-hidden">
+                <div x-ref="productCardArrow" class="w-full">
+                    {{ svg:visuals/arrow-right class="w-full stroke-current" }}
+                </div>
+            </div>
+        </div>
+    {{ /partial:components/cursor/dot }}
+
+    {{ partial:components/cursor/dot
+        ref="play"
+        size="w-28 h-28"
+        no_border="true"
+    }}
+        <div class="relative flex justify-center items-center w-full h-full">
+            {{ svg:visuals/play class="ml-1 w-5" }}
+        </div>
+    {{ /partial:components/cursor/dot }}
+
+
+    {{ partial:components/cursor/dot
+        ref="pointerDot"
+        size="w-2 h-2"
+    }}
+
+</div>

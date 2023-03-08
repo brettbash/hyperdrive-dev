@@ -4,10 +4,15 @@
 #}}
 
 <{{ as or "h6" }}
-    {{ js }}
-    class="text-base font-mono leading-tight uppercase
-    {{ color or "text-inherit" }}
-    {{ class }}"
+    {{ attribute }}
+    class="
+        text-xs lg:text-sm font-sans
+        {{ font_weight or "font-normal" }}
+        tracking-wide
+        {{ font_case or "uppercase" }}
+        {{ color or "text-inherit" }}
+        {{ class }}
+    "
 >
-        {{ content | nl2br }}
+    {{ content | nl2br }}
 </{{ as or "h6" }}>

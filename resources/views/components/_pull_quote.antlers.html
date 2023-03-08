@@ -4,13 +4,46 @@
     @set page.article.pull_quote
 #}}
 
-<div class="size-{{ size }} my-4">
-    <div class="p-0 m-0 text-yellow italic text-3xl leading-snug">
-        {{ quote | nl2br }}
+<div
+    x-data
+    x-ref="container"
+    class="size-{{ set:size }} my-4"
+>
+
+    <div
+        {{# x-data="lines()" #}}
+        x-data="fadeIn()"
+
+        x-init="
+            delay = $store.animationDelay + {{ increment:block{{ block:index }}set{{ index }} by="0.4" }};
+            $nextTick(() => {
+                trigger = $refs.container;
+                mounted();
+            });
+        "
+
+        x-ref="element"
+        class="p-0 m-0 text-secondary-500 italic text-3xl leading-snug"
+    >
+        {{ set:quote | nl2br }}
     </div>
-    {{ if author }}
-        <span class="block mt-4 font-bold text-gray">
-            {{ author }}
+
+    {{ if set:author }}
+        <span
+            x-data="words()"
+
+            x-init="
+                delay = $store.animationDelay + {{ increment:block{{ block:index }}set{{ index }} by="0.4" }};
+                $nextTick(() => {
+                    trigger = $refs.container;
+                    mounted();
+                });
+            "
+
+            x-ref="element"
+            class="block mt-4 font-bold text-gray"
+        >
+            {{ set:author }}
         </span>
     {{ /if }}
 </div>

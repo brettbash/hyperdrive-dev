@@ -1,13 +1,13 @@
 {{#
 	@name Picture
-	@desc The picture component. A responsive imageset in a picture element. See `resources/views/components/_figure.antlers.html` for an example on how to use this.
+	@desc The picture component.
 #}}
 
 {{ if image }}
     <picture>
         {{ asset :url="image" }}
-            {{ if extension == 'svg' || extension == 'gif' }}
-                <img class="{{ class }}" src="{{ url }}" alt="{{ alt }}" />
+            {{ if extension == 'svg' || extension == 'gif' || static_image }}
+                <img class="{{ class }}" src="{{ url }}" alt="{{ alt }}">
             {{ else }}
                 <source
                     srcset="

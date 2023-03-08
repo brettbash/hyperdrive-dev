@@ -1,0 +1,118 @@
+{{#
+	@name Soundscape Section
+	@desc Used to add sound to any section, module, or block. Add a src, parameters, and the content goes into the slot.
+#}}
+
+{{ if sound }}
+    <div
+        x-data="{
+            audio: null,
+            src: '{{ sound }}',
+            start: '{{ start or "top bottom" }}',
+            end: '{{ end or "bottom top" }}',
+            inView: false,
+            playing: false,
+            volume: {{ volume or "1" }},
+            markers: {{ markers or "false" }},
+
+            init() {
+                $nextTick(() => this.mounted());
+
+                this.$watch('$store.audioPause', value => {
+                    if (this.inView) {
+                        if (value && this.playing) {
+                            this.pause();
+                        } else {
+                            this.resume();
+                        }
+                    }
+                });
+
+                this.$watch('$store.audioMute', value => {
+                    if (this.inView) {
+                        if (value && this.playing) {
+                            this.mute();
+                        } else {
+                            this.unmute();
+                        }
+                    }
+                });
+            },
+
+            mounted() {
+                this.audio = new Howl({
+                    src: this.src,
+                    loop: true
+                });
+
+                ScrollTrigger.create({
+                    trigger: this.$refs.container,
+                    start: this.start,
+                    end: this.end,
+                    markers: this.markers,
+
+                    onToggle: self => {
+                        if (self.isActive) {
+                            this.inView = true;
+                            this.play();
+
+                        } else {
+                            this.inView = false;
+                            this.stop();
+                        }
+
+                    },
+                });
+            },
+
+            play() {
+                if (!this.playing && !$store.audioMute && !$store.audioPause) {
+                    this.playing = true;
+                    this.audio.play();
+                    this.audio.fade(0, this.volume, 1000);
+                }
+            },
+
+            stop() {
+                if (this.playing && !$store.audioMute && !$store.audioPause) {
+                    this.audio.fade(this.volume, 0, 1000);
+
+                    setTimeout(() => {
+                        this.audio.pause();
+                        this.playing = false;
+                    }, 1100);
+                }
+            },
+
+            pause() {
+                this.audio.fade(this.volume, 0, 1000);
+
+                setTimeout(() => {
+                    this.audio.pause();
+                    this.playing = false;
+                }, 1100);
+            },
+
+            resume() {
+                this.playing = true;
+                this.audio.play();
+                this.audio.fade(0, this.volume, 1000);
+            },
+
+            mute() {
+                console.log('Mute the Audio');
+            },
+
+            unmute() {
+                console.log('UNMUTE');
+            }
+        }"
+        x-ref="container"
+    >
+{{ /if }}
+
+    {{ slot }}
+
+{{ if sound }}
+    </div>
+{{ /if }}

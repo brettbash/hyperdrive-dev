@@ -13,7 +13,7 @@ module.exports = {
     theme: {
         extend: {
             colors: {
-                yellow: {
+                primary: {
                     100: '#FFFCCB',
                     200: '#FFFAA1',
                     300: '#FFF766',
@@ -25,7 +25,7 @@ module.exports = {
                     900: '#a09600'
                 },
 
-                blue: {
+                secondary: {
                     100: '#379CFD',
                     200: '#3B8FE0',
                     300: '#3680C9',
@@ -37,7 +37,7 @@ module.exports = {
                     900: '#08131F'
                 },
 
-                green: {
+                tertiary: {
                     100: '#deffff',
                     200: '#caf3eb',
                     DEFAULT: '#B6DFD7',
@@ -49,15 +49,17 @@ module.exports = {
                     900: '#3e675f'
                 },
 
-                gray: {
-                    DEFAULT: colors.blueGray['500'],
-                    ...colors.blueGray
+                neutral: {
+                    DEFAULT: colors.slate['500'],
+                    ...colors.slate
                 },
 
                 transparent: 'transparent',
                 black: '#000000',
                 white: '#ffffff'
             },
+
+            // cursor: { none: 'none' },
 
             fontFamily: {
                 mono: [
@@ -129,13 +131,44 @@ module.exports = {
                     // fontFamily: theme('fontFamily.sans'),
                     // fontFamily: theme('fontFamily.serif'),
                 },
+
+
+                /* :: Forms
+                {+} ---------------------------------- */
+                "[type='text'], [type='email'], [type='url'], [type='password'], [type='number'], [type='date'], [type='datetime-local'], [type='month'], [type='search'], [type='tel'], [type='time'], [type='week'], [multiple], textarea, select": {
+                        padding: '0 1rem',
+                        background: theme('colors.transparent'),
+                        border: '0',
+                        border: '1px solid',
+                        borderColor: theme('colors.gray.300'),
+                        borderRadius: '0 !important',
+                        fontSize: '0.875rem',
+                        fontFamily: theme('fontFamily.mono'),
+                        transition: 'all 0.3s cubic-bezier(0.455, 0.03, 0.515, 0.955)'
+                    },
+
+                [`@media (min-width: ${theme('screens.lg')})`]: {
+                    "[type='text'], [type='email'], [type='url'], [type='password'], [type='number'], [type='date'], [type='datetime-local'], [type='month'], [type='search'], [type='tel'], [type='time'], [type='week'], [multiple], textarea, select":
+                        { fontSize: '0.75rem' },
+
+                    'a, button, input, label, textarea': { cursor: 'none' }
+                },
+
+                textarea: { resize: 'none' },
+
+                "[type='text']:focus, [type='email']:focus, [type='url']:focus, [type='password']:focus, [type='number']:focus, [type='date']:focus, [type='datetime-local']:focus, [type='month']:focus, [type='search']:focus, [type='tel']:focus, [type='time']:focus, [type='week']:focus, [multiple]:focus, textarea:focus, select:focus": {
+                    borderColor: theme('colors.gold.DEFAULT'),
+                    outline: 'none',
+                    boxShadow: 'none !important'
+                },
+
                 '::selection': {
-                    backgroundColor: theme('colors.yellow.DEFAULT'),
-                    color: theme('colors.blue.DEFAULT')
+                    backgroundColor: theme('colors.primary.DEFAULT'),
+                    color: theme('colors.secondary.DEFAULT')
                 },
 
                 '::-moz-selection': {
-                    backgroundColor: theme('colors.yellow.DEFAULT'),
+                    backgroundColor: theme('colors.primary.DEFAULT'),
                     color: theme('colors.white')
                 }
             });

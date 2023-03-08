@@ -1,0 +1,24 @@
+{{#
+	@name Scrolling Stats
+#}}
+
+<section
+    id="{{ block:anchor }}"
+    x-data
+    class="
+        fluid-container relative flex w-full justify-center
+        {{ partial:snippets/no_block_spacing }}
+    "
+>
+
+    <img
+        x-data="fadeIn()"
+        x-init="mounted()"
+        x-ref="element"
+        src="visuals/why-unspoken.png"
+        class="w-full max-w-3xl"
+        alt="Why Unspoken: Infograph"
+    >
+
+</section>
+

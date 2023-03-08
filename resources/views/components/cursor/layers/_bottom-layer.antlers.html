@@ -1,0 +1,28 @@
+{{#
+	@name Bottom Cursor Layer
+	@desc The bottom of the layer pit. This layer takes the most time to catch up to the mouse position.
+#}}
+
+<div
+    x-ref="layerBottom"
+    class="fixed z-50 top-0 left-0"
+>
+    {{# :: Default Cursor
+    {+} ------------------------------------ #}}
+    {{# :: Click -------------- #}}
+    {{ partial:components/cursor/dot
+        ref="pulse"
+        size="w-16 h-16"
+        no_border="true"
+    }}
+
+    {{# :: View Text Spin
+    {+} ------------------------------------ #}}
+    {{ partial:components/cursor/text-spin
+        ref="viewTextSpin"
+        size="w-24 h-24"
+        text="visuals/view-circle-text"
+    }}
+
+
+</div>

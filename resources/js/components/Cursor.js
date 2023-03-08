@@ -2,159 +2,330 @@ export default () => {
     return {
         scale: 1,
         opacity: 1,
-        mousePos: {
+
+        cursorPos: {
             x: 0,
             y: 0
         },
-        posDot: {
+
+        layerTopPos: {
             x: 0,
             y: 0
         },
-        posCircle: {
+
+        layerMiddlePos: {
             x: 0,
             y: 0
         },
-        active: false,
-        animating: false,
+
+        layerBottomPos: {
+            x: 0,
+            y: 0
+        },
+
+        animation: '',
+        entering: false,
+
+        loadingSpin: null,
+        viewSpin: null,
+        customizeSpin: null,
+        rinehartSpin: null,
 
         start() {
-            // cursorActions.init();
-            this.cursorActions();
+            window.addEventListener('mousemove', ev => this.moveCursor(ev));
+            this.moveLayers();
 
-            gsap.set(this.$refs.dot, { opacity: 0 });
-            gsap.set(this.$refs.ring, { opacity: 0 });
-            gsap.to(this.$refs.circle, { opacity: 1, duration: 0.2 });
+            /* :: Hide Default Browser Cursor
+            {+} ---------------------------------- */
+            setTimeout(() => {
+                // document.body.classList.add('lg:cursor-none');
+                this.$refs.cursorContainer.classList.add('lg:visible');
+            }, 200);
 
-            gsap.set(this.$refs.dot, { xPercent: -50, yPercent: -50 });
-            gsap.set(this.$refs.circle, { xPercent: -50, yPercent: -50 });
+            gsap.set(
+                this.$refs.logoCursor,
+                {
+                    xPercent: 101,
+                    yPercent: -101,
+                }
+            );
 
-            window.addEventListener('mousemove', ev => this.moveMe(ev));
-            gsap.ticker.add(this.updatePosition);
+            /* :: Default Cursor
+            {+} ---------------------------------- */
+            window.addEventListener('cursorEnter', () => this.enter());
+            window.addEventListener('cursorLeave', () => this.leave());
+            window.addEventListener('cursorClick', () => this.click());
 
-            // :: Do with Spruce ------------ //
-            // this.$root.$on('cursorEnter', this.enter);
-            // this.$root.$on('cursorLeave', this.leave);
-            // this.$root.$on('cursorClick', this.click);
+            /* :: Logo Cursor
+            {+} ---------------------------------- */
+            window.addEventListener('cursorLogoEnter', () => this.logoEnter());
+            window.addEventListener('cursorLogoLeave', () => this.logoLeave());
+
+            /* :: Loading
+            {+} ---------------------------------- */
+            window.addEventListener('cursorLoadingEnter', () => this.loadingEnter());
+            window.addEventListener('cursorLoadingLeave', () => this.loadingLeave());
         },
 
-        moveMe(ev) {
-            this.mousePos.x = ev.clientX;
-            this.mousePos.y = ev.clientY;
+        // π ----
+        // :: UTILITIES ---------------------------::
+        // ____
+        createSpin(element, duration = 7, paused = true, rotation = '360deg') {
+            const tl = gsap.timeline({
+                paused: paused,
+                repeat: -1
+            });
+
+            tl.to(element, { duration: duration, rotate: rotation, ease: 'none' });
+
+            return tl;
         },
 
-        updatePosition() {
-            if (!this.active) {
-                this.posDot.x += (this.mousePos.x - this.posDot.x) * 0.3;
-                this.posDot.y += (this.mousePos.y - this.posDot.y) * 0.3;
+        // π ----
+        // :: CURSOR POSITIONING ---------------------------::
+        // ____
+        moveCursor(ev) {
+            this.cursorPos.x = ev.clientX;
+            this.cursorPos.y = ev.clientY;
 
-                this.posCircle.x += (this.mousePos.x - this.posCircle.x) * 0.1;
-                this.posCircle.y += (this.mousePos.y - this.posCircle.y) * 0.1;
-
-                gsap.set(this.$refs.dot, { x: this.posDot.x, y: this.posDot.y });
-                gsap.set(this.$refs.circle, { x: this.posCircle.x, y: this.posCircle.y });
-            }
-        },
-
-        cursorActions() {
-            [...document.querySelectorAll('a, button')].forEach(link => {
-                link.addEventListener('mouseenter', () => {
-                    // this.$root.$emit('cursorEnter');
-                });
-                link.addEventListener('mouseleave', () => {
-                    // this.$root.$emit('cursorLeave');
-                });
-                link.addEventListener('click', () => {
-                    // this.$root.$emit('cursorClick');
-                });
+            gsap.set(this.$refs.cursor, {
+                css: {
+                    left: this.cursorPos.x,
+                    top: this.cursorPos.y
+                }
             });
         },
 
-        /* Finished checking here. Everything above looks good. */
-        enter() {
-            this.animating = true;
+        moveLayers() {
+            gsap.to({}, 0.01, {
+                repeat: -1,
+                onRepeat: () => {
+                    this.layerBottomPos.x += (this.cursorPos.x - this.layerBottomPos.x) * 0.1;
+                    this.layerBottomPos.y += (this.cursorPos.y - this.layerBottomPos.y) * 0.1;
 
-            setTimeout(() => {
-                if (this.animating) {
-                    this.animateIn();
+                    this.layerMiddlePos.x += (this.cursorPos.x - this.layerMiddlePos.x) * 0.2;
+                    this.layerMiddlePos.y += (this.cursorPos.y - this.layerMiddlePos.y) * 0.2;
+
+                    this.layerTopPos.x += (this.cursorPos.x - this.layerTopPos.x) * 0.3;
+                    this.layerTopPos.y += (this.cursorPos.y - this.layerTopPos.y) * 0.3;
+
+                    gsap.set(this.$refs.layerBottom, {
+                        css: {
+                            left: this.layerBottomPos.x,
+                            top: this.layerBottomPos.y
+                        }
+                    });
+
+                    gsap.set(this.$refs.layerMiddle, {
+                        css: {
+                            left: this.layerMiddlePos.x,
+                            top: this.layerMiddlePos.y
+                        }
+                    });
+
+                    gsap.set(this.$refs.layerTop, {
+                        css: {
+                            left: this.layerTopPos.x,
+                            top: this.layerTopPos.y
+                        }
+                    });
                 }
-            }, 200);
+            });
         },
 
-        animateIn() {
+        // π ----
+        // :: ANIMATION CONTROLLERS ---------------------------::
+        // ____
+        setEnter(animation) {
+            this.animation = animation;
+            this.entering = true;
+
+            if (!this.entering) {
+                return;
+            }
+
             const tl = gsap.timeline({
                 onComplete: () => {
-                    if (!this.animating) {
-                        this.leave();
+                    if (!this.entering) {
+                        this.findLeave(animation);
                     }
                 }
             });
 
-            tl.add('start')
-                .to(this.$refs.ring, {
-                    opacity: 0.25,
-                    duration: 0.3
-                })
-                .to(
-                    this.$refs.dot,
-                    {
-                        opacity: 0.3,
-                        duration: 0.3
-                    },
-                    'start'
-                )
-                .to(
-                    this.$refs.ring,
-                    {
-                        scale: 2.7,
-                        duration: 0.5,
-                        ease: 'circ.inOut'
-                    },
-                    'start'
-                )
-                .to(
-                    this.$refs.dot,
-                    {
-                        scale: 1.7,
-                        duration: 0.4,
-                        ease: 'circ.inOut'
-                    },
-                    'start'
-                );
+            return tl;
         },
 
-        leave() {
-            this.animating = false;
-            const tl = gsap.timeline();
+        findLeave(animation) {
+            if (animation === 'default') {
+                this.leave();
+            } else if (animation === 'logo') {
+                this.logoLeave();
+            } else {
+                console.log(`You forgot to add your cursor animation to this method!`);
+            }
+        },
 
-            tl.to(this.$refs.ring, {
-                scale: 1,
-                opacity: 0,
-                duration: 0.2
-            }).to(
-                this.$refs.dot,
+        setLeave() {
+            this.entering = false;
+
+            const tl = gsap.timeline({
+                onComplete: () => {
+                    this.animation = '';
+                }
+            });
+
+            return tl;
+        },
+
+        // π ----
+        // :: ENTER ---------------------------::
+        // ____
+        enter() {
+            const tl = this.setEnter('default');
+
+            tl.add('start')
+            .to(
+                this.$refs.ring, {
+                    opacity: 1,
+                    duration: 0.22
+                },
+                'start'
+            )
+
+            .to(
+                this.$refs.pointerDot, {
+                    opacity: 1,
+                    duration: 0.22
+                },
+                'start'
+            )
+
+            .fromTo(
+                this.$refs.ring,
+                {
+                    scale: 0.6,
+                    yPercent: 60
+                },
                 {
                     scale: 1,
-                    opacity: 0,
-                    duration: 0.2
+                    yPercent: 0,
+                    duration: 0.3,
+                    ease: 'circ.out'
                 },
-                '<0'
+                'start'
             );
         },
 
+        logoEnter() {
+            console.log(`logo enter!`);
+            const tl = this.setEnter('logo');
+
+            tl.add('start')
+            .fromTo(this.$refs.logoCursor,
+                {
+                    xPercent: -101,
+                    yPercent: 101,
+                },
+                {
+                    xPercent: 0,
+                    yPercent: 0,
+                    duration: 0.6,
+                    ease: 'quint.out'
+                },
+                'start'
+            );
+        },
+
+        // π ----
+        // :: LEAVE ---------------------------::
+        // ____
+        leave() {
+            const tl = this.setLeave();
+
+            tl.add('start')
+            .to(this.$refs.pointerDot, {
+                    opacity: 0,
+                    duration: 0.25
+                },
+                'start'
+            )
+
+            .to(this.$refs.ring, {
+                scale: 0.7,
+                yPercent: -15,
+                opacity: 0,
+                duration: 0.3,
+                ease: 'circ.inOut',
+            },
+            'start'
+            )
+        },
+
+        logoLeave() {
+            const tl = this.setLeave();
+
+            tl.add('start')
+                .to(
+                    this.$refs.logoCursor,
+                    {
+                        xPercent: 101,
+                        yPercent: -101,
+                        duration: 0.6,
+                        ease: 'quint.inOut'
+                    }
+                );
+        },
+
+
+        // π ----
+        // :: CLICK ---------------------------::
+        // ____
         click() {
-            gsap.fromTo(
+            const tl = this.setLeave();
+
+            tl.fromTo(
                 this.$refs.pulse,
                 {
                     scale: 0,
-                    opacity: 1
+                    opacity: 0.3
                 },
                 {
-                    scale: 3.5,
+                    scale: 2.5,
                     opacity: 0,
                     duration: 0.5,
                     ease: 'quad.out'
                 }
             );
+        },
+
+        // π ----
+        // :: LOADING ---------------------------::
+        // ____
+        loadingEnter() {
+            const tl = gsap.timeline();
+            document.body.classList.add('lg:cursor-none');
+
+            tl.add('start')
+                .to(this.$refs.loaderCursor, {
+                    opacity: 1,
+                    duration: 0.5
+                });
+
+        },
+
+        loadingLeave() {
+            const tl = gsap.timeline({
+                delay: 0.6,
+                onComplete: () => {
+                    document.body.classList.remove('lg:cursor-none');
+                }
+            });
+
+            tl.add('start')
+                .to(this.$refs.loaderCursor, {
+                    opacity: 0,
+                    duration: 0.5
+                })
         }
     };
 };

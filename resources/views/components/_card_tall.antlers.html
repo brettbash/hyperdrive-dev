@@ -1,0 +1,37 @@
+{{#
+	@name Card Tall
+#}}
+
+<div class="w-56 sm:w-64 md:w-72 2xl:w-80">
+    <a
+        {{ action }}
+            {{ partial:snippets/link_attributes }}
+        {{ /action }}
+        class="w-full group"
+    >
+    {{# <{{ partial:snippets/link_tag_generator }}> #}}
+
+        <div class="relative flex justify-center items-end w-full aspect-[4/6] p-8">;
+            <div class="absolute inset-0 w-full h-full bg-neutral overflow-hidden group-hover:scale-105 transition-transform duration-300 ease-in-out-circ">
+                {{ media }}
+                    {{ partial:components/background
+                        class="relative group-hover:scale-110 transition-transform duration-500 ease-in-out-circ"
+                    }}
+
+                    <div class="absolute inset-x-0 bottom-0 w-full h-32 bg-gradient-to-t from-black to-transparent opacity-50 group-hover:opacity-80 group-hover:scale-105 transition duration-300 ease-in-out-circ"></div>
+                {{ /media }}
+            </div>
+
+
+            {{ if title }}
+                {{ partial:typography/h3
+                    :content="title"
+                    color="relative text-white group-hover:text-primary text-center"
+                    class="mt-5 transition"
+                }}
+            {{ /if }}
+        </div>
+
+    {{# </{{ partial:snippets/link_tag_generator }}> #}}
+    </a>
+</div>

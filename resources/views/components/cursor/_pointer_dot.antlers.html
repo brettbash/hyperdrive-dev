@@ -1,0 +1,22 @@
+{{#
+	@name Dot Cursor
+	@desc Dot cursor that size, colors, and x-ref can be passed
+#}}
+
+<div
+    class="absolute left-0 top-0 w-1.5 h-1.5 transform -translate-x-1/2 -translate-y-1/2"
+>
+    <div
+        x-ref="mainCursor"
+        class="w-full h-full rounded-full overflow-hidden"
+    >
+
+        <div
+            class="w-full h-full"
+            :class="{
+                'bg-primary opacity-50' : entering,
+                'bg-white opacity-100' : !entering,
+            }"
+        ></div>
+    </div>
+</div>

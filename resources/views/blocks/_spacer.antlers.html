@@ -5,9 +5,12 @@
 
 <div
     class="flex w-full
+    {{ partial:snippets/no_block_spacing }}
     {{ if block:space === "lg" }}
         pt-10 md:pt-16 lg:pt-24
     {{ elseif block:space === "md" }}
         pt-8 md:pt-12 lg:pt-16
+    {{ else }}
+        pt-6 md:pt-10 lg:pt-12
     {{ /if }}"
 ></div>

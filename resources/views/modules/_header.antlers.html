@@ -1,32 +1,40 @@
 {{#
-	@name Header
-	@desc The sites header rendered on each page.
+    @name Header
+    @desc The sites header rendered on each page.
 #}}
 
-<header class="fixed z-30 inset-x-0 top-0 w-full py-4">
-    <div class="fluid-container flex justify-between items-center">
-        <div
-            x-data="fadeIn()"
-            x-init="
-                scrollTrigger = false;
-                delay = $store.site.enterDelay;
-                mounted();
-            "
-            x-ref="element"
-        >
-            {{ partial:components/logo width="w-48 md:w-80" }}
+<header
+    {{# x-data="header()" #}}
+    class="absolute z-30 inset-x-0 top-0 w-full pt-6"
+>
+
+    <div
+        x-data="fadeIn()"
+        x-init="
+            translate = 'y';
+            yStart = -50;
+            scrollTrigger = false;
+            delay = $store.enterDelay + 0.2;
+            mounted();
+        "
+        x-cloak
+        x-ref="element"
+        class="relative flex justify-between items-start px-4 md:px-16"
+    >
+
+        <div class="flex-1 flex items-center gap-6">
+            <div
+                class="w-48 sm:w-80 mt-2 sm:mt-0 transition-all transform origin-top-left"
+            >
+                {{ partial:components/logo }}
+            </div>
+
+            {{ partial:navigation/primary }}
         </div>
 
-        <div
-            x-data="fadeIn()"
-            x-init="
-                scrollTrigger = false;
-                delay = $store.site.enterDelay + 0.2;
-                mounted();
-            "
-            x-ref="element"
-        >
-            {{ partial:modules/navigation }}
+        <div class="flex items-center space-x-10">
+            {{ partial:components/nav_toggle }}
         </div>
+
     </div>
 </header>

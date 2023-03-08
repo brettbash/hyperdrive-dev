@@ -1,0 +1,50 @@
+{{#
+	@name Link Attributes
+#}}
+
+{{ if action == "entry" }}
+    href="{{ entry:url }}"
+
+{{ elseif action == "url" }}
+    href="{{ url }}"
+
+{{ elseif action == "email" }}
+    href="mailto:{{ email }}"
+
+{{ elseif action == "tel" }}
+    href="tel:{{ tel }}"
+
+{{ elseif action == "asset" }}
+    href="{{ asset }}" download
+
+{{ elseif action == "submit" }}
+    type="submit"
+
+{{ elseif action == "anchor" }}
+    href="#{{ anchor }}"
+
+{{ elseif action === "video" }}
+    {{ video }}
+        @click="
+            $store.lightboxVideo.source = '{{ source }}';
+            $store.lightboxVideo.vimeo = '{{ vimeo }}';
+            $store.lightboxVideo.youtube = '{{ youtube }}';
+            $store.lightboxVideo.mp4 = '{{ mp4 }}';
+            $store.lightboxVideo.webm = '{{ webm }}';
+            $store.lightboxVideo.poster = '{{ poster }}';
+            $store.lightboxVideo.open = true;
+        "
+    {{ /video }}
+{{ /if }}
+
+{{ if target_blank }}
+    rel="noopener" target="_blank"
+{{ /if }}
+
+{{ if attr_title }}
+    title="{{ attr_title }}"
+{{ /if }}
+
+{{ if attr_aria }}
+    aria-label="{{ attr_aria }}"
+{{ /if }}

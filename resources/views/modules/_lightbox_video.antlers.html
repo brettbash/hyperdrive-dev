@@ -1,0 +1,48 @@
+{{#
+	@name Lightbox Video
+	@desc Lightbox specifically for a video player.
+#}}
+
+<div
+    x-data="lightboxVideo()"
+    x-show="$store.lightboxVideo.open"
+    @keydown.window.escape="close()"
+    x-cloak
+    class="w-full fixed flex inset-0 z-40 p-8 overflow-hidden"
+>
+
+    {{# -- π ----
+    // :: BACKGROUND
+    // : ------------------------------------ #}}
+    <div @click="close()" class="absolute inset-0 w-full">
+        <div x-ref="curtain" class="relative w-full">
+            <div class="h-screen bg-gradient-to-t from-neutral-900 to-transparent"></div>
+            <div class="h-screen bg-neutral-900"></div>
+            <div class="h-screen bg-gradient-to-b from-neutral-900 to-transparent"></div>
+        </div>
+    </div>
+
+    {{ partial:components/close_button }}
+
+    <div
+        x-ref="content"
+        class="relative lg:flex flex-row w-full max-w-6xl m-auto opacity-0"
+    >
+
+        <div class="relative w-full">
+            <video
+                x-show="$store.lightboxVideo.source !== 'vimeo'"
+                id="lightbox-video"
+            ></video>
+
+            <div
+                x-show="$store.lightboxVideo.source === 'vimeo'"
+                x-ref="player"
+                class="aspect-video"
+            ></div>
+        </div>
+
+
+    </div>
+</div>
+

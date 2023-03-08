@@ -1,8 +1,16 @@
 {{#
 	@name Text
-	@desc The text component for regular styled text from Bard. 
+	@desc The text component for regular styled text from Bard.
 #}}
 
-<div class="size-md prose max-w-none">
-    {{ text }}
+<div
+    x-data="fadeIn()"
+    x-init="
+        opacityDuration = 0.5;
+        mounted();
+    "
+    x-ref="element"
+    class="size-md prose lg:prose-lg max-w-none"
+>
+    {{ set:text }}
 </div>

@@ -19,7 +19,7 @@
 
     <body
         data-portal="realm"
-        class="min-h-screen bg-white antialiased"
+        class="min-h-screen bg-neutral-900 text-white antialiased"
     >
 
         {{ partial:modules/loader }}
@@ -41,6 +41,8 @@
 
             {{ partial:modules/footer }}
         </div>
+
+        {{ partial:components/cursor }}
 
         <script src="{{ mix src='/js/manifest.js' }}"></script>
         <script src="{{ mix src='/js/vendor.js' }}"></script>

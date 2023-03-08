@@ -4,12 +4,163 @@
     @set page.blocks.call_to_action
 #}}
 
-<section class="fluid-container grid md:grid-cols-12 gap-y-8 md:gap-8">
-    <div class="md:col-start-3 md:col-span-8">
-        {{ partial:typography/h2 class="mb-4" :content="block:title" }}
-        {{ partial:typography/paragraph class="mb-4" :content="block:text" }}
-        {{ if block:buttons }}
-            {{ partial:components/buttons }}
+{{ partial:components/access_gate }}
+<section
+    id="{{ block:anchor }}"
+    x-data
+    class="
+        relative flex w-full overflow-hidden
+        {{ partial:snippets/no_block_spacing }}
+
+        {{ if block:style_type === "full" }}
+            min-h-screen text-white
+        {{ else }}
+             min-h-screen-80 bg-white text-neutral-900
         {{ /if }}
+
+    "
+>
+
+    {{ if block:style_type === "full" }}
+        {{ block:background }}
+            <div
+                x-data="parallaxBackground()"
+                x-init="
+                    $nextTick(() => {
+                        trigger = $refs.container;
+                        mounted();
+                    });
+                "
+                x-ref="container"
+                x-cloak
+                class="absolute inset-0 w-full h-full overflow-hidden"
+            >
+
+                {{ partial:components/background
+                    :asset_type="asset_type"
+                    :image="image"
+                    :webm="webm"
+                    :mp4="mp4"
+                    :poster="poster"
+                    attribute="x-ref='background'"
+                }}
+
+            </div>
+        {{ /block:background }}
+
+        <div class="absolute inset-0 w-full h-full bg-black opacity-20"></div>
+    {{ /if }}
+
+    <div
+        class="
+            fluid-container relative flex flex-col gap-12 py-12
+
+            {{ if block:style_type === "full" }}
+                items-stretch
+            {{ else }}
+                justify-center
+            {{ /if }}
+        "
+    >
+        {{ if block:subtitle }}
+            <div
+                x-data="fadeIn()"
+                x-init="mounted()"
+                x-ref="element"
+
+                class="
+                    flex
+                    {{ if block:style_type === "full" }}
+                        items-center h-20 px-10 py-3 border border-secondary text-secondary rounded-full
+                    {{ else }}
+                        justify-center text-secondary-500
+                    {{ /if }}
+                "
+            >
+
+                    {{ if block:style_type === "full" }}
+                        {{ partial:typography/h4
+                            :content="block:subtitle"
+                        }}
+                    {{ else }}
+                        {{ partial:typography/h5
+                            :content="block:subtitle"
+                        }}
+                    {{ /if }}
+
+
+            </div>
+        {{ /if }}
+
+        <div
+            x-ref="container"
+            class="
+                flex flex-col justify-center
+                {{ if block:style_type === "full" }}
+                    flex-grow
+                {{ else }}
+                    w-full items-center text-center
+                {{ /if }}
+            "
+        >
+
+            {{ partial:typography/h2
+                :content="block:title"
+                class="mb-6 uppercase"
+                attribute="
+                    x-data='words()'
+                    x-init='
+                        {{ noparse }}
+                            $nextTick(() => {
+                                trigger = $refs.container;
+                                mounted();
+                            });
+                        {{ /noparse }}
+                    '
+                    x-ref='element'
+                "
+            }}
+
+            {{ partial:typography/paragraph
+                class="block max-w-xl"
+                margin="mb-10"
+                :content="block:text"
+                attribute="
+                    {{# x-data='lines()' #}}
+                    x-data='fadeIn()'
+                    x-init='
+                        delay = $store.animationDelay + {increment:block{{ index }} by="0.4"};
+                        {{ noparse }}
+                            $nextTick(() => {
+                                trigger = $refs.container;
+                                mounted();
+                            });
+                        {{ /noparse }}
+                    '
+                    x-ref='element'
+                "
+            }}
+
+            {{ block:buttons }}
+                {{ partial:components/buttons
+                    attribute="
+                        x-data='fadeIn()'
+                        x-init='
+                            delay = $store.animationDelay + {increment:block{{ index }} by="0.7"};
+                            {{ noparse }}
+                                $nextTick(() => {
+                                    trigger = $refs.container;
+                                    mounted();
+                                });
+                            {{ /noparse }}
+                        '
+                        x-ref='element'
+                    "
+                }}
+            {{ /block:buttons }}
+
+        </div>
     </div>
+
 </section>
+{{ /partial:components/access_gate }}

@@ -1,0 +1,19 @@
+{{#
+	@name Pricing
+	@desc Shows the membership plan pricing
+#}}
+
+<section
+    x-data
+    x-ref="container"
+    id="{{ block:anchor }}"
+    class="fluid-container {{ partial:snippets/no_block_spacing }}"
+>
+    <div class="flex flex-wrap justify-center w-full -mx-4">
+
+        {{ membership:membership_tiers scope="tier" }}
+            {{ partial:components/pricing_card }}
+        {{ /membership:membership_tiers }}
+
+    </div>
+</section>

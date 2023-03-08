@@ -1,0 +1,53 @@
+{{#
+	@name Video Player
+	@desc The video player component. A sizeable YouTube or Vimeo video rendered in a responsive container with an optional caption.
+#}}
+
+<div
+    x-data="videoPlayer()"
+    x-init="
+        source = '{{ source }}';
+        autoplay = {{ autoplay ? "true" : "false" }};
+
+        endRedirect = {{ redirect_page ? "true" : "false" }};
+        {{ if redirect_page }}
+            {{ if action == "entry" }}
+                redirect = '{{ entry:url }}';
+            {{ elseif action == "url" }}
+                redirect = '{{ url }}';
+            {{ /if }}
+        {{ /if }}
+
+        mounted();
+    "
+    class="relative w-full select-none"
+>
+
+    {{ if source === "local" }}
+        <video
+            x-ref="player"
+            poster="{{ poster }}"
+        >
+            <source src="{{ mp4 }}" type="video/mp4">
+
+            {{ if webm }}
+                <source src="{{ webm }}" type="video/webm">
+            {{ /if }}
+        </video>
+
+    {{ elseif source === "youtube" }}
+        <div
+            x-ref="player"
+            data-plyr-provider="{{ source }}"
+            data-plyr-embed-id="{{ youtube }}"
+        ></div>
+
+    {{ elseif source === "vimeo" }}
+        <div
+            x-ref="player"
+            data-vimeo-id="{{ vimeo }}"
+            class="aspect-video"
+        ></div>
+    {{ /if }}
+
+</div>

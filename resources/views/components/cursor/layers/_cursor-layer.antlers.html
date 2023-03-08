@@ -1,0 +1,39 @@
+{{#
+	@name Cursor Layer
+	@desc The topmost layer in the cursor component
+#}}
+
+<div
+    x-ref="cursor"
+    class="fixed z-50 top-0 left-0"
+>
+    {{# :: Default
+    {+} ------------------------------------ #}}
+    {{ partial:components/cursor/pointer }}
+    {{ partial:components/cursor/dot background="transparent" no_border="true" }}
+
+    {{# :: Arrows
+    {+} ------------------------------------ #}}
+    {{ partial:components/cursor/arrow
+        ref="arrowLeft"
+        direction="left"
+    }}
+    {{ partial:components/cursor/arrow }}
+
+
+    {{# :: Loading
+    {+} ------------------------------------ #}}
+    {{ partial:components/cursor/dot
+        ref="loaderDot"
+        no_border="true"
+    }}
+
+
+    {{# :: Loading Text Spin
+    {+} ------------------------------------ #}}
+    {{ partial:components/cursor/text-spin
+        ref="loaderTextSpin"
+        text="visuals/loading"
+    }}
+
+</div>

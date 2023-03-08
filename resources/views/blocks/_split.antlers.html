@@ -5,60 +5,79 @@
 #}}
 
 <section
-    id="{{ block:anchor }}"
-    class="relative flex flex-col
-    {{ block:layout === "left" ? "md:flex-row-reverse" : "md:flex-row" }}
-    w-full {{ partial:snippets/no_block_spacing }}"
+    x-data=""
+    class="
+        relative flex flex-col
+        {{ block:alignment === "left" ? "lg:flex-row-reverse" : "lg:flex-row" }}
+        w-full lg:min-h-screen
+        {{ partial:snippets/no_block_spacing }}
+    "
 >
     {{# -- π ----
     // :: BACKGROUND
     // : ------------------------------------ #}}
-    <div class="relative w-full md:w-1/2 h-80 sm:h-96 md:h-full bg-blue-900">
+    <div class="relative w-full lg:w-1/2 h-80 sm:h-96 md:h-[32rem] lg:h-full bg-neutral-900">
         <div
-            x-data="fadeIn()"
+            x-data="parallaxBackground()"
             x-init="
-                delay = $store.site.animationDelay + {{ increment }};
-                mounted();
-            "
-            x-ref="element"
-            class="absolute inset-0 w-full h-full"
-        >
-            <div
-                x-data="parallaxBackground()"
-                x-init="
-                    container = $refs.container;
-                    scale = 1.3;
+                scaleStart = 1.4;
+                scaleEnd = 1.4;
+                yStart = -12;
+                yEnd = 12;
+                $nextTick(() => {
                     mounted();
-                "
-                x-ref="container"
-                x-cloak
-                class="absolute inset-0 w-full h-full overflow-hidden"
-            >
-                {{ partial:components/background
-                    :asset_type="block:asset_type"
-                    :image="block:image"
-                    js="x-ref='background'"
-                }}
+                });
+            "
+            x-ref="container"
+            x-cloak
+            class="relative w-full h-full overflow-hidden"
+        >
+
+            <div x-ref="background" class="absolute inset-0 w-full h-full">
+                <div
+                    x-data="fadeIn()"
+                    x-init="
+                        scale = true;
+                        delay = $store.animationDelay + 0.2;
+                        $nextTick(() => {
+                            trigger = $refs.container;
+                            mounted();
+                        });
+                    "
+                    class="absolute inset-0 w-full h-full"
+                >
+
+                    {{ partial:components/background
+                        :asset_type="block:asset_type"
+                        :image="block:image"
+                        :webm="block:webm"
+                        :mp4="block:mp4"
+                        :poster="block:poster"
+                        attribute="x-ref='element'"
+                    }}
+
+                </div>
             </div>
+
         </div>
+
+
+        {{#  #}}
     </div>
 
-    <div class="flex flex-col justify-center w-full md:w-1/2 px-10 py-16 md:p-12 lg:p-16 xl:p-20">
-        {{# :: Subtitle
-        {+} ------------------------------------ #}}
-        {{ if block:subtitle }}
-            {{ partial:typography/h6
-                as="p"
-                :content="block:subtitle"
-                color="text-green-500"
-                class="mb-6"
-                js="
-                    x-data='wordsUp()'
+    <div x-ref="content" class="flex flex-col justify-center gap-8 w-full lg:w-1/2 px-10 py-16 md:p-12 lg:p-8 xl:p-10 2xl:p-20 3xl:p-24 text-black">
+        {{ if block:subtitle_top }}
+            {{ partial:typography/h4
+                :content="block:subtitle_top"
+                class="mb-1"
+                attribute="
+                    x-data='words()'
                     x-init='
-                        delay = $store.site.animationDelay + {increment by="0.3"};
+                        delay = $store.animationDelay + {increment:block{{ index }} by="0.4"};
+                        trigger = $refs.content;
                         mounted();
                     '
-                    x-ref='wrapper'
+                    x-ref='element'
                 "
             }}
         {{ /if }}
@@ -67,43 +86,66 @@
         {+} ------------------------------------ #}}
         {{ partial:typography/h2
             :content="block:title"
-            class="mb-2"
-            js="
-                x-data='wordsUp()'
+            :size="block:title_size"
+            class="{{ !block:subtitle_bottom ?= 'mb-8' }}"
+            attribute="
+                x-data='words()'
                 x-init='
-                    delay = $store.site.animationDelay + {increment by="0.3"};
+                    trigger = $refs.content;
                     mounted();
                 '
-                x-ref='wrapper'
+                x-ref='element'
             "
         }}
+
+        {{ if block:subtitle_bottom }}
+            {{ partial:typography/h4
+                :content="block:subtitle_bottom"
+                color="text-secondary"
+                attribute="
+                    {{# x-data='lines()' #}}
+                    x-data='fadeIn()'
+                    x-init='
+                        delay = $store.animationDelay + {increment:block{{ index }} by="0.4"};
+                        trigger = $refs.content;
+                        mounted();
+                    '
+                    x-ref='element'
+                "
+            }}
+        {{ /if }}
+
 
         {{# :: Text
         {+} ------------------------------------ #}}
         {{ if block:text }}
             {{ partial:typography/paragraph
-                as="p"
-                :content="block:text"
-                class="max-w-md mb-8 overflow-hidden"
-                js="
-                    x-data='linesRight()'
+                class="max-w-xl"
+                :content="block:text | nl2br"
+                attribute="
+                    {{# x-data='lines()' #}}
+                    x-data='fadeIn()'
                     x-init='
-                        delay = $store.site.animationDelay + {increment by="0.5"};
+                        delay = $store.animationDelay + {increment:block{{ index }} by="0.4"};
+                        trigger = $refs.content;
                         mounted();
                     '
-                    x-ref='wrapper'
+                    x-ref='element'
                 "
             }}
         {{ /if }}
+
 
         {{# :: Buttons
         {+} ------------------------------------ #}}
         {{ partial:components/buttons
             :buttons="block:buttons"
-            js="
+            style="white"
+            attribute="
                 x-data='fadeIn()'
                 x-init='
-                    delay = $store.site.animationDelay + {increment by="0.4"};
+                    delay = $store.animationDelay + {increment:block{{ index }} by="0.7"};
+                    trigger = $refs.content;
                     mounted();
                 '
                 x-ref='element'

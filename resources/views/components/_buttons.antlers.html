@@ -5,11 +5,24 @@
 
 {{ if buttons }}
     <div
-        {{ js }}
-        class="inline-flex flex-col md:flex-row justify-start md:items-center flex-wrap space-y-8 md:space-y-0 md:space-x-6 {{ class }}"
+        {{ attribute }}
+
+        {{ if is_article }}
+            x-data="fadeIn()"
+            x-init="mounted()"
+            x-ref="element"
+        {{ /if }}
+
+        class="
+            {{ is_article ?= "size-md" }}
+            flex sm:inline-flex flex-col md:flex-row justify-start md:items-center flex-wrap space-y-4 md:space-y-0 md:space-x-8
+            {{ class }}
+        "
     >
         {{ buttons }}
-            {{ partial:components/button js="" }}
+            {{ partial:components/button
+                :attribute="button_attribute"
+            }}
         {{ /buttons }}
     </div>
 {{ /if }}

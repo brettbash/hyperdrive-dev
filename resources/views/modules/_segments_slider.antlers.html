@@ -1,0 +1,81 @@
+{{#
+	@name My Segments Slider
+	@desc Containing all user purchased segments. Used on the My Account template.
+#}}
+
+{{ if current_user:segments }}
+    <section
+        x-data="cardSlider()"
+        class="relative w-full"
+    >
+        <div class="fluid-container">
+
+            <div
+                x-data="fadeIn()"
+                x-init="mounted()"
+                x-ref="element"
+                class="flex justify-between lg:justify-start flex-wrap lg:flex-nowrap gap-4"
+            >
+
+                <div class="lg:flex-grow flex items-center w-full lg:w-auto h-20 px-10 py-4 bg-neutral text-secondary rounded-full">
+                    {{ partial:typography/h4
+                        content="Unspoken Segments"
+                    }}
+                </div>
+
+                <div class="flex gap-4 w-full lg:w-auto">
+
+                    <div class="flex-grow lg:hidden w-full h-20 border border-neutral-600 rounded-full"></div>
+
+                    {{ partial:components/arrow_button
+                        background="bg-secondary-500"
+                        direction="left"
+                        click="prev()"
+                    }}
+
+                    {{ partial:components/arrow_button
+                        click="next()"
+                    }}
+
+                </div>
+
+            </div>
+
+            <div
+                class="relative flex flex-col mt-6 sm:mt-12 w-full"
+            >
+                <div x-ref="slider" class="relative">
+
+                    {{ collection:segments scope="card" }}
+                        {{# Only show segment ID that matches the user's segment ID. (only 1 now) #}}
+                        {{ if id === current_user:segments }}
+
+                            <div
+                                x-data="fadeIn()"
+                                x-init="
+                                    translate = 'y';
+                                    yStart = 20;
+                                    delay = $store.animationDelay + {{ increment:segment{{ card:index }} by="0.08" }};
+                                    mounted();
+                                "
+                                x-ref="element"
+                                class="absolute left-0 top-0 mr-6 sm:mr-8 lg:mr-10"
+                            >
+
+                                {{ partial:components/card_wide
+                                    action_override="true"
+                                    action="url"
+                                    :url="card.url"
+                                }}
+
+                            </div>
+
+                        {{ /if }}
+                    {{ /collection:segments }}
+
+                </div>
+            </div>
+
+        </div>
+	</section>
+{{ /if }}

@@ -1,19 +1,19 @@
 {{#
-	@name Peak toolbar
-	@desc The Peak toolbar component displaying debug information.
+	@name Hyperdrive toolbar
+	@desc The Hyperdrive toolbar component displaying debug information.
 #}}
 
 {{ if environment == "local" }}
     <aside
         x-data="{
-            visible: window.getCookie('toolbar_visible')
+            visible: true
         }"
         x-ref="toolbar"
         x-cloak
-        class="fixed z-50 bottom-0 right-0 flex bg-gray-800 text-xs hover:opacity-100 transition-opacity"
+        class="fixed z-50 bottom-0 right-0 flex bg-neutral-900 text-xs hover:opacity-100 transition-opacity"
         :class="{ 'opacity-100': visible, 'opacity-0': !visible }"
     >
-        <span title="Current Tailwind breakpoint" class="flex items-center p-2 space-x-1 text-cyan-700 bg-yellow-300">
+        <span title="Current Tailwind breakpoint" class="flex items-center p-2 space-x-1 text-black bg-primary">
             {{ svg:breakpoint class="w-4 h-4 fill-current" alt="" aria-hidden="true" }}
             <span class="breakpoint"></span>
         </span>
@@ -24,7 +24,7 @@
                 title="Edit entry in CP"
                 aria-label="Edit entry in CP"
                 target="_blank"
-                class="flex items-center pl-4 pr-3 py-2 space-x-1 text-purple-300 hover:text-pink-400 bg-gray-800 hover:bg-gray-900 transition-colors"
+                class="flex items-center pl-4 pr-3 py-2 space-x-1 text-tertiary hover:text-primary bg-neutral-700 hover:bg-neutral-600 transition-colors"
             >
                 {{ svg:edit class="w-4 h-4 fill-current" alt="" aria-hidden="true" }}
                 <span>Edit</span>
@@ -38,7 +38,7 @@
             "
             title="Toggle toolbar visibility"
             aria-label="Toggle toolbar visibility"
-            class="flex items-center justify-center px-2 bg-gray-800 hover:bg-gray-900 text-white hover:text-yellow-400 transition-colors"
+            class="flex items-center justify-center px-2 bg-neutral-900 hover:bg-neutral-800 text-tertiary hover:text-primary-200 transition-colors"
         >
             <div :class="{ 'hidden': visible, 'block': !visible }">
                 {{ svg:invisible class="w-5 h-5 fill-current" alt="" aria-hidden="true" }}
@@ -53,7 +53,7 @@
             @click="$refs.toolbar.remove()"
             title="Remove toolbar"
             aria-label="Remove toolbar"
-            class="flex items-center justify-center px-2 text-red-500 hover:text-red-400 bg-gray-800 hover:bg-gray-900 transition-colors"
+            class="flex items-center justify-center px-2 text-pink-300 hover:text-pink-400 bg-neutral-900 hover:bg-neutral-800 transition-colors"
         >
             {{ svg:trash class="w-4 h-4 stroke-current" alt="" aria-hidden="true" }}
         </button>

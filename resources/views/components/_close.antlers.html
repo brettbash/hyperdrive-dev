@@ -1,0 +1,33 @@
+{{#
+	@name Close Icon
+#}}
+
+<div
+    class="
+        flex items-center
+        {{ size or "w-8 h-8" }}
+        transform rotate-45
+    "
+>
+
+    <div
+        class="
+            relative w-full
+            {{ stroke or "border" }}
+            {{ color or "border-primary" }}
+            transition
+        "
+    ></div>
+
+    <div class="absolute inset-0 flex justify-center w-full h-full">
+        <div
+            class="
+                relative w-0 h-full
+                {{ stroke or "border" }}
+                {{ color or "border-primary" }}
+                transition
+            "
+        ></div>
+    </div>
+
+</div>

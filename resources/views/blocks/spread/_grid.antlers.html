@@ -1,0 +1,194 @@
+{{#
+	@name Spread Block - Layout 01
+	@desc Magazine-style spread layout. Allows 2 assets, 2 text areas, and buttons
+    @set page.blocks.spread.layout1
+#}}
+
+<section
+    class="
+        flex flex-col md:flex-row items-start mx-auto w-full max-w-screen-3xl px-10 spacey-10 md:space-y-0 md:space-x-10
+        {{ dark_mode ?= "text-white" }}
+    "
+>
+
+    <div class="flex flex-col md:w-2/3 space-y-10">
+        <div class="relative flex bg-sky-800 rounded-4xl overflow-hidden">
+
+            <div
+                x-data="parallaxBackground()"
+                x-init="
+                    scaleStart = 1.4;
+                    scaleEnd = 1.4;
+                    yStart = -12;
+                    yEnd = 12;
+                    $nextTick(() => {
+                        mounted();
+                    });
+                "
+                x-ref="container"
+                x-cloak
+                class="relative w-full aspect-w-16 aspect-h-9 overflow-hidden"
+            >
+
+
+                <div x-ref="background" class="absolute inset-0 w-full h-full">
+                    <div
+                        x-data="fadeIn()"
+                        x-init="
+                            scale = true;
+                            delay = $store.animationDelay + 0.2;
+                            $nextTick(() => {
+                                trigger = $refs.container;
+                                mounted();
+                            });
+                        "
+                        class="absolute inset-0 w-full h-full"
+                    >
+
+                        {{ partial:components/background
+                            :asset_type="block:asset_type"
+                            :image="block:image"
+                            :webm="block:webm"
+                            :mp4="block:mp4"
+                            :poster="block:poster"
+                            attribute="x-ref='element'"
+                        }}
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div x-data x-ref="container" class="flex flex-col md:flex-row">
+            <div class="relative md:flex-shrink-0 md:w-1/2 md:pr-5 pb-4 md:pb-0 overflow-hidden">
+                {{ partial:typography/paragraph
+                    as="div"
+                    :content="block:text_01"
+                    margin=""
+                    class="bold-highlight"
+                }}
+
+                <div
+                    x-data="translate()"
+                    x-init="
+                        duration = 1;
+                        yStart = -50;
+                        yEnd = 51;
+                        delay = $store.animationDelay + 0.2;
+
+                        $nextTick(() => {
+                            trigger = $refs.container;
+                            mounted();
+                        });
+                    "
+                    x-ref="element"
+                    class="absolute inset-0 w-full h-[200%]"
+                >
+
+                    <div class="w-full h-1/2 bg-gradient-to-b from-transparent {{ dark_mode ? "to-charcoal" : "to-white" }}"></div>
+                    <div class="w-full h-1/2 {{ dark_mode ? "bg-charcoal" : "bg-white" }}"></div>
+
+                </div>
+            </div>
+
+
+            <div class="relative md:flex-shrink-0 md:w-1/2 md:pl-5 overflow-hidden">
+                {{ partial:typography/paragraph
+                    as="div"
+                    :content="block:text_02"
+                    margin=""
+                    class="bold-highlight"
+                }}
+
+                {{# Make into Partial for Animations #}}
+                <div
+                    x-data="translate()"
+                    x-init="
+                        duration = 1;
+                        yStart = -50;
+                        yEnd = 51;
+                        delay = $store.animationDelay + 0.4;
+
+                        $nextTick(() => {
+                            trigger = $refs.container;
+                            mounted();
+                        });
+                    "
+                    x-ref="element"
+                    class="absolute inset-0 w-full h-[200%]"
+                >
+
+                    <div class="w-full h-1/2 bg-gradient-to-b from-transparent {{ dark_mode ? "to-charcoal" : "to-white" }}"></div>
+                    <div class="w-full h-1/2 {{ dark_mode ? "bg-charcoal" : "bg-white" }}"></div>
+
+                </div>
+            </div>
+
+        </div>
+
+        {{ partial:components/buttons
+            :buttons="block:buttons"
+            attribute="
+                x-data='fadeIn()'
+                x-init='
+                    delay = $store.animationDelay + 0.7;
+                    {{ noparse }}
+                        $nextTick(() => {
+                            trigger = $refs.container;
+                            mounted();
+                        });
+                    {{ /noparse }}
+                '
+                x-ref='element'
+            "
+        }}
+
+    </div>
+
+    <div class="relative md:w-1/3 bg-sky-800 rounded-4xl overflow-hidden">
+        <div
+            x-data="parallaxBackground()"
+            x-init="
+                scaleStart = 1.4;
+                scaleEnd = 1.4;
+                yStart = -12;
+                yEnd = 12;
+                $nextTick(() => {
+                    mounted();
+                });
+            "
+            x-ref="container"
+            x-cloak
+            class="relative aspect-w-5 aspect-h-9 overflow-hidden"
+        >
+
+            <div x-ref="background" class="absolute inset-0 w-full h-full">
+                <div
+                    x-data="fadeIn()"
+                    x-init="
+                        scale = true;
+                        delay = $store.animationDelay + 0.4;
+                        $nextTick(() => {
+                            trigger = $refs.container;
+                            mounted();
+                        });
+                    "
+                    class="absolute inset-0 w-full h-full"
+                >
+
+                    {{ partial:components/background
+                        :asset_type="block:media02_asset_type"
+                        :image="block:media02_image"
+                        :webm="block:media02_webm"
+                        :mp4="block:media02_mp4"
+                        :poster="block:media02_poster"
+                        attribute="x-ref='element'"
+                    }}
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>

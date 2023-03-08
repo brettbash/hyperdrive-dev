@@ -4,14 +4,23 @@
     @set page.article.table
 #}}
 
-<div class="size-{{ size }} my-4 overflow-scroll">
-    <table class="w-full bg-light border-collapse">
+<div
+    class="size-{{ size }} my-12 overflow-scroll"
+>
+    <table
+        x-data="fadeIn()"
+        x-init="mounted()"
+        x-ref="element"
+        class="w-full bg-neutral-600 border-collapse"
+    >
         {{ table }}
             {{ if first && first_row_headers }}
                 <thead>
                     <tr>
                         {{ cells }}
-                            <th class="px-3 xl:px-6 py-3 border-b border-gray bg-gray text-left text-xs font-bold text-white uppercase tracking-wider">{{ value }}</th>
+                            <th class="px-3 xl:px-6 py-3 border-b border-neutral-500 bg-neutral text-left text-xs font-bold text-white uppercase tracking-wider">
+                                {{ value }}
+                            </th>
                         {{ /cells }}
                     </tr>
                 </thead>
@@ -26,9 +35,13 @@
                 <tr>
                     {{ cells }}
                         {{ if first && first_column_headers }}
-                            <th class="px-3 xl:px-6 py-3 border-b border-gray bg-gray text-left text-xs font-bold text-white uppercase tracking-wider">{{ value }}</th>
+                            <th class="px-3 xl:px-6 py-3 border-b border-neutral-500 bg-neutral text-left text-xs font-bold text-white uppercase tracking-wider">
+                                {{ value }}
+                            </th>
                         {{ else }}
-                            <td class="px-3 xl:px-6 py-3 whitespace-nowrap border-b border-gray text-sm leading-3 text-gray">{{ value }}</td>
+                            <td class="px-3 xl:px-6 py-3 border-b border-neutral-500 text-sm leading-normal text-gray">
+                                {{ value }}
+                            </td>
                         {{ /if }}
                     {{ /cells }}
                 </tr>
@@ -40,5 +53,11 @@
         {{ /table }}
     </table>
 
-    {{ partial:typography/caption }}
+    {{ partial:typography/caption
+        attribute="
+            x-data='fadeIn()'
+            x-init='mounted()'
+            x-ref='element'
+        "
+    }}
 </div>

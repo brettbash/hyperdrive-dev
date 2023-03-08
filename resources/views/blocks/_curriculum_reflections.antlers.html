@@ -1,0 +1,39 @@
+{{#
+	@name Curriculum Reflections
+	@desc Reflection questions for the Curriculum
+    @set page.blocks.curriculum_reflections
+#}}
+
+<section
+    id="{{ block:anchor }}"
+    x-data
+    class="
+        container relative flex w-full
+        {{ partial:snippets/no_block_spacing }}
+    "
+>
+
+    <form method="POST" action="../curriculum/save-reflection" class="w-full">
+        {{ csrf_field }}
+
+        <input type="hidden" name="reflection_group" value="{{ reflection_group }}">
+
+        <div class="flex flex-col items-start gap-8 w-full">
+
+            {{ partial:components/curriculum/reflections_chapter01 }}
+            {{ partial:components/curriculum/reflections_chapter02 }}
+            {{ partial:components/curriculum/reflections_chapter03 }}
+            {{ partial:components/curriculum/reflections_chapter04 }}
+            {{ partial:components/curriculum/reflections_chapter05 }}
+            {{ partial:components/curriculum/reflections_chapter06 }}
+
+            {{ partial:components/button
+                as="button"
+                label="Save"
+                action="submit"
+            }}
+        </div>
+
+    </form>
+</section>
+

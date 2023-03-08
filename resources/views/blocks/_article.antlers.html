@@ -4,8 +4,15 @@
     @set page.page_builder.article
 #}}
 
-<article class="fluid-container grid grid-cols-12 gap-y-4">
+{{ partial:components/access_gate }}
+<article
+    x-data
+    x-ref="container"
+    id="{{ block:anchor }}"
+    class="fluid-container grid grid-cols-12 gap-y-4 {{ partial:snippets/no_block_spacing }}"
+>
     {{ article scope="set" }}
-        {{ partial src="components/{type}" }}
+        {{ partial src="components/{type}" is_article="true" }}
     {{ /article }}
 </article>
+{{ /partial:components/access_gate }}

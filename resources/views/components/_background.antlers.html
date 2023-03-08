@@ -4,15 +4,19 @@
 #}}
 
 <div
-    {{ js }}
+    {{ attribute }}
     class="absolute inset-0 w-full h-full {{ class }}"
 >
     {{ if asset_type === "video" }}
         <video
+            x-data=""
+            x-ref="video"
+            x-init="$refs.video.play()"
             class="absolute inset-0 w-full h-full object-cover"
             autoplay
             muted
             loop
+            playsinline
             poster="{{ poster }}"
         >
 
@@ -30,7 +34,7 @@
             :image="image"
             class="w-full h-full"
             cover="true"
-            sizes="100vw"
+            sizes="auto"
         }}
     {{ /if }}
 </div>

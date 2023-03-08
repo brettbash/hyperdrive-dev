@@ -1,10 +1,13 @@
 {{#
 	@name Caption
-	@desc The typography caption partial to render an h1 caption `as`, `caption` attributes.
+	@desc The typography caption partial to render a div with `class`, `as`, `color` and `content` attributes.
 #}}
 
 {{ if caption }}
-    <{{ as or 'span' }} class="mt-2 text-gray text-sm">
+    <{{ as or "div" }}
+        {{ attribute }}
+        class="block mt-4 lg:mt-5 text-sm lg:text-xs font-mono"
+    >
         {{ caption }}
-    </{{ as or 'span' }}>
+    </{{ as or "div" }}>
 {{ /if }}

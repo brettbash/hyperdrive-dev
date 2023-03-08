@@ -1,0 +1,103 @@
+{{#
+	@name Lightbox Person
+	@desc Used with the people block, this opens a selected People entry
+#}}
+
+<div
+    x-data="lightboxPerson()"
+    x-show="$store.lightboxPerson.open"
+    @keydown.window.escape="close()"
+    x-cloak
+    class="w-full fixed flex inset-0 z-40 p-8 overflow-hidden"
+>
+
+    {{# -- π ----
+    // :: BACKGROUND
+    // : ------------------------------------ #}}
+    <div @click="close()" class="absolute inset-0 w-full">
+        <div x-ref="curtain" class="relative w-full">
+            <div class="h-screen bg-gradient-to-t from-charcoal to-transparent"></div>
+            <div class="h-screen bg-charcoal"></div>
+            <div class="h-screen bg-gradient-to-b from-charcoal to-transparent"></div>
+        </div>
+    </div>
+
+    <div
+        x-ref="content"
+        class="relative lg:flex flex-row w-full max-w-4xl m-auto bg-white text-charcoal rounded-4xl opacity-0"
+    >
+
+        {{# -- π ----
+        // :: CLOSE
+        // : ------------------------------------ #}}
+        <div
+            x-ref="button"
+            class="absolute right-8 top-8"
+            aria-label="Close"
+        >
+
+            <div
+                x-data="magnetic()"
+                x-ref="element"
+                @mousemove="magnetize($event, $el, $refs.element)"
+                @mouseleave="demagnetize($refs.element)"
+                class="flex"
+            >
+
+                <button
+                    @click="close()"
+                    class="inline-flex justify-center items-center w-10 h-10 rounded-full border-[2px] border-white lg:border-sky lg:hover:border-gray-300 z-20 text-white lg:text-charcoal transform transition duration-300 ease-in-out-circ hover:scale-125 group"
+                    aria-label="Close"
+                >
+
+                    {{ partial:components/close
+                        color="border-sky group-hover:border-sky-600"
+                    }}
+
+                </button>
+
+            </div>
+
+        </div>
+
+        <div class="p-8 xl:p-12 overflow-hidden">
+            {{# -- π ----
+            // :: PROFILE HEADING
+            // : ------------------------------------ #}}
+            <div class="flex flex-col sm:flex-row items-center mb-8 sm:pr-10">
+                {{# :: Profile Image/Video
+                {+} ------------------------------------ #}}
+                <div class="relative sm:mr-8 mb-8 sm:mb-0 w-40 h-40">
+
+                    <div class="absolute inset-0 w-full sm:w-64 h-64 sm:h-full bg-primary rounded-full transform sm:translate-x-1 translate-y-1 sm:translate-y-0"></div>
+
+                    <div class="relative w-40 h-40 rounded-full overflow-hidden">
+                        <img
+                            x-show="$store.lightboxPerson.image"
+                            :src="$store.lightboxPerson.image"
+                            :alt="$store.lightboxPerson.name"
+                            class="w-full h-full object-cover"
+                        >
+                    </div>
+                </div>
+
+                {{# :: Name
+                {+} ------------------------------------ #}}
+                {{ partial:typography/h2
+                    as="div"
+                    class="relative mb-2 text-center md:text-left"
+                    attribute="
+                        x-show='$store.lightboxPerson.name'
+                        x-text='$store.lightboxPerson.name'
+                    "
+                }}
+            </div>
+
+            <div
+                x-show="$store.lightboxPerson.bio"
+                x-text="$store.lightboxPerson.bio"
+                class="h-48 lg:h-72 mt-6 lg:pl-24 lg:pr-16 overflow-y-scroll text-sm lg:text-xs font-mono leading-normal lg:leading-loose"
+            ></div>
+        </div>
+    </div>
+</div>

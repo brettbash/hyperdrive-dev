@@ -1,0 +1,18 @@
+{{#
+	@name h4
+	@desc The typography h4 partial to render an h4 with `class`, `as`, `color` and `content` attributes.
+#}}
+
+<{{ as or "h4" }}
+    {{ attribute }}
+
+    class="
+        text-xl sm:text-2xl lg:text-xl font-sans leading-none
+        {{ font_case or "uppercase" }}
+        tracking-wide
+        {{ color or "text-inherit" }}
+        {{ class }}
+    "
+>
+    {{ content | nl2br }}
+</{{ as or "h4" }}>

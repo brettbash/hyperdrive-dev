@@ -1,0 +1,31 @@
+{{#
+	@name Link Tag Generator
+	@desc Generates the tag for a link (e.g. buttons, cards) based on the action it has.
+#}}
+
+
+{{ variable:link_tag value="div" }}
+
+{{ action }}
+    {{ variable:action :value="action" }}
+
+    {{ if as }}
+        {{ as }}
+
+    {{ elseif variable:action === "video" or variable:action === "anchor" }}
+        {{ variable:link_tag value="button" }}
+
+    {{ elseif variable:action === "entry" or variable:action === "url" or variable:action === "email" or variable:action ===
+    "phone" }}
+        {{ variable:link_tag value="a" }}
+
+    {{ else }}
+        {{# {{ variable:link_tag value="div" }} #}}
+        {{ variable:link_tag :value="action" }}
+    {{ /if }}
+
+    {{ variable:link_tag }}
+    {{ variable:action }}
+{{ /action }}
+
+

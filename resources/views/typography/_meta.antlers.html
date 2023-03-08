@@ -1,0 +1,15 @@
+{{#
+	@name Meta
+	@desc The typography meta partial to render a span with `class`, `as`, `color` and `content` attributes.
+#}}
+
+<{{ as or "span" }}
+    {{ attribute }}
+    class="
+        text-sm lg:text-xs font-mono
+        {{ color or "text-inherit" }}
+        {{ class }}
+    "
+>
+    {{ content | nl2br }}
+</{{ as or "span" }}>

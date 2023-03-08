@@ -1,5 +1,5 @@
 {{#
-	@name Button attributes
+	@name Button
 	@desc A single button component. Faux is used when a button is displayed inside a link (for example in link blocks).
 #}}
 
@@ -9,12 +9,62 @@
         x-ref="element"
         @mousemove="magnetize($event, $el, $refs.element)"
         @mouseleave="demagnetize($refs.element)"
-        class="relative hover:z-10"
+        class="relative flex hover:z-10"
     >
-        {{ if button_type === "primary-light" }}
-            {{ partial:components/button_primary_light }}
-        {{ else }}
-            {{ partial:components/button_primary_dark }}
-        {{ /if }}
+
+        <{{ as or "a" }}
+            {{ attribute }}
+            class="
+                relative focus:outline-none
+
+                {{ if size === "sm" }}
+                    px-2 md:px-6 py-1 md:py-3
+                {{ else }}
+                    min-w-48 px-4 md:px-5 py-2 md:py-3
+                {{ /if }}
+
+                group
+                {{ class }}
+            "
+
+            {{ unless faux }}
+                {{ partial:snippets/link_attributes }}
+            {{ /unless }}
+        >
+            <div
+                class="
+                    absolute inset-0 w-full h-full
+                    border
+                    {{ if style === "white" }}
+                        border-black lg:group-hover:border-primary
+                    {{ else }}
+                        border-primary
+                    {{ /if }}
+                    rounded-full overflow-hidden lg:group-hover:scale-95 transition
+                "
+            >
+
+                <div class="w-full h-full bg-primary opacity-0 group-hover:opacity-100 transition-opacity"></div>
+
+            </div>
+
+            <div
+                class="
+                    relative
+                    text-xs lg:text-sm
+                    {{ if style === "white" }}
+                        text-black
+                    {{ else }}
+                        text-white lg:group-hover:text-black
+                    {{ /if }}
+                    uppercase tracking-wide text-center transition
+                "
+            >
+                <span>
+                {{ label }}
+                </span>
+            </div>
+        </{{ as or "a" }}>
+
     </div>
 {{ /if }}

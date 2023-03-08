@@ -4,10 +4,14 @@
 #}}
 
 <{{ as or "h1" }}
-    {{ js }}
-    class="text-5xl md:text-7xl xl:text-8xl font-sans leading-tight
-    {{ color or "text-inherit" }}
-    {{ class }}"
+    {{ attribute }}
+    class="
+        text-5xl sm:text-6xl md:text-7xl xl:text-8xl font-sans
+        {{ font_weight or "font-normal" }}
+        leading-none
+        {{ color or "text-inherit" }}
+        {{ class }}
+    "
 >
-        {{ content | nl2br }}
+    {{ content | nl2br }}
 </{{ as or "h1" }}>

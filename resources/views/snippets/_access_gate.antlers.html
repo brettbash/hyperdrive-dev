@@ -1,0 +1,42 @@
+{{#
+	@name Access Gate
+	@desc Controls Access to an Entry if it's Gated
+#}}
+
+{{# :: Entry Gated but Not Logged In -------------- #}}
+{{ if gated && gated !== "segment" && ! logged_in }}
+    {{ redirect to="/access" }}
+{{ /if }}
+
+{{# :: Check Gated Level to User Membership Tier -------------- #}}
+{{ if gated && logged_in && gated !== "segment" }}
+
+    {{ if gated === "tier1" }}
+        {{ if current_user:plan !== "tier1" and current_user:plan === "tier2" or current_user:plan === "tier3" }}
+            {{ redirect to="/access" }}
+        {{ /if }}
+
+    {{ elseif gated === "tier2" }}
+        {{ if current_user:plan !== "tier2" && current_user:plan === "tier3" }}
+            {{ redirect to="/access" }}
+        {{ /if }}
+
+    {{ elseif gated === "tier3" }}
+        {{ if current_user:plan !== "tier3" }}
+            {{ redirect to="/access" }}
+        {{ /if }}
+
+    {{ /if }}
+
+{{ /if }}
+
+{{# :: Check User's Segments -------------- #}}
+{{ if gated === "segment" && ! logged_in }}
+    {{ redirect to="/registration?plan=segment&&id={{ id }}&&segment={{ title }}" }}
+{{ /if }}
+
+{{# Will probably need a better check on segments since it will be an array or object #}}
+{{# Maybe if Segment, then loop through the user's segments and check if any are a match. #}}
+{{ if gated === "segment" && logged_in && current_user:segments != id }}
+    {{ redirect to="/my-account" }}
+{{ /if }}

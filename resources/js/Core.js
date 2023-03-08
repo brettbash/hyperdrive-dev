@@ -1,32 +1,20 @@
-// :: Templates ------------ //
+import header from '@modules/Header';
+import lightboxVideo from '@modules/LightboxVideo';
+import navigation from '@modules/Navigation';
 
-// :: Blocks ------------ //
-
-// :: Modules ------------ //
-
-// :: Components ------------ //
 import avalanche from '@components/avalanche/Avalanche';
-import cursor from '@components/cursor';
-
-// :: Utilities ------------ //
-import tokens from '@/utilities/Tokens';
-import cookies from '@/utilities/Cookies';
+import cursor from '@components/Cursor';
+import mouse from '@components/MouseController';
+import videoPlayer from '@components/VideoPlayer';
 
 export default () => {
-    // :: Templates ------------ //
+    Alpine.data('header', header);
+    Alpine.data('lightboxVideo', lightboxVideo);
+    Alpine.data('navigation', navigation);
 
-    // :: Blocks ------------ //
+    Alpine.data('cursor', cursor);
+    window.mouse = mouse;
+    Alpine.data('videoPlayer', videoPlayer);
 
-    // :: Modules ------------ //
-    // window.lightboxVideo = lightboxVideo;
-    // window.header = header;
-    // window.videoPlayer = video;
-
-    // :: Components ------------ //
     avalanche();
-    window.cursor = cursor;
-
-    // :: Utilities ------------ //
-    tokens();
-    cookies();
 };

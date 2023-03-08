@@ -1,0 +1,15 @@
+{{#
+	@name Text Spin
+	@desc Cursor text spin. Uses an SVG and rotates that on the event.
+#}}
+
+<div
+    class="absolute left-0 top-0 {{ size ? size : "w-32 h-32" }} transform -translate-x-1/2 -translate-y-1/2"
+>
+    <div
+        x-ref="{{ ref }}"
+        class="w-full h-full {{ color ? color : "text-primary" }} opacity-0 animate-spin-slow"
+    >
+        {{# {{ svg :src="text" class="w-full fill-current transition-colors" }} #}}
+    </div>
+</div>

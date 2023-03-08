@@ -1,0 +1,45 @@
+{{#
+	@name Hero Home
+	@desc Home page hero
+#}}
+
+<section
+    x-data
+    x-ref="heroContainer"
+    class="relative flex flex-col lg:flex-row w-full min-h-screen bg-neutral-900 text-white overflow-hidden"
+>
+
+    <div
+        x-data="parallaxBackground()"
+        x-init="
+            yStart = 0;
+            start = 'top top';
+            trigger = $refs.container;
+            scrub = 1;
+            $nextTick(() => {
+                mounted();
+            });
+        "
+        x-ref="container"
+        class="absolute inset-0 w-full h-full overflow-hidden"
+    >
+
+        {{ partial:components/background
+            asset_type="video"
+            webm="/visuals/runes.webm"
+            mp4="/visuals/runes.mp4"
+            poster="/visuals/runes.jpg"
+            attribute="x-ref='background'"
+        }}
+
+    </div>
+
+    {{ partial:components/hero_home_woman }}
+
+    <div class="absolute inset-x-0 bottom-0 w-full lg:h-32 lg:bg-gradient-to-t lg:from-neutral-900 lg:to-transparent">
+        <div class="lg:hidden w-full h-[10vh] bg-gradient-to-t from-neutral-900 to-transparent"></div>
+        <div class="lg:hidden w-full h-[10vh] bg-neutral-900"></div>
+    </div>
+
+    {{ partial:modules/hero_home_content }}
+</section>

@@ -1,0 +1,17 @@
+{{#
+	@name h5
+	@desc The typography h5 partial to render an h5 with `class`, `as`, `color` and `content` attributes.
+#}}
+
+<{{ as or "h5" }}
+    {{ attribute }}
+    class="
+        text-xl lg:text-lg font-sans leading-none
+        {{ font_case or "uppercase" }}
+        tracking-wide
+        {{ color or "text-inherit" }}
+        {{ class }}
+    "
+>
+    {{ content | nl2br }}
+</{{ as or "h5" }}>

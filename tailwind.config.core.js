@@ -1,8 +1,3 @@
-// 追い風 ----
-// :: TAILWIND HYPERDRIVE CONFIGURATION ---------------------------::
-// ____
-// Here we define base styles, components, & utilities used by Hyperdrive
-
 const plugin = require('tailwindcss/plugin');
 const colors = require('tailwindcss/colors');
 
@@ -14,18 +9,39 @@ module.exports = {
             container: {
                 center: true,
                 padding: {
-                    default: '2rem',
-                    md: '4rem',
-                    xl: '6rem'
+                    DEFAULT: '1.5rem',
+                    sm: '2rem',
+                    lg: '4rem',
+                    xl: '5rem',
+                    '2xl': '6rem'
                 }
             },
 
             colors: {
-                gray: colors.blueGray,
+                gray: colors.slate,
                 red: colors.red,
                 yellow: colors.yellow,
                 green: colors.green,
                 cyan: colors.cyan
+            },
+
+            minHeight: {
+                '3xs': '12rem',
+                '2xs': '16rem',
+                xs: '20rem',
+                sm: '24rem',
+                md: '28rem',
+                lg: '32rem',
+                xl: '36rem',
+                '2xl': '42rem',
+                '3xl': '48rem',
+                '4xl': '56rem',
+                '5xl': '64rem',
+                '6xl': '72rem',
+                'screen-50': '50vh',
+                'screen-75': '75vh',
+                'screen-80': '80vh',
+                'screen-90': '90vh'
             },
 
             minWidth: theme => ({
@@ -62,6 +78,11 @@ module.exports = {
                 'in-out-circ': 'cubic-bezier(0.785, 0.135, 0.15, 0.86)'
             },
 
+            translate: {
+                '-over': '-101%',
+                over: '101%'
+            },
+
             zIndex: {
                 // Z-index stuff behind it's parent.
                 behind: '-1'
@@ -96,7 +117,7 @@ module.exports = {
                 body: { minHeight: '-webkit-fill-available' },
 
                 // Used to hide alpine elements before being rendered.
-                '[x-cloak]': { display: 'none !important' },
+                '[x-cloak]': { opacity: '0 !important', visibility: 'hidden !important' },
 
                 // Implement the focus-visible polyfill: https://github.com/WICG/focus-visible
                 '.js-focus-visible :focus:not(.focus-visible)': { outline: 'none' },
@@ -104,7 +125,6 @@ module.exports = {
                 // ::  Display screen breakpoints in debug environment ------------ //
                 '.breakpoint:before': {
                     display: 'block',
-                    color: theme('colors.notice.900'),
                     textTransform: 'uppercase',
                     content: '"-"'
                 },
@@ -158,7 +178,9 @@ module.exports = {
                     return a[1].replace(/\D/g, '') - b[1].replace(/\D/g, '');
                 })
                 .map(value => {
-                    return {[`@media (min-width: ${value[1]})`]: { '.breakpoint::before': { content: `"${value[0]}"` } }};
+                    return {
+                        [`@media (min-width: ${value[1]})`]: { '.breakpoint::before': { content: `"${value[0]}"` } }
+                    };
                 });
 
             addBase(breakpoints);

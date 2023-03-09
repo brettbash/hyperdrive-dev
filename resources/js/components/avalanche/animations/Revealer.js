@@ -24,7 +24,7 @@ export default () => ({
         }
 
         if (!this.delay) {
-            this.delay = this.$store.animationDelay;
+            this.delay = this.$store.site.animationDelay;
         }
 
         const animation = gsap.timeline({

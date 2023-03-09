@@ -16,6 +16,7 @@ window.Alpine = Alpine;
 
 gsap.registerPlugin(ScrollToPlugin, ScrollTrigger, SplitText);
 window.gsap = gsap;
+window.mm = gsap.matchMedia();
 window.ScrollTrigger = ScrollTrigger;
 window.SplitText = SplitText;
 

@@ -17,29 +17,30 @@ fields:
             -
               import: article
         call_to_action:
-          display: 'Call to action'
-          instructions: 'Show a call to action.'
+          display: 'Call to Action'
           fields:
             -
               import: call_to_action
-        collection:
-          display: Collection
-          instructions: 'Show collection entries.'
+        card_slider:
+          display: 'Card Slider'
           fields:
             -
-              import: collection
+              import: card_slider
         form:
           display: Form
-          instructions: 'Show a form.'
           fields:
             -
               import: form
-        link_blocks:
-          display: 'Link blocks'
-          instructions: 'Show link blocks.'
+        media_grid:
+          display: 'Media Grid'
           fields:
             -
-              import: link_blocks
+              import: media_grid
+        people:
+          display: People
+          fields:
+            -
+              import: people
         spacer:
           display: Spacer
           fields:
@@ -50,6 +51,8 @@ fields:
           fields:
             -
               import: split
+      instructions_position: above
+      read_only: false
   -
     handle: spacing_top
     field:

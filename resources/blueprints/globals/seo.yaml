@@ -130,44 +130,9 @@ sections:
     display: Social Sharing
     fields:
       -
-        handle: section_social_images
-        field:
-          type: section
-          instructions: 'Automatically generate Social Images'
-          display: Social
-      -
-        handle: use_social_image_generation
-        field:
-          display: 'Use Social Images generation'
-          type: toggle
-          icon: toggle
-          localizable: false
-          instructions: 'Enable auto Social Image generation. **Important**: you need to have Puppeteer and Browsershot installed.'
-          listable: hidden
-          width: 50
-      -
-        handle: social_images_collections
-        field:
-          mode: select
-          display: 'Social Images generation'
-          type: collections
-          icon: collections
-          instructions: 'Use auto Social Image generation for the following collections.'
-          listable: hidden
-          width: 50
-          if:
-            use_social_image_generation: 'equals true'
-      -
-        handle: section_og
-        field:
-          type: section
-          instructions: 'Default settings for Social Sharing.'
-          display: Defaults
-      -
         handle: og_image
         field: common.image
         config:
-          container: social_images
           localizable: true
           listable: hidden
           display: 'Social image'
@@ -177,7 +142,6 @@ sections:
         handle: twitter_image
         field: common.image
         config:
-          container: social_images
           localizable: true
           listable: hidden
           display: 'Twitter image'

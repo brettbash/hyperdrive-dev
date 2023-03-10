@@ -1,33 +1,56 @@
 title: 'Block: Split'
 fields:
   -
-    handle: layout
+    handle: alignment
     field:
       options:
-        left: 'Text Left'
-        right: 'Text Right'
-      display: Layout
+        left: 'Text / Media'
+        right: 'Media / Text'
+      display: Alignment
       default: left
       type: button_group
       icon: button_group
       listable: hidden
   -
-    import: background
-  -
-    handle: title
+    handle: media
     field:
-      input_type: text
-      antlers: false
-      display: Title
-      type: text
-      icon: text
+      fields:
+        -
+          import: background
+      mode: stacked
+      max_rows: 1
+      add_row: 'Add Media'
+      reorderable: false
+      display: Media
+      type: grid
+      icon: grid
+      listable: hidden
+      instructions_position: above
+      read_only: false
+  -
+    handle: html_content
+    field:
+      html: '<hr>'
+      display: Content
+      type: html
+      icon: html
       listable: hidden
   -
     handle: subtitle
     field:
       input_type: text
       antlers: false
-      display: Subtitle
+      display: 'Subtitle'
+      type: text
+      icon: text
+      listable: false
+      instructions_position: above
+  -
+    handle: title
+    field:
+      input_type: text
+      antlers: false
+      display: Title
       type: text
       icon: text
       listable: hidden

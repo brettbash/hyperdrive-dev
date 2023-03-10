@@ -8,61 +8,59 @@
     x-data=""
     class="
         relative flex flex-col
-        {{ block:layout === "left" ? "lg:flex-row-reverse" : "lg:flex-row" }}
+        {{ block:alignment === "left" ? "lg:flex-row-reverse" : "lg:flex-row" }}
         w-full lg:min-h-screen
         {{ partial:snippets/no_block_spacing }}
     "
 >
     {{# -- π ----
-    // :: BACKGROUND
+    // :: MEDIA
     // : ------------------------------------ #}}
     <div class="relative w-full lg:w-1/2 h-80 sm:h-96 md:h-[32rem] lg:h-full bg-neutral-900">
-        <div
-            x-data="parallaxBackground()"
-            x-init="
-                scaleStart = 1.4;
-                scaleEnd = 1.4;
-                yStart = -12;
-                yEnd = 12;
-                $nextTick(() => {
-                    mounted();
-                });
-            "
-            x-ref="container"
-            x-cloak
-            class="relative w-full h-full overflow-hidden"
-        >
+        {{ block:media }}
+            <div
+                x-data="parallaxBackground()"
+                x-init="
+                    scaleStart = 1.4;
+                    scaleEnd = 1.4;
+                    yStart = -12;
+                    yEnd = 12;
+                    $nextTick(() => {
+                        mounted();
+                    });
+                "
+                x-ref="container"
+                x-cloak
+                class="relative w-full h-full overflow-hidden"
+            >
 
-            <div x-ref="background" class="absolute inset-0 w-full h-full">
-                <div
-                    x-data="fadeIn()"
-                    x-init="
-                        scale = true;
-                        delay = $store.animationDelay + 0.2;
-                        $nextTick(() => {
-                            trigger = $refs.container;
-                            mounted();
-                        });
-                    "
-                    class="absolute inset-0 w-full h-full"
-                >
+                <div x-ref="background" class="absolute inset-0 w-full h-full">
+                    <div
+                        x-data="fadeIn()"
+                        x-init="
+                            scale = true;
+                            delay = $store.animationDelay + 0.2;
+                            $nextTick(() => {
+                                trigger = $refs.container;
+                                mounted();
+                            });
+                        "
+                        class="absolute inset-0 w-full h-full"
+                    >
 
-                    {{ partial:components/background
-                        :asset_type="block:asset_type"
-                        :image="block:image"
-                        :webm="block:webm"
-                        :mp4="block:mp4"
-                        :poster="block:poster"
-                        attribute="x-ref='element'"
-                    }}
+                        {{ partial:components/background
+                            :asset_type="asset_type"
+                            :image="image"
+                            :video="video"
+                            :poster="poster"
+                            attribute="x-ref='background'"
+                        }}
 
+                    </div>
                 </div>
+
             </div>
-
-        </div>
-
-
-        {{#  #}}
+        {{ /block:media }}
     </div>
 
     {{# -- π ----
@@ -89,7 +87,6 @@
         {+} ------------------------------------ #}}
         {{ partial:typography/h2
             :content="block:title"
-            :size="block:title_size"
             class="{{ !block:subtitle_bottom ?= 'mb-8' }}"
             attribute="
                 x-data='words()'

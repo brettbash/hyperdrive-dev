@@ -14,6 +14,13 @@ fields:
         - quote
         - removeformat
         - anchor
+        - left
+        - right
+        - center
+        - underline
+        - strikethrough
+        - small
+        - superscript
       save_html: false
       toolbar_mode: fixed
       link_noopener: false
@@ -55,4 +62,13 @@ fields:
           display: Video
           fields:
             -
-              import: video
+              import: video_set
+      instructions_position: above
+      read_only: false
+      enable_input_rules: true
+      enable_paste_rules: true
+      antlers: false
+  -
+    import: block_spacing
+  -
+    import: anchor

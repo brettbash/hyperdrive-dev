@@ -28,4 +28,10 @@ mix.browserSync({
     notify: false
 });
 
+mix.webpackConfig({
+    stats: {
+        children: true,
+    },
+});
+
 mix.version();

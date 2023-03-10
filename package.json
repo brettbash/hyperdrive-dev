@@ -19,15 +19,14 @@
         "flickity": "^3.0.0",
         "focus-visible": "^5.2.0",
         "gsap": "npm:@gsap/shockingly@^3.11.4",
-        "howler": "^2.2.3",
-        "plyr": "^3.7.2"
+        "howler": "^2.2.3"
     },
 
     "devDependencies": {
         "@tailwindcss/aspect-ratio": "^0.4.0",
         "@tailwindcss/forms": "^0.4.0",
         "@tailwindcss/typography": "^0.5.1",
-        "autoprefixer": "^10.3.1",
+        "autoprefixer": "^10.4.5",
         "babel-eslint": "^10.1.0",
         "browser-sync": "^2.27.5",
         "browser-sync-webpack-plugin": "^2.3.0",

@@ -1,0 +1,54 @@
+title: 'Block: Spread'
+fields:
+  -
+    handle: html_asset01
+    field:
+      html: '<hr>'
+      display: 'Media Asset 01'
+      type: html
+      icon: html
+      listable: hidden
+  -
+    import: background
+  -
+    handle: html_asset02
+    field:
+      html: '<hr>'
+      type: html
+      icon: html
+      listable: hidden
+  -
+    import: background
+    prefix: media02_
+  -
+    handle: html_content
+    field:
+      html: '<hr>'
+      display: Content
+      type: html
+      icon: html
+      listable: hidden
+  -
+    handle: text_01
+    field: common.text_plain
+  -
+    handle: text_02
+    field: common.text_plain
+  -
+    import: buttons
+  -
+    handle: layout
+    field:
+      options:
+        grid: 'Grid'
+        seesaw: 'Seesaw'
+      default: grid
+      display: Layout
+      type: button_group
+      icon: button_group
+      listable: false
+      instructions_position: above
+  -
+    import: block_spacing
+  -
+    import: anchor

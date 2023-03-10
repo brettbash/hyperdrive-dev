@@ -1,0 +1,138 @@
+title: Links
+fields:
+  -
+    handle: action
+    field:
+      options:
+        anchor: Anchor
+        asset: Asset
+        email: Email
+        entry: Entry
+        phone: Phone
+        url: URL
+        video: Video
+      type: select
+      instructions: 'What type of link action do you want to add?'
+      localizable: true
+      default: entry
+      listable: false
+      display: Action
+      replicator_preview: false
+  -
+    handle: entry
+    field:
+      max_items: 1
+      mode: default
+      type: entries
+      instructions: 'Choose the collection entry you want to link.'
+      localizable: true
+      listable: false
+      display: Entry
+      replicator_preview: false
+      if:
+        action: entry
+  -
+    handle: url
+    field:
+      placeholder: 'https://site.com'
+      input_type: text
+      type: text
+      instructions: 'The URL you want to link.'
+      localizable: true
+      listable: false
+      display: URL
+      replicator_preview: false
+      if:
+        action: url
+  -
+    handle: email
+    field:
+      placeholder: info@site.com
+      input_type: email
+      type: text
+      instructions: 'The email address you want to link.'
+      localizable: true
+      listable: false
+      display: Email
+      replicator_preview: false
+      validate:
+        - 'required_if:{this}.action,email'
+      if:
+        action: email
+  -
+    handle: tel
+    field:
+      input_type: tel
+      type: text
+      instructions: 'The phone number you want to link.'
+      localizable: true
+      listable: false
+      display: Phone
+      replicator_preview: false
+      validate:
+        - 'required_if:{this}.action,tel'
+      if:
+        action: tel
+  -
+    handle: asset
+    field: common.image
+    config:
+      localizable: true
+      display: Asset
+      instructions: 'The asset you want to link.'
+      if:
+        action: asset
+  -
+    handle: anchor
+    field:
+      placeholder: your-section-id
+      input_type: text
+      type: text
+      instructions: 'The section anchor ID'
+      localizable: true
+      listable: false
+      display: Anchor
+      if:
+        action: anchor
+  -
+    handle: video
+    field:
+      fields:
+        -
+          import: video_player
+      mode: stacked
+      max_rows: 1
+      add_row: 'Attach Video'
+      reorderable: false
+      display: Video
+      type: grid
+      icon: grid
+      listable: hidden
+      instructions_position: above
+      read_only: false
+      if:
+        action: video
+  -
+    handle: attr_aria
+    field:
+      placeholder: 'View the Video'
+      input_type: text
+      type: text
+      localizable: true
+      listable: false
+      display: 'Aria label'
+      instructions: 'Optional aria label for accessibility.'
+      width: 50
+      replicator_preview: false
+  -
+    handle: target_blank
+    field:
+      type: toggle
+      localizable: true
+      width: 50
+      listable: false
+      display: 'Open in new window?'
+      instructions: 'Open link in new tab or window.'
+      replicator_preview: false
+      if:
+        action: url

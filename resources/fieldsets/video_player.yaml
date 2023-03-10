@@ -1,0 +1,144 @@
+title: 'Component: Video Player'
+fields:
+  -
+    handle: source
+    field:
+      options:
+        local: Local
+        youtube: YouTube
+        vimeo: Vimeo
+      inline: true
+      default: vimeo
+      display: Source
+      type: button_group
+      icon: button_group
+      listable: false
+      validate:
+        - required
+      instructions_position: above
+  -
+    handle: vimeo
+    field:
+      input_type: text
+      type: text
+      localizable: true
+      listable: false
+      display: Vimeo
+      if:
+        source: 'equals vimeo'
+      instructions_position: above
+  -
+    handle: youtube
+    field:
+      input_type: text
+      type: text
+      localizable: true
+      listable: false
+      display: YouTube
+      if:
+        source: 'equals youtube'
+      instructions_position: above
+  -
+    handle: mp4
+    field:
+      container: assets
+      mode: grid
+      restrict: false
+      allow_uploads: true
+      max_files: 1
+      type: assets
+      listable: false
+      display: MP4
+      width: 33
+      if:
+        source: 'equals local'
+      instructions_position: above
+      show_filename: true
+  -
+    handle: webm
+    field:
+      container: assets
+      mode: grid
+      restrict: false
+      allow_uploads: true
+      max_files: 1
+      type: assets
+      width: 33
+      listable: false
+      display: WebM
+      instructions_position: above
+      show_filename: true
+      if:
+        source: 'equals local'
+  -
+    handle: poster
+    field:
+      container: assets
+      mode: grid
+      restrict: false
+      allow_uploads: true
+      max_files: 1
+      type: assets
+      width: 33
+      listable: false
+      display: Poster
+      instructions_position: above
+      show_filename: true
+      if:
+        source: 'equals local'
+  -
+    handle: redirect_page
+    field:
+      default: false
+      display: 'Redirect Page After Video Ends'
+      type: toggle
+      icon: toggle
+      listable: hidden
+      instructions_position: above
+      read_only: false
+  -
+    handle: action
+    field:
+      options:
+        entry: Entry
+        url: URL
+      type: select
+      instructions: 'What type of redirection do you want to add?'
+      localizable: true
+      default: entry
+      listable: false
+      display: Action
+      replicator_preview: false
+      if:
+        redirect_page: true
+  -
+    handle: entry
+    field:
+      max_items: 1
+      mode: default
+      type: entries
+      instructions: 'Choose the collection entry you want to link.'
+      localizable: true
+      listable: false
+      display: Entry
+      replicator_preview: false
+      instructions_position: above
+      read_only: false
+      create: true
+      if:
+        action: 'equals entry'
+        redirect_page: 'equals true'
+  -
+    handle: url
+    field:
+      placeholder: 'https://site.com'
+      input_type: text
+      type: text
+      instructions: 'The URL you want to link.'
+      localizable: true
+      listable: false
+      display: URL
+      replicator_preview: false
+      if:
+        action: url
+        redirect_page: 'equals true'

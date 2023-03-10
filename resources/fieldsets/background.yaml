@@ -10,10 +10,11 @@ fields:
       default: image
       type: button_group
       icon: button_group
-      listable: hidden
-      display: 'Background Type'
+      listable: false
+      display: 'Media Asset Type'
       validate:
         - required
+      instructions_position: above
   -
     handle: image
     field:
@@ -23,12 +24,14 @@ fields:
       allow_uploads: true
       max_files: 1
       type: assets
-      listable: hidden
+      listable: false
       display: Image
       if:
         asset_type: 'equals image'
+      instructions_position: above
+      show_filename: true
   -
-    handle: mp4
+    handle: video
     field:
       container: assets
       mode: grid
@@ -36,25 +39,13 @@ fields:
       allow_uploads: true
       max_files: 1
       type: assets
-      listable: hidden
-      display: MP4
-      width: 33
+      listable: false
+      display: Video
+      width: 50
       if:
         asset_type: 'equals video'
-  -
-    handle: webm
-    field:
-      container: assets
-      mode: grid
-      restrict: false
-      allow_uploads: true
-      max_files: 1
-      type: assets
-      width: 33
-      listable: hidden
-      display: WebM
-      if:
-        asset_type: video
+      instructions_position: above
+      show_filename: true
   -
     handle: poster
     field:
@@ -64,8 +55,10 @@ fields:
       allow_uploads: true
       max_files: 1
       type: assets
-      width: 33
-      listable: hidden
+      width: 50
+      listable: false
       display: Poster
+      instructions_position: above
+      show_filename: true
       if:
-        asset_type: video
+        asset_type: 'equals video'

@@ -1,0 +1,29 @@
+title: 'Block: People'
+fields:
+  -
+    handle: headline
+    field:
+      input_type: text
+      antlers: false
+      display: Headline
+      type: text
+      icon: text
+      listable: false
+      instructions_position: above
+  -
+    handle: people
+    field:
+      mode: default
+      create: true
+      collections:
+        # - people
+        - pages
+      display: People
+      type: entries
+      icon: entries
+      listable: false
+      instructions_position: above
+  -
+    import: block_spacing
+  -
+    import: anchor

@@ -41,14 +41,14 @@ sections:
         handle: meta
         field:
           type: section
-          instructions: "This entry's meta data."
+          instructions: 'This entry''s meta data.'
           display: Meta
       -
         handle: slug
         field:
           type: slug
-          localizable: true
           required: true
+          localizable: true
           generate: true
           listable: hidden
           display: Slug

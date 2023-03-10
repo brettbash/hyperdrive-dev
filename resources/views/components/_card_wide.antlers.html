@@ -4,20 +4,20 @@
 
 <div class="w-80 sm:w-96 xl:w-[28rem] 2xl:w-[32rem]">
     <a
-        data-mouse-manual
+        {{# data-mouse-manual #}}
         x-data
 
         {{ if action_override }}
             {{ partial:snippets/link_attributes }}
 
-            @mouseenter="mouse.createEvent('cursorPlayEnter')"
-            @mouseleave="mouse.createEvent('cursorPlayLeave')"
+            {{# @mouseenter="mouse.createEvent('cursorPlayEnter')" #}}
+            {{# @mouseleave="mouse.createEvent('cursorPlayLeave')" #}}
         {{ else }}
             {{ action }}
                 {{ partial:snippets/link_attributes }}
 
-                @mouseenter="mouse.createEvent('cursorPlayEnter')"
-                @mouseleave="mouse.createEvent('cursorPlayLeave')"
+                {{# @mouseenter="mouse.createEvent('cursorPlayEnter')" #}}
+                {{# @mouseleave="mouse.createEvent('cursorPlayLeave')" #}}
             {{ /action }}
         {{ /if }}
         class="w-full group"
@@ -35,7 +35,7 @@
         {{ if title }}
             {{ partial:typography/h3
                 :content="title"
-                color="text-white group-hover:text-primary"
+                color="text-black group-hover:text-secondary-300"
                 class="mt-5 transition"
             }}
         {{ /if }}

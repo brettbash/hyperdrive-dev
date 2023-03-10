@@ -1,25 +1,57 @@
 title: 'Module: Hero'
 fields:
   -
-    import: background
+    handle: media
+    field:
+      fields:
+        -
+          import: background
+      mode: stacked
+      max_rows: 1
+      add_row: 'Add Media'
+      reorderable: true
+      display: Media
+      type: grid
+      icon: grid
+      listable: hidden
+      instructions_position: above
+      read_only: false
+  -
+    handle: size
+    field:
+      options:
+        full: Full
+        compact: Compact
+      display: Size
+      default: full
+      type: button_group
+      icon: button_group
+      listable: hidden
+      width: 50
+  -
+    handle: alignment
+    field:
+      options:
+        left: Left
+        center: Center
+        right: Right
+      display: 'Content Alignment'
+      default: left
+      type: button_group
+      icon: button_group
+      listable: hidden
+      width: 50
   -
     handle: title
     field:
       input_type: text
+      antlers: false
       display: Title
       type: text
       icon: text
       listable: hidden
-      width: 66
-  -
-    handle: subtitle
-    field:
-      input_type: text
-      display: Subtitle
-      type: text
-      icon: text
-      listable: hidden
-      width: 33
+      instructions_position: above
+      read_only: false
   -
     handle: text
     field: common.text_plain

@@ -10,13 +10,75 @@ sections:
           display: 'General configuration'
           instructions: 'Global site configuration options.'
       -
-        handle: html
+        handle: email
         field:
-          html: 'This is where you can add site specific configuration options like color options or globally used e-mail addresses.'
-          display: General configuration
-          type: html
-          icon: code
+          input_type: email
+          antlers: false
+          display: 'Primary Email'
+          type: text
+          icon: text
           listable: hidden
+          width: 50
+      -
+        handle: phone
+        field:
+          input_type: tel
+          antlers: false
+          display: Phone
+          type: text
+          icon: text
+          listable: hidden
+          width: 50
+      -
+        handle: address_street
+        field:
+          input_type: text
+          antlers: false
+          display: Street
+          type: text
+          icon: text
+          listable: false
+          width: 66
+      -
+        handle: address_unit
+        field:
+          input_type: text
+          antlers: false
+          display: Suite/Unit
+          type: text
+          icon: text
+          listable: false
+          width: 33
+      -
+        handle: address_city
+        field:
+          input_type: text
+          antlers: false
+          display: City
+          type: text
+          icon: text
+          listable: false
+          width: 50
+      -
+        handle: address_state
+        field:
+          input_type: text
+          antlers: false
+          display: State
+          type: text
+          icon: text
+          listable: false
+          width: 25
+      -
+        handle: address_zip
+        field:
+          input_type: text
+          antlers: false
+          display: Zip
+          type: text
+          icon: text
+          listable: false
+          width: 25
   error_messages:
     display: 'Error messages'
     fields:

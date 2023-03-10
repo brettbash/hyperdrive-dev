@@ -4,7 +4,6 @@
     @set page.blocks.call_to_action
 #}}
 
-{{ partial:components/access_gate }}
 <section
     id="{{ block:anchor }}"
     x-data
@@ -39,8 +38,7 @@
                 {{ partial:components/background
                     :asset_type="asset_type"
                     :image="image"
-                    :webm="webm"
-                    :mp4="mp4"
+                    :video="video"
                     :poster="poster"
                     attribute="x-ref='background'"
                 }}
@@ -110,12 +108,8 @@
                 attribute="
                     x-data='words()'
                     x-init='
-                        {{ noparse }}
-                            $nextTick(() => {
-                                trigger = $refs.container;
-                                mounted();
-                            });
-                        {{ /noparse }}
+                        trigger = $refs.container;
+                        mounted();
                     '
                     x-ref='element'
                 "
@@ -130,37 +124,26 @@
                     x-data='fadeIn()'
                     x-init='
                         delay = $store.animationDelay + {increment:block{{ index }} by="0.4"};
-                        {{ noparse }}
-                            $nextTick(() => {
-                                trigger = $refs.container;
-                                mounted();
-                            });
-                        {{ /noparse }}
+                        trigger = $refs.container;
+                        mounted();
                     '
                     x-ref='element'
                 "
             }}
 
-            {{ block:buttons }}
-                {{ partial:components/buttons
-                    attribute="
-                        x-data='fadeIn()'
-                        x-init='
-                            delay = $store.animationDelay + {increment:block{{ index }} by="0.7"};
-                            {{ noparse }}
-                                $nextTick(() => {
-                                    trigger = $refs.container;
-                                    mounted();
-                                });
-                            {{ /noparse }}
-                        '
-                        x-ref='element'
-                    "
-                }}
-            {{ /block:buttons }}
+            {{ partial:components/buttons
+                attribute="
+                    x-data='fadeIn()'
+                    x-init='
+                        delay = $store.animationDelay + {increment:block{{ index }} by="0.7"};
+                        trigger = $refs.container;
+                        mounted();
+                    '
+                    x-ref='element'
+                "
+            }}
 
         </div>
     </div>
 
 </section>
-{{ /partial:components/access_gate }}

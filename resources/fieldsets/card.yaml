@@ -1,12 +1,12 @@
-title: 'Block: Call to Action'
+title: 'Component: Card'
 fields:
   -
-    handle: style_type
+    handle: type
     field:
       options:
-        full: Full
-        basic: Basic
-      default: full
+        custom: Custom
+        entry: Entry
+      default: custom
       display: Type
       type: button_group
       icon: button_group
@@ -14,51 +14,51 @@ fields:
       instructions_position: above
       read_only: false
   -
-    handle: subtitle
+    handle: title
     field:
       input_type: text
       antlers: false
-      display: Subtitle
+      display: Title
       type: text
       icon: text
       listable: hidden
       instructions_position: above
       read_only: false
+      if:
+        type: custom
   -
-    handle: title
-    field:
-      input_type: text
-      type: text
-      localizable: true
-      listable: hidden
-      display: Title
-      instructions: 'The title you want to display above the text.'
-      validate:
-        - required
-  -
-    handle: text
-    field: common.text_plain
-  -
-    import: buttons
-  -
-    handle: background
+    handle: media
     field:
       fields:
         -
           import: background
       mode: stacked
       max_rows: 1
-      add_row: 'Add Background'
-      reorderable: false
-      display: Background
+      add_row: 'Add Media'
+      reorderable: true
+      display: Media
       type: grid
       icon: grid
       listable: hidden
       instructions_position: above
       read_only: false
       if:
-        style_type: full
+        type: custom
   -
-    import: block_spacing
-  -
-    import: anchor
+    handle: action
+    field:
+      fields:
+        -
+          import: links
+      mode: stacked
+      max_rows: 1
+      add_row: 'Add Link Action'
+      reorderable: false
+      display:  Action
+      type: grid
+      icon: grid
+      listable: hidden
+      instructions_position: above
+      read_only: false
+      if:
+        type: custom

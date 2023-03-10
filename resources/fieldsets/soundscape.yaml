@@ -1,0 +1,51 @@
+title: 'Component: Soundscape'
+fields:
+  -
+    handle: sound
+    field:
+      mode: list
+      container: assets
+      restrict: false
+      allow_uploads: true
+      show_filename: true
+      max_files: 1
+      display: Sound
+      type: assets
+      icon: assets
+      listable: hidden
+      instructions_position: above
+  -
+    handle: customize_triggers
+    field:
+      default: false
+      display: 'Customize Sound Triggers'
+      type: toggle
+      icon: toggle
+      listable: false
+      instructions_position: above
+  -
+    handle: start
+    field:
+      input_type: text
+      antlers: false
+      display: Start
+      type: text
+      icon: text
+      width: 50
+      listable: false
+      instructions_position: above
+      if:
+        customize_triggers: true
+  -
+    handle: end
+    field:
+      input_type: text
+      antlers: false
+      display: End
+      type: text
+      icon: text
+      width: 50
+      listable: false
+      instructions_position: above
+      if:
+        customize_triggers: true

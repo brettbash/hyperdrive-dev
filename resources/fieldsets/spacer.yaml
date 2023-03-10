@@ -1,14 +1,16 @@
-title: 'Block: Spacer'
+title: 'Block Spacer'
 fields:
   -
     handle: space
     field:
       options:
-        sm: SM
-        md: MD
-        lg: LG
+        sm: Small
+        md: Medium
+        lg: Large
       display: Space
       default: md
       type: button_group
       icon: button_group
       listable: hidden
+  -
+    import: block_spacing

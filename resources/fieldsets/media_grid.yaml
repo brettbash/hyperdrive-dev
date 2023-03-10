@@ -1,0 +1,51 @@
+title: 'Block: Media Grid'
+fields:
+  -
+    handle: rows
+    field:
+      fields:
+        -
+          handle: layout
+          field:
+            options:
+              '100': '100%'
+              '50_50': '50% / 50%'
+              '66_33': '66% / 33%'
+              '33_66': '33% / 66%'
+              '33_33_33': '33% / 33% / 33%'
+            multiple: false
+            clearable: false
+            searchable: true
+            taggable: false
+            push_tags: false
+            cast_booleans: false
+            display: Layout
+            default: '50_50'
+            type: select
+            icon: select
+            listable: hidden
+        -
+          handle: media_assets
+          field:
+            fields:
+              -
+                import: background
+            mode: stacked
+            max_rows: 3
+            add_row: 'Add Media'
+            reorderable: true
+            display: 'Media Assets'
+            type: grid
+            icon: grid
+            listable: hidden
+      mode: stacked
+      min_rows: 1
+      reorderable: true
+      display: Rows
+      type: grid
+      icon: grid
+      listable: hidden
+  -
+    import: block_spacing
+  -
+    import: anchor

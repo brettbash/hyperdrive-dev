@@ -1,0 +1,20 @@
+title: 'Component: Video'
+fields:
+  -
+    handle: size
+    field: common.size
+    config:
+      localizable: true
+      width: 50
+      instructions: 'The size in which the video should be displayed.'
+  -
+      import: video_player
+  -
+    handle: caption
+    field:
+      input_type: text
+      type: text
+      localizable: true
+      listable: hidden
+      display: Caption
+      instructions: 'An optional caption that will be displayed under the video.'

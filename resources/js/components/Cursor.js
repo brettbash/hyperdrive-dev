@@ -26,11 +26,6 @@ export default () => {
         animation: '',
         entering: false,
 
-        loadingSpin: null,
-        viewSpin: null,
-        customizeSpin: null,
-        rinehartSpin: null,
-
         start() {
             window.addEventListener('mousemove', ev => this.moveCursor(ev));
             this.moveLayers();
@@ -38,17 +33,9 @@ export default () => {
             /* :: Hide Default Browser Cursor
             {+} ---------------------------------- */
             setTimeout(() => {
-                // document.body.classList.add('lg:cursor-none');
+                document.body.classList.add('lg:cursor-none');
                 this.$refs.cursorContainer.classList.add('lg:visible');
             }, 200);
-
-            gsap.set(
-                this.$refs.logoCursor,
-                {
-                    xPercent: 101,
-                    yPercent: -101,
-                }
-            );
 
             /* :: Default Cursor
             {+} ---------------------------------- */
@@ -56,15 +43,10 @@ export default () => {
             window.addEventListener('cursorLeave', () => this.leave());
             window.addEventListener('cursorClick', () => this.click());
 
-            /* :: Logo Cursor
-            {+} ---------------------------------- */
-            window.addEventListener('cursorLogoEnter', () => this.logoEnter());
-            window.addEventListener('cursorLogoLeave', () => this.logoLeave());
-
             /* :: Loading
             {+} ---------------------------------- */
-            window.addEventListener('cursorLoadingEnter', () => this.loadingEnter());
-            window.addEventListener('cursorLoadingLeave', () => this.loadingLeave());
+            // window.addEventListener('cursorLoadingEnter', () => this.loadingEnter());
+            // window.addEventListener('cursorLoadingLeave', () => this.loadingLeave());
         },
 
         // π ----
@@ -216,26 +198,6 @@ export default () => {
             );
         },
 
-        logoEnter() {
-            console.log(`logo enter!`);
-            const tl = this.setEnter('logo');
-
-            tl.add('start')
-            .fromTo(this.$refs.logoCursor,
-                {
-                    xPercent: -101,
-                    yPercent: 101,
-                },
-                {
-                    xPercent: 0,
-                    yPercent: 0,
-                    duration: 0.6,
-                    ease: 'quint.out'
-                },
-                'start'
-            );
-        },
-
         // π ----
         // :: LEAVE ---------------------------::
         // ____
@@ -260,22 +222,6 @@ export default () => {
             'start'
             )
         },
-
-        logoLeave() {
-            const tl = this.setLeave();
-
-            tl.add('start')
-                .to(
-                    this.$refs.logoCursor,
-                    {
-                        xPercent: 101,
-                        yPercent: -101,
-                        duration: 0.6,
-                        ease: 'quint.inOut'
-                    }
-                );
-        },
-
 
         // π ----
         // :: CLICK ---------------------------::

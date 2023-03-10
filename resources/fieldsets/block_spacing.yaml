@@ -1,4 +1,4 @@
-title: 'Block Spacing'
+title: 'Block: Spacing'
 fields:
   -
     handle: set_top_padding
@@ -7,5 +7,5 @@ fields:
       default: true
       type: toggle
       icon: toggle
-      instructions: 'If a block has a sibling block above it, this block will have top padding when this is enabled (enabled by default).'
+      instructions: 'Adds a top padding to the block (enabled by default). Only adds padding if the block is __not__ the first in the set.'
       listable: hidden

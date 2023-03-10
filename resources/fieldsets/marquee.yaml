@@ -1,0 +1,63 @@
+title: 'Block: Marquee'
+fields:
+  -
+    handle: rows
+    field:
+      fields:
+        -
+          handle: text
+          field:
+            input_type: text
+            antlers: false
+            display: Text
+            type: text
+            icon: text
+            listable: hidden
+        -
+          handle: x_start
+          field:
+            input_type: text
+            antlers: false
+            display: 'X Start'
+            type: text
+            icon: text
+            width: 33
+            listable: hidden
+        -
+          handle: x_end
+          field:
+            input_type: text
+            antlers: false
+            display: 'X End'
+            type: text
+            icon: text
+            width: 33
+            listable: hidden
+        -
+          handle: color
+          field:
+            options:
+              white: White
+              orange: Orange
+              white_outline: 'White Outline'
+              orange_outline: 'Orange Outline'
+              gray: Gray
+              gray_light: 'Gray Light'
+            multiple: false
+            default: white
+            clearable: false
+            searchable: true
+            taggable: false
+            push_tags: false
+            cast_booleans: false
+            display: Color
+            type: select
+            icon: select
+            width: 33
+            listable: false
+      mode: stacked
+      reorderable: true
+      display: 'Text Rows'
+      type: grid
+      icon: grid
+      listable: hidden

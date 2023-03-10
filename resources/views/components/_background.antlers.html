@@ -19,14 +19,7 @@
             playsinline
             poster="{{ poster }}"
         >
-
-            {{ if mp4 }}
-                <source src="{{ mp4 }}" type="video/mp4" />
-            {{ endif }}
-
-            {{ if webm }}
-                <source src="{{ webm }}" type="video/webm" />
-            {{ endif }}
+                <source src="{{ video }}" />
         </video>
 
     {{ else }}

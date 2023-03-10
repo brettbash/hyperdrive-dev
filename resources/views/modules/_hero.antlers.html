@@ -17,24 +17,30 @@
         x-ref="element"
         class="absolute inset-0 w-full h-full"
     >
-        <div
-            x-data="parallaxBackground()"
-            x-init="
-                container = $refs.container;
-                yStart = 0;
-                start = 'top top';
-                mounted();
-            "
-            x-ref="container"
-            x-cloak
-            class="absolute inset-0 w-full h-full overflow-hidden"
-        >
-            {{ partial:components/background
-                :asset_type="hero_asset_type"
-                :image="hero_image"
-                attribute="x-ref='background'"
-            }}
-        </div>
+        {{ hero_media }}
+            <div
+                x-data="parallaxBackground()"
+                x-init="
+                    container = $refs.container;
+                    yStart = 0;
+                    start = 'top top';
+                    mounted();
+                "
+                x-ref="container"
+                x-cloak
+                class="absolute inset-0 w-full h-full overflow-hidden"
+            >
+
+                {{ partial:components/background
+                    :asset_type="asset_type"
+                    :image="image"
+                    :video="video"
+                    :poster="poster"
+                    attribute="x-ref='background'"
+                }}
+
+            </div>
+        {{ /hero_media }}
     </div>
 
     <div class="absolute right-0 top-0 w-full h-full bg-gradient-to-bl from-black to-transparent opacity-25"></div>

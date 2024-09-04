@@ -4,10 +4,10 @@ export default () => {
         return await fetch('/!/DynamicToken/refresh')
             .then(res => res.json())
             .then(data => {
-                return data.csrf_token;
+                return data.csrf_token
             })
             .catch(function (error) {
-                this.error = 'Something went wrong. Please try again later.';
-            });
-    };
-};
+                this.error = 'Something went wrong. Please try again later.'
+            })
+    }
+}

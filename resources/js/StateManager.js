@@ -1,6 +1,6 @@
 export default () => {
-    Alpine.store('animationDelay', 0.25);
-    Alpine.store('enterDelay', 1);
+    Alpine.store('animationDelay', 0.25)
+    Alpine.store('enterDelay', 1)
 
     Alpine.store('navigator', {
         open: false,
@@ -8,17 +8,17 @@ export default () => {
 
         toggle() {
             if (!this.animating) {
-                this.animating = true; // End of animations set this to false
-                this.open = !this.open;
+                this.animating = true // End of animations set this to false
+                this.open = !this.open
             }
-        }
-    });
+        },
+    })
 
     Alpine.store('search', {
         open: false,
-    });
+    })
 
-    Alpine.store('isTouch', ('ontouchstart' in document.documentElement && navigator.userAgent.match(/Mobi/)));
+    Alpine.store('isTouch', 'ontouchstart' in document.documentElement && navigator.userAgent.match(/Mobi/))
 
     Alpine.store('breakpoint', {
         sm: '(min-width: 640px)',
@@ -27,14 +27,14 @@ export default () => {
         xl: '(min-width: 1280px)',
         '2xl': '(min-width: 1536px)',
         '3xl': '(min-width: 1680px)',
-    });
+    })
 
-    Alpine.store('audioMute', false); // User Toggled & Persisted
-    Alpine.store('audioPause', false);
+    Alpine.store('audioMute', false) // User Toggled & Persisted
+    Alpine.store('audioPause', false)
 
     document.addEventListener('visibilitychange', () => {
-        Alpine.store('audioPause', document.hidden);
-    });
+        Alpine.store('audioPause', document.hidden)
+    })
 
     Alpine.store('lightboxVideo', {
         open: false,
@@ -43,7 +43,6 @@ export default () => {
         vimeo: '',
         mp4: '',
         webm: '',
-        poster: ''
-    });
-
-};
+        poster: '',
+    })
+}

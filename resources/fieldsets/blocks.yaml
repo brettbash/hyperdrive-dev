@@ -1,7 +1,6 @@
 title: Blocks
 fields:
-  -
-    handle: blocks
+  - handle: blocks
     field:
       type: replicator
       localizable: true
@@ -14,47 +13,26 @@ fields:
           display: Article
           instructions: 'Long form content, can be expanded with media like figures, video, quotes, or tables.'
           fields:
-            -
-              import: article
+            - import: article
         call_to_action:
           display: 'Call to Action'
           fields:
-            -
-              import: call_to_action
-        card_slider:
-          display: 'Card Slider'
-          fields:
-            -
-              import: card_slider
+            - import: call_to_action
         form:
           display: Form
           fields:
-            -
-              import: form
-        media_grid:
-          display: 'Media Grid'
-          fields:
-            -
-              import: media_grid
-        people:
-          display: People
-          fields:
-            -
-              import: people
+            - import: form
         spacer:
           display: Spacer
           fields:
-            -
-              import: spacer
+            - import: spacer
         split:
           display: Split
           fields:
-            -
-              import: split
+            - import: split
       instructions_position: above
       read_only: false
-  -
-    handle: spacing_top
+  - handle: spacing_top
     field:
       display: 'Top Spacing'
       default: true
@@ -62,8 +40,7 @@ fields:
       icon: toggle
       width: 50
       listable: hidden
-  -
-    handle: spacing_bottom
+  - handle: spacing_bottom
     field:
       display: 'Bottom Spacing'
       default: true

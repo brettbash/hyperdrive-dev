@@ -15,7 +15,7 @@
         x-data="fadeIn()"
 
         x-init="
-            delay = $store.animationDelay + {{ increment:block{{ block:index }}set{{ index }} by="0.4" }};
+            delay = avalanche.delay.default + {{ increment:block{{ block:index }}set{{ index }} by="0.4" }};
             $nextTick(() => {
                 trigger = $refs.container;
                 mounted();
@@ -33,7 +33,7 @@
             x-data="words()"
 
             x-init="
-                delay = $store.animationDelay + {{ increment:block{{ block:index }}set{{ index }} by="0.4" }};
+                delay = avalanche.delay.default + {{ increment:block{{ block:index }}set{{ index }} by="0.4" }};
                 $nextTick(() => {
                     trigger = $refs.container;
                     mounted();

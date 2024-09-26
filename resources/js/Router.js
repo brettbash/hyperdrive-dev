@@ -1,8 +1,10 @@
 import barba from '@barba/core'
+import mouse from '@components/MouseController'
 import primaryOnce from '@modules/pageTransitions/PrimaryOnce'
 import primaryLeave from '@modules/pageTransitions/PrimaryLeave'
 import primaryEnter from '@modules/pageTransitions/PrimaryEnter'
-import mouse from '@components/MouseController'
+// import secondaryLeave from '@modules/pageTransitions/SecondaryLeave'
+// import secondaryEnter from '@modules/pageTransitions/SecondaryEnter'
 
 window.barba = barba
 
@@ -12,8 +14,20 @@ export default () => {
     })
 
     barba.hooks.afterOnce(() => {
+        Alpine.store('barba').started = true
         const elements = [...document.querySelectorAll('a, button')]
         mouse.set(elements)
+    })
+
+    barba.hooks.beforeEnter(() => {
+        window.smoother = ScrollSmoother.create({
+            smooth: 1,
+            effects: true,
+            smoothTouch: true,
+            ignoreMobileResize: true,
+        })
+        ScrollTrigger.refresh()
+        smoother.scrollTo(0)
     })
 
     barba.hooks.enter(() => {
@@ -41,13 +55,13 @@ export default () => {
         Alpine.store('audioPause', true)
 
         mouse.createEvent('cursorLoadingEnter')
-        if (Alpine.store('navigator').open) {
-            Alpine.store('navigator').toggle()
+        if (Alpine.store('overlay').nav.open) {
+            Alpine.store('overlay').nav.toggle()
         }
     })
 
     barba.hooks.afterLeave(() => {
-        Alpine.store('enterDelay', 0.5)
+        avalanche.delay.enter = 1.3
     })
 
     barba.hooks.after(() => {
@@ -63,11 +77,13 @@ export default () => {
         timeout: 30000,
         transitions: [
             {
+                name: 'primary',
                 once() {
                     primaryOnce()
                 },
                 leave(data) {
                     const done = this.async()
+                    Alpine.store('barba').currentHeight = data.current.container.clientHeight
                     primaryLeave(data.current.container, done)
                 },
                 enter() {

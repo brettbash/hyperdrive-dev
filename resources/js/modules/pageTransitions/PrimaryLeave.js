@@ -1,19 +1,22 @@
 export default (container, done) => {
-    document.body.classList.add('no-scroll')
+    smoother.paused(true)
+    const loader = document.querySelector('[data-transition-primary]')
+    const cover = loader.querySelector('[data-cover]')
+    const logo = loader.querySelector('[data-logo]')
 
-    const initialLoad = gsap.timeline({
+    const tl = gsap.timeline({
         defaults: { ease: 'circ.inOut' },
         onComplete: () => {
             done()
         },
     })
 
-    const loaderWrapper = document.querySelector('[data-loader-wrapper]')
-    const curtainYellow = document.querySelector('[data-curtain-yellow]')
-    const curtainBlue = document.querySelector('[data-curtain-blue]')
-
-    initialLoad
-        .set(loaderWrapper, { autoAlpha: 1 })
-        .fromTo(curtainYellow, { xPercent: -101 }, { duration: 0.6, xPercent: 0 })
-        .fromTo(curtainBlue, { xPercent: -101 }, { duration: 0.6, xPercent: 0 }, '<0.2')
+    tl.set(loader, { autoAlpha: 1 })
+        .fromTo(cover, { opacity: 0 }, { opacity: 1, duration: 0.4 })
+        .fromTo(
+            logo,
+            { opacity: 0, yPercent: 50, scale: 0.9 },
+            { opacity: 1, yPercent: 0, scale: 1, duration: 0.6, ease: 'circ.out' },
+            '<',
+        )
 }

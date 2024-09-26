@@ -1,0 +1,163 @@
+{{#
+    @name Person Card
+    @desc A single person card. Used with the people block and People collection.
+    @type component
+#}}
+
+<{{ block:open_person ? "button" : "div" }}
+    data-person-card
+    {{ if block:open_person }}
+        @click="$store.overlay.person.toggle({{ person:count }})"
+    {{ /if }}
+    class="
+        relative z-10
+        grid gap-4
+        w-full text-left
+        focus:outline-none
+        transition-none group
+    "
+>
+
+    {{# -- π ----
+    // :: PROFILE IMAGE/VIDEO
+    // : ------------------------------------ #}}
+    <div
+        {{ if block:open_person }}
+            x-data="magnetic()"
+            x-ref="card"
+            @mousemove="
+                magnetize($event, $el, $refs.card, 25);
+                magnetize($event, $el, $refs.selector, -35);
+            "
+            @mouseleave="
+                demagnetize($refs.card);
+                demagnetize($refs.selector);
+            "
+        {{ /if }}
+        class="relative z-0 w-full aspect-[10/16] rounded-3xl"
+    >
+
+        <div class="relative w-full h-full rounded-3xl overflow-hidden">
+            {{ person:featured_media }}
+                {{ partial:components/media
+                    size="w-full h-full"
+                    class="{{
+                        block:open_person ?= "
+                            lg:group-hover:scale-110
+                            transition-transform duration-500 ease-in-out-quint
+                        "
+                    }}"
+                }}
+            {{ /person:featured_media }}
+
+            {{ if block:open_person }}
+                <div
+                    class="absolute inset-0 lg:group-hover:animate-flicker"
+                >
+
+                    <div
+                        class="
+                            w-full h-full
+                            bg-primary-100
+                            opacity-0 lg:group-hover:opacity-10
+                            transition duration-400 ease-in-out-quint
+                        "
+                    >
+                    </div>
+                </div>
+            {{ /if }}
+        </div>
+
+    <div
+        class="
+            {{ if block:open_person }}
+                border border-neutral-100/40 lg:group-hover:border-primary-100/50
+                transition
+            {{ /if }}
+            absolute inset-0
+            rounded-3xl
+            p-4
+        "
+    >
+        <div
+            class="
+                {{ if block:open_person }}
+                    lg:group-hover:animate-flicker
+                {{ /if }}
+                w-full h-full
+            "
+        >
+            {{ if block:open_person }}
+                <div
+                    x-ref="selector"
+                    class="w-full h-full"
+                >
+
+                    <div
+                        class="
+                            w-full h-full border border-primary rounded-2xl
+                            opacity-0 lg:group-hover:opacity-100
+                            scale-125 lg:group-hover:scale-100
+                            transition duration-400 ease-in-out-quint
+                        "
+                    >
+                    </div>
+                </div>
+            {{ /if }}
+        </div>
+    </div>
+
+    </div>
+
+    {{# -- π ----
+    // :: INFO
+    // : ------------------------------------ #}}
+    <div
+        class="
+            {{ if block:open_person }}
+                lg:group-hover:animate-flicker
+            {{ /if }}
+            flex flex-col gap-2
+        "
+    >
+        <div
+            class="
+                {{ if block:open_person }}
+                    lg:group-hover:translate-x-4
+                {{ /if }}
+                relative
+                inline-flex items-center gap-2
+                transition ease-in-out-circ
+            "
+        >
+            {{# :: Pixel
+            {+} ------------------------------------ #}}
+            <div class="w-2 h-2 bg-white"></div>
+            {{ if block:open_person }}
+                <div
+                    class="
+                        absolute left-0 top-1
+                        w-10 lg:group-hover:w-2 h-2
+                        bg-white
+                        opacity-0 lg:group-hover:opacity-100
+                        transition-all ease-in-out-circ
+                    "
+                ></div>
+            {{ /if }}
+
+            {{# :: Name
+            {+} ------------------------------------ #}}
+            {{ partial:typography/meta
+                as="div"
+                :content="person:title"
+            }}
+        </div>
+
+        {{# :: Position
+        {+} ------------------------------------ #}}
+        {{ partial:typography/meta
+            as="div"
+            :content="person:position"
+        }}
+    </div>
+</{{ block:open_person ? "button" : "div" }}>

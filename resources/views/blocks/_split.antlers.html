@@ -1,16 +1,16 @@
 {{#
-	@name Split
+	@name Split (50/50)
 	@desc Text content and media asset split
-    @set page.blocks.split
+    @type block
 #}}
 
 <section
     x-data=""
     class="
-        relative flex flex-col
         {{ block:alignment === "left" ? "lg:flex-row-reverse" : "lg:flex-row" }}
-        w-full lg:min-h-screen
         {{ partial:snippets/no_block_spacing }}
+        relative flex flex-col
+        w-full lg:min-h-screen
     "
 >
     {{# -- π ----
@@ -19,6 +19,7 @@
     <div class="relative w-full lg:w-1/2 h-80 sm:h-96 md:h-[32rem] lg:h-full bg-neutral-900">
         {{ block:media }}
             <div
+                {{#
                 x-data="parallaxBackground()"
                 x-init="
                     scaleStart = 1.4;
@@ -31,12 +32,13 @@
                 "
                 x-ref="container"
                 x-cloak
+                #}}
                 class="relative w-full h-full overflow-hidden"
             >
 
                 <div x-ref="background" class="absolute inset-0 w-full h-full">
                     <div
-                        x-data="fadeIn()"
+                        x-data="animate()"
                         x-init="
                             scale = true;
                             delay = $store.animationDelay + 0.2;
@@ -47,18 +49,11 @@
                         "
                         class="absolute inset-0 w-full h-full"
                     >
-
-                        {{ partial:components/background
-                            :asset_type="asset_type"
-                            :image="image"
-                            :video="video"
-                            :poster="poster"
+                        {{ partial:components/media
                             attribute="x-ref='background'"
                         }}
-
                     </div>
                 </div>
-
             </div>
         {{ /block:media }}
     </div>
@@ -66,13 +61,16 @@
     {{# -- π ----
     // :: CONTENT
     // : ------------------------------------ #}}
-    <div x-ref="content" class="flex flex-col justify-center gap-8 w-full lg:w-1/2 px-10 py-16 md:p-12 lg:p-8 xl:p-10 2xl:p-20 3xl:p-24 text-black">
+    <div
+        x-ref="content"
+        class="flex flex-col justify-center gap-8 w-full lg:w-1/2 px-10 py-16 md:p-12 lg:p-8 xl:p-10 2xl:p-20 3xl:p-24 text-black"
+    >
         {{ if block:subtitle_top }}
             {{ partial:typography/h4
                 :content="block:subtitle_top"
                 class="mb-1"
                 attribute="
-                    x-data='words()'
+                    x-data='animateText()'
                     x-init='
                         delay = $store.animationDelay + {increment:block{{ index }} by="0.4"};
                         trigger = $refs.content;
@@ -89,7 +87,7 @@
             :content="block:title"
             class="{{ !block:subtitle_bottom ?= 'mb-8' }}"
             attribute="
-                x-data='words()'
+                x-data='animateText()'
                 x-init='
                     trigger = $refs.content;
                     mounted();
@@ -104,7 +102,7 @@
                 color="text-secondary"
                 attribute="
                     {{# x-data='lines()' #}}
-                    x-data='fadeIn()'
+                    x-data='animate()'
                     x-init='
                         delay = $store.animationDelay + {increment:block{{ index }} by="0.4"};
                         trigger = $refs.content;
@@ -124,7 +122,7 @@
                 :content="block:text | nl2br"
                 attribute="
                     {{# x-data='lines()' #}}
-                    x-data='fadeIn()'
+                    x-data='animate()'
                     x-init='
                         delay = $store.animationDelay + {increment:block{{ index }} by="0.4"};
                         trigger = $refs.content;
@@ -142,7 +140,7 @@
             :buttons="block:buttons"
             style="white"
             attribute="
-                x-data='fadeIn()'
+                x-data='animate()'
                 x-init='
                     delay = $store.animationDelay + {increment:block{{ index }} by="0.7"};
                     trigger = $refs.content;

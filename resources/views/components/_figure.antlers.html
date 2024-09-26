@@ -6,7 +6,7 @@
 
 <figure class="size-{{ size }} my-4">
     <div
-        x-data="fadeIn()"
+        x-data="animate()"
         x-init="
             delay = $store.animationDelay + {increment:block{{ index }}set{{ index }}};
             mounted();
@@ -34,7 +34,7 @@
     {{ partial:typography/caption
         as="figcaption"
         attribute="
-            x-data='fadeIn()'
+            x-data='animate()'
             x-init='
                 delay = $store.animationDelay + {increment:block{{ index }}set{{ index }} by="0.7"};
                 mounted();

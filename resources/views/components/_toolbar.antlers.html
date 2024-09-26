@@ -6,11 +6,23 @@
 {{ if environment == "local" }}
     <aside
         x-data="{
-            visible: true
+            visible: true,
         }"
+
+        x-init="
+            {{#
+            ScrollTrigger.create({
+                trigger: document.getElementById('smooth-content'),
+                start: 'top top',
+                end: 'bottom',
+                pin: $refs.toolbar,
+            });
+            #}}
+        "
+
         x-ref="toolbar"
         x-cloak
-        class="fixed z-50 bottom-0 right-0 flex bg-neutral-900 text-xs hover:opacity-100 transition-opacity"
+        class="fixed z-40 top-[100vh] right-0 flex bg-neutral-900 text-xs hover:opacity-100 transition-opacity -translate-y-full"
         :class="{ 'opacity-100': visible, 'opacity-0': !visible }"
     >
         <span title="Current Tailwind breakpoint" class="flex items-center p-2 space-x-1 text-black bg-primary">

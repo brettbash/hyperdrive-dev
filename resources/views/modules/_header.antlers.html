@@ -1,15 +1,33 @@
 {{#
     @name Header
     @desc The sites header rendered on each page.
+    @type module
 #}}
 
 <header
-    {{# x-data="header()" #}}
-    class="absolute z-30 inset-x-0 top-0 w-full pt-6"
+    x-data="{
+        sticky: false,
+        init() {
+            ScrollTrigger.create({
+                trigger: document.body,
+                start: '400px top',
+                end: 'bottom bottom',
+                onEnter: () => {
+                    this.sticky = true;
+                },
+                onLeaveBack: () => {
+                    this.sticky = false;
+                },
+            })
+        },
+    }"
+    x-ref="header"
+    id="site-header"
+    class="fixed z-30 inset-x-0 top-0 w-full pt-6"
 >
 
     <div
-        x-data="fadeIn()"
+        x-data="animate()"
         x-init="
             translate = 'y';
             yStart = -50;
@@ -29,11 +47,11 @@
                 {{ partial:components/logo }}
             </div>
 
-            {{ partial:navigation/primary }}
+            {{ partial:navigation/nav_primary }}
         </div>
 
         <div class="flex items-center space-x-10">
-            {{ partial:components/nav_toggle }}
+            {{ partial:components/buttons/button_hamburger }}
         </div>
 
     </div>

@@ -1,0 +1,22 @@
+{{#
+    @name Primary Transition
+    @desc Transition between pages.
+    @type component
+#}}
+
+<div
+    x-data
+    data-transition-primary
+    class="fixed z-50 inset-0 flex w-full h-screen overflow-hidden opacity-0 invisible"
+>
+    <div data-cover class="absolute inset-0 w-full h-full bg-white"></div>
+
+    <div
+        class="absolute inset-0 flex items-center justify-center"
+        x-cloak
+    >
+        <div data-logo class="flex justify-center items-center w-96 h-96 p-4 rounded-full border-8 border-tertiary">
+            {{ svg src="visuals/logomark" class="text-tertiary" }}
+        </div>
+    </div>
+</div>

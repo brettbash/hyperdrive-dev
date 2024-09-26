@@ -23,6 +23,7 @@
     {{ if block:style_type === "full" }}
         {{ block:background }}
             <div
+                {{#
                 x-data="parallaxBackground()"
                 x-init="
                     $nextTick(() => {
@@ -32,17 +33,12 @@
                 "
                 x-ref="container"
                 x-cloak
+                #}}
                 class="absolute inset-0 w-full h-full overflow-hidden"
             >
-
-                {{ partial:components/background
-                    :asset_type="asset_type"
-                    :image="image"
-                    :video="video"
-                    :poster="poster"
+                {{ partial:components/media
                     attribute="x-ref='background'"
                 }}
-
             </div>
         {{ /block:background }}
 
@@ -62,7 +58,7 @@
     >
         {{ if block:subtitle }}
             <div
-                x-data="fadeIn()"
+                x-data="animate()"
                 x-init="mounted()"
                 x-ref="element"
 
@@ -106,7 +102,7 @@
                 :content="block:title"
                 class="mb-6 uppercase"
                 attribute="
-                    x-data='words()'
+                    x-data='animateText()'
                     x-init='
                         trigger = $refs.container;
                         mounted();
@@ -121,7 +117,7 @@
                 :content="block:text"
                 attribute="
                     {{# x-data='lines()' #}}
-                    x-data='fadeIn()'
+                    x-data='animate()'
                     x-init='
                         delay = $store.animationDelay + {increment:block{{ index }} by="0.4"};
                         trigger = $refs.container;
@@ -133,7 +129,7 @@
 
             {{ partial:components/buttons
                 attribute="
-                    x-data='fadeIn()'
+                    x-data='animate()'
                     x-init='
                         delay = $store.animationDelay + {increment:block{{ index }} by="0.7"};
                         trigger = $refs.container;

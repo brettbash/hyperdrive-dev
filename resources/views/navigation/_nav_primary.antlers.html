@@ -1,0 +1,12 @@
+{{#
+	@name Primary Navigation
+	@desc Displays in the header
+#}}
+
+<nav
+    class="hidden xl:flex gap-6 mt-1"
+>
+    {{ nav:primary max_depth="1" }}
+        {{ partial:components/navigation/nav_item }}
+    {{ /nav:primary }}
+</nav>

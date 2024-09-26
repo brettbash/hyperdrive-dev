@@ -1,0 +1,79 @@
+{{#
+    @name Contact Group Card
+    @desc A single contact group of contacts
+    @type component
+#}}
+
+<div
+    class="
+        {{ partial:snippets/border border="border" }}
+        {{ if contact_group.contacts | count > 1 and contact_group.contacts | count < 4 }}
+            sm:col-span-2
+        {{ elseif contact_group.contacts | count >= 4 }}
+            sm:col-span-2 lg:col-span-4
+        {{ /if }}
+        w-full
+        bg-neutral-800
+        rounded-3xl
+    "
+>
+    {{ if contact_group.title }}
+        <div
+            class="
+                {{ partial:snippets/border border="border-b" }}
+                p-4 3xl:p-8
+            "
+        >
+            {{ partial:typography/h6
+                :content="contact_group.title"
+                color="text-primary"
+            }}
+        </div>
+    {{ /if }}
+
+    <div
+        class="
+            {{ if contact_group.contacts | count > 1 and contact_group.contacts | count < 4 }}
+                sm:grid-cols-2
+            {{ elseif contact_group.contacts | count >= 4 }}
+                sm:grid-cols-2 lg:grid-cols-4
+            {{ /if }}
+            grid
+        "
+    >
+        {{ contact_group.contacts scope="contact" }}
+            <div class="flex flex-col items-start gap-2 p-4 3xl:p-8">
+
+                {{ partial:typography/paragraph
+                    :content="contact:type === 'person' ? contact:person.title : contact:name"
+                    size="lg"
+                    margin="m-0"
+                }}
+
+                {{ email = "" }}
+                {{ phone = "" }}
+                {{ if contact:type === "person" }}
+                    {{ email = contact:person:email }}
+                    {{ contact:person:phone limit="1" }}
+                        {{ phone = number }}
+                    {{ /contact:person:phone }}
+                {{ else }}
+                    {{ email = contact:email }}
+                    {{ phone = contact:phone }}
+                {{ /if }}
+
+                {{ partial:components/contact_item
+                    :label="phone"
+                    link="tel:{{ phone }}"
+                    class="mt-1"
+                }}
+
+                {{ partial:components/contact_item
+                    :label="email"
+                    link="mailto:{{ email }}"
+                    icon="mail"
+                }}
+            </div>
+        {{ /contact_group.contacts }}
+    </div>
+</div>

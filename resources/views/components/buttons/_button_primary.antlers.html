@@ -1,0 +1,174 @@
+{{#
+	@name Button: Primary
+	@desc A single button component. Faux is used when a button is displayed inside a link (for example in link blocks).
+#}}
+
+{{ if label }}
+    <div
+        x-data="{
+            hovered: false
+        }"
+        class="{{ wrapper_class }}"
+    >
+
+        <div
+            {{ if magnetic }}
+                x-data="magnetic()"
+                x-ref="button"
+                @mousemove="
+                    magnetize($event, $el, $refs.button, 25);
+                    magnetize($event, $el, $refs.content, -35);
+                "
+            {{ /if }}
+
+            @mouseleave="
+                {{ if magnetic }}
+                    demagnetize($refs.button);
+                    demagnetize($refs.content);
+                {{ /if }}
+
+                mm.add(avalanche.breakpoint(avalanche.screens.lg), () => {
+                    hovered = false;
+                });
+            "
+
+            @mouseenter="
+                mm.add(avalanche.breakpoint(avalanche.screens.lg), () => {
+                    hovered = true;
+                });
+            "
+
+            class="relative inline-flex hover:z-10"
+        >
+
+        <{{ as or "a" }}
+            {{ attribute }}
+            class="
+                relative focus:outline-none
+                md:min-w-56 px-4 md:px-8 xl:px-12 py-5 md:py-6 xl:py-8
+                group
+                {{ class }}
+            "
+
+            {{ unless faux }}
+                {{ partial:snippets/link_attributes }}
+            {{ /unless }}
+        >
+            <div
+                class="
+                    {{ if theme === "black" }}
+                        border-neutral lg:group-hover:border-primary
+                        group-focus-visible:ring-neutral
+                    {{ elseif theme === "red" }}
+                        border-primary
+                        group-focus-visible:ring-primary
+                    {{ elseif theme === "white" }}
+                        border-white
+                        group-focus-visible:ring-white
+                    {{ else }}
+                        border-primary
+                        group-focus-visible:ring-primary
+                    {{ /if }}
+                    absolute inset-0 w-full h-full
+                    border rounded-2xl
+                    group-focus-visible:ring
+                    overflow-hidden transition
+                "
+            >
+                <div
+                    class="
+                        {{ if theme === "white" }}
+                            bg-white
+                        {{ else }}
+                            bg-primary
+                        {{ /if }}
+                        w-full h-full
+                        opacity-0 group-hover:opacity-100
+                        transition
+                    "
+                ></div>
+            </div>
+
+            <div
+                x-ref="content"
+                class="
+                    {{ if theme === "black" }}
+                        text-neutral lg:group-hover:text-white
+                    {{ elseif theme === "red" }}
+                        text-primary lg:group-hover:text-white
+                    {{ elseif theme === "white" }}
+                        text-white lg:group-hover:text-primary
+                    {{ else }}
+                        text-white
+                    {{ /if }}
+                    relative flex gap-8 sm:gap-10 md:gap-12
+                    transition-colors
+                "
+            >
+
+                {{ partial:typography/h5
+                    :content="label"
+                    size="label"
+                    letter_spacing="tracking-widest"
+                    weight="font-black"
+                    class="-mb-[3%] xl:-mb-[5%]"
+                    as="div"
+                }}
+
+                <div
+                    class="
+                        relative
+                        flex justify-center items-center
+                        w-12 sm:w-16 overflow-hidden
+                    "
+                >
+                    <div
+                        x-show="hovered"
+                        x-transition:enter="transition ease-in-out-circ delay-75 duration-300"
+                        x-transition:enter-start="-translate-x-over"
+                        x-transition:enter-end="translate-x-0"
+                        x-transition:leave="transition ease-in-out-circ duration-300"
+                        x-transition:leave-start="translate-x-0"
+                        x-transition:leave-end="translate-x-over"
+                        class="
+                            {{
+                                if theme === "black"
+                                or theme === "red"
+                            }}
+                                text-white
+                            {{ elseif theme === "white" }}
+                                text-primary
+                            {{ /if }}
+                            absolute inset-0 flex justify-center items-center
+                        "
+                    >
+                        {{ svg:visuals/arrow }}
+                    </div>
+
+                    <div
+                        x-show="!hovered"
+                        x-transition:enter="transition ease-in-out-circ delay-150 duration-300"
+                        x-transition:enter-start="-translate-x-over"
+                        x-transition:enter-end="translate-x-0"
+                        x-transition:leave="transition ease-in-out-circ duration-300"
+                        x-transition:leave-start="translate-x-0"
+                        x-transition:leave-end="translate-x-over"
+                        class="
+                            {{ if theme === "black" }}
+                                text-neutral
+                            {{ elseif theme === "red" }}
+                                text-primary
+                            {{ elseif theme === "white" }}
+                                text-white
+                            {{ /if }}
+                            relative w-full
+                        "
+                    >
+                        {{ svg:visuals/arrow }}
+                    </div>
+                </div>
+            </div>
+        </{{ as or "a" }}>
+    </div>
+</div>
+{{ /if }}

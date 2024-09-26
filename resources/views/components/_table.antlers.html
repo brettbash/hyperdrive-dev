@@ -8,7 +8,7 @@
     class="size-{{ size }} my-12 overflow-scroll"
 >
     <table
-        x-data="fadeIn()"
+        x-data="animate()"
         x-init="mounted()"
         x-ref="element"
         class="w-full bg-neutral-600 border-collapse"
@@ -55,7 +55,7 @@
 
     {{ partial:typography/caption
         attribute="
-            x-data='fadeIn()'
+            x-data='animate()'
             x-init='mounted()'
             x-ref='element'
         "

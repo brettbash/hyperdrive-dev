@@ -1,0 +1,105 @@
+{{#
+    @name Button: Hamburger
+    @desc Hamburger button that toggles the hidden navigation.
+    @type Component
+#}}
+
+<button
+    x-data="{
+        hovered: false,
+    }"
+
+    @mouseleave="
+        mm.add(avalanche.breakpoint(avalanche.screens.lg), () => {
+            hovered = false;
+        });
+    "
+
+    @mouseenter="
+        mm.add(avalanche.breakpoint(avalanche.screens.lg), () => {
+            hovered = true;
+        });
+    "
+
+    @click="$store.overlay.nav.toggle()"
+    :aria-label="$store.overlay.nav.open ? 'Close Nav' : 'Open Nav'"
+    class="
+        flex justify-center items-center
+        w-full h-full px-4
+        focus:outline-none
+        group
+    "
+>
+
+    <div class="relative w-full h-full overflow-hidden">
+        <div
+            x-data="animate()"
+            x-init="
+                opacity.active = false;
+                xPercent = {
+                    ...xPercent, active: true,
+                    start: 101,
+                };
+
+                scrollTrigger = false;
+                delay = avalanche.delay.enter + {{ delay }};
+                mounted();
+            "
+            x-ref="element"
+            class="relative w-full h-full"
+        >
+
+            {{# π ----
+            // :: HAMBURGER
+            // : ---------------------------------- #}}
+            <div
+                x-show="!$store.overlay.nav.open"
+                x-transition:enter="transition ease-in-out-circ duration-500"
+                x-transition:enter-start="translate-x-over"
+                x-transition:enter-end="translate-x-0"
+                x-transition:leave="transition ease-in-out-circ duration-500"
+                x-transition:leave-start="translate-x-0"
+                x-transition:leave-end="-translate-x-over"
+                class="relative flex flex-col justify-center items-end w-full h-full gap-2 overflow-hidden"
+            >
+
+                <div
+                    class="
+                        w-full h-px
+                        bg-white group-hover:bg-primary-300
+                        group-focus-visible:bg-tertiary group-hover:group-focus-visible:bg-secondary
+                        lg:group-hover:-translate-x-1/2
+                        transition duration-200
+                    "
+                ></div>
+
+                <div
+                    class="
+                        w-full h-px
+                        bg-white group-hover:bg-primary-300
+                        group-focus-visible:bg-tertiary group-hover:group-focus-visible:bg-secondary
+                        translate-x-1/3 lg:group-hover:translate-x-0
+                        transition duration-200
+                    "
+                ></div>
+            </div>
+
+            {{# π ----
+            // :: CLOSE
+            // : ---------------------------------- #}}
+            <div
+                x-show="$store.overlay.nav.open"
+                x-transition:enter="transition ease-in-out-circ duration-500"
+                x-transition:enter-start="translate-x-over"
+                x-transition:enter-end="translate-x-0"
+                x-transition:leave="transition ease-in-out-circ duration-500"
+                x-transition:leave-start="translate-x-0"
+                x-transition:leave-end="-translate-x-over"
+                class="absolute inset-0"
+            >
+
+                {{ partial:components/close }}
+            </div>
+        </div>
+    </div>
+</button>

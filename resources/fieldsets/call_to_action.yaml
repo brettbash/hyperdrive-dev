@@ -1,7 +1,6 @@
 title: 'Block: Call to Action'
 fields:
-  -
-    handle: style_type
+  - handle: style_type
     field:
       options:
         full: Full
@@ -13,8 +12,7 @@ fields:
       listable: hidden
       instructions_position: above
       read_only: false
-  -
-    handle: subtitle
+  - handle: subtitle
     field:
       input_type: text
       antlers: false
@@ -24,8 +22,7 @@ fields:
       listable: hidden
       instructions_position: above
       read_only: false
-  -
-    handle: title
+  - handle: title
     field:
       input_type: text
       type: text
@@ -35,30 +32,27 @@ fields:
       instructions: 'The title you want to display above the text.'
       validate:
         - required
-  -
-    handle: text
+  - handle: text
     field: common.text_plain
-  -
-    import: buttons
-  -
-    handle: background
+  - import: buttons
+  - handle: media
     field:
-      fields:
-        -
-          import: background
-      mode: stacked
-      max_rows: 1
-      add_row: 'Add Background'
-      reorderable: false
-      display: Background
-      type: grid
-      icon: grid
-      listable: hidden
+      container: assets
+      mode: grid
+      restrict: false
+      allow_uploads: false
+      max_files: 1
+      type: assets
+      listable: false
+      display: Media
       instructions_position: above
-      read_only: false
+      visibility: visible
+      replicator_preview: true
+      show_set_alt: false
+      hide_display: false
+      width: 50
+      show_filename: true
       if:
         style_type: full
-  -
-    import: block_spacing
-  -
-    import: anchor
+  - import: block_spacing
+  - import: anchor

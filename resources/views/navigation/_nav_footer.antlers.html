@@ -1,0 +1,10 @@
+{{#
+	@name Footer Navigation
+	@desc Displays in the footer
+#}}
+
+<nav class="hidden lg:flex space-x-4">
+    {{ nav:footer max_depth="1" }}
+        {{ partial:components/navigation/nav_item_small }}
+    {{ /nav:footer }}
+</nav>

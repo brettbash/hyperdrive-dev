@@ -1,0 +1,15 @@
+{{#
+    @name Dev Section
+    @desc Auto scrolls to the current section in development by using the `current-dev` ID.
+    @type snippet
+#}}
+
+<div
+    x-data="{
+        offset: '-91px',
+        init() {
+            if (!document.getElementById('current-dev')) return
+            setTimeout(() => smoother.scrollTo('#current-dev', true, this.offset), 2600)
+        },
+    }"
+></div>

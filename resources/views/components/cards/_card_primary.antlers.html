@@ -1,0 +1,149 @@
+{{#
+    @name Primary Card
+    @desc Main card used for an entry or custom
+    @type component
+#}}
+
+<div
+    class="
+        {{ partial:snippets/border border="{border or "border"}" }}
+        {{ padding or "p-4 md:p-8" }}
+        w-full
+    "
+>
+
+<a
+    data-card
+    {{ if card:entry }}
+        {{ partial:snippets/link_attributes
+            action="entry"
+            :entry="card:entry"
+        }}
+    {{ /if }}
+    {{ if card:url }}
+        {{ partial:snippets/link_attributes
+            action="url"
+            :entry="card:url"
+        }}
+    {{ /if }}
+    {{ card:action }}
+        {{ partial:snippets/link_attributes }}
+    {{ /card:action }}
+    class="
+        relative z-10
+        grid gap-4
+        w-full text-left
+        focus:outline-none
+        transition-none group
+    "
+>
+
+    {{# -- π ----
+    // :: PROFILE IMAGE/VIDEO
+    // : ------------------------------------ #}}
+    <div
+        x-data="magnetic()"
+        @mousemove="
+            magnetize($event, $el, $refs.card, 25);
+            magnetize($event, $el, $refs.selector, -35);
+        "
+        @mouseleave="
+            demagnetize($refs.card);
+            demagnetize($refs.selector);
+        "
+        class="
+            relative z-0 w-full aspect-[5/6]
+        "
+    >
+        <div
+            x-ref="card"
+            class="relative w-full h-full"
+        >
+
+            <div
+                class="
+                    {{ switch between="media-mask-1|media-mask-2|media-mask-3|media-mask-4|media-mask-5" }}
+                    media-mask
+                    relative z-0
+                    w-full h-full
+                    bg-neutral-900 overflow-hidden
+                "
+            >
+                {{ media = card:media
+                    or card:entry.featured_media
+                    or card:entry.hero.media
+                    or card:featured_media
+                    or card:hero.media
+                }}
+                {{ media }}
+                    {{ partial:components/media
+                        size="w-full h-full"
+                        class="
+                            lg:group-hover:scale-110
+                            transition-transform duration-500 ease-in-out-quint
+                        "
+                    }}
+                {{ /media }}
+            </div>
+
+            {{ svg
+                src="visuals/media-masks/media-mask-{switch between="1|2|3|4|5"}"
+                class="
+                    absolute z-10 inset-0
+                    w-full h-full
+                    fill-none stroke-2
+                    stroke-neutral-100/40 lg:group-hover:stroke-primary-100/50
+                    transition duration-400 ease-in-out-quint
+                "
+            }}
+        </div>
+
+        <div
+            class="
+                absolute inset-0
+                p-4
+                transition
+            "
+        >
+            <div
+                class="
+                    lg:group-hover:animate-flicker
+                    w-full h-full
+                "
+            >
+                <div
+                    x-ref="selector"
+                    class="w-full h-full"
+                >
+
+                    {{ svg
+                        src="visuals/media-masks/media-mask-{switch between="1|2|3|4|5" for="overlay"}"
+                        class="
+                            w-full h-full
+                            fill-none stroke-2 stroke-primary-100
+                            mix-blend-screen
+                            opacity-0 lg:group-hover:opacity-80
+                            transition
+                        "
+                    }}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div
+        class="
+            relative
+            inline-flex items-center gap-2
+            lg:group-hover:text-tertiary
+            transition
+        "
+    >
+
+        {{ partial:typography/h6
+            as="div"
+            :content="card.type === 'entry' ? card:entry.title : card:title"
+        }}
+    </div>
+</a>
+</div>

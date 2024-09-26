@@ -1,0 +1,62 @@
+{{#
+    @name Scroll Button
+    @desc Scrolls the user to a specific section
+    @parm destination - Mixed. Pixel height (Number), dom object height (Object), or ID (String).
+    @parm offset - String. Offset on the desination.
+    @type component
+#}}
+
+<button
+    x-data="{
+        scrollMe() {
+            smoother.scrollTo(
+                {{ destination or "window.innerHeight" }},
+                true,
+                '{{ offset or "top top" }}'
+            );
+        },
+    }"
+    @click="scrollMe()"
+    class="
+        flex flex-col items-center gap-3
+        w-full
+        focus:outline-none
+        lg:hover:animate-flicker
+        group
+    "
+>
+
+    {{ svg:visuals/chevron
+        class="
+            w-3
+            opacity-0 lg:group-hover:opacity-100
+            lg:group-hover:translate-y-6
+            transition ease-in-out-expo
+        "
+    }}
+
+    <div
+        class="
+            relative pt-2
+            group-focus-visible:text-tertiary
+
+            lg:group-hover:translate-y-4
+            transition ease-in-out-expo
+        "
+    >
+        {{ partial:typography/meta
+            content="Scroll"
+            line_height="leading-none"
+            class="vertical-writing-lr orientation-sideways"
+        }}
+    </div>
+
+    {{ svg:visuals/chevron
+        class="
+            w-3
+            lg:group-hover:text-primary-300
+            lg:group-hover:translate-y-2
+            transition ease-in-out-expo
+        "
+    }}
+</button>

@@ -1,0 +1,79 @@
+{{#
+    @name Company Contact Card
+    @desc Shows the company contact information within the contact groups block
+    @type component
+#}}
+
+{{ if block:show_company_contact }}
+    <div
+        class="
+            {{ partial:snippets/border border="border" }}
+            sm:col-span-2
+            grid sm:grid-cols-2
+            w-full bg-neutral-800 rounded-3xl
+        "
+    >
+        <div
+            class="
+                {{ partial:snippets/border border="sm:border-r" }}
+                flex flex-col items-center lg:items-start
+                gap-8 p-4 3xl:p-8
+                text-center lg:text-left
+            "
+        >
+            <div class="w-3/4 max-w-xs">
+                {{ partial:components/picture
+                    image="/assets/logo.png"
+                    sizes="(min-width: 1280px) 640px, (min-width: 768px) 20vw, 30vw"
+                }}
+            </div>
+
+            {{ partial:typography/h6
+                :content="site.name"
+                color="text-primary"
+                size="text-2xl sm:text-lg lg:text-xl xl:text-2xl"
+            }}
+        </div>
+
+        <div
+            class="
+                flex flex-col justify-between gap-8 p-4 3xl:p-8
+            "
+        >
+            <div class="grid">
+                {{ partial:typography/paragraph
+                    :content="configuration:address_street"
+                    size="lg"
+                    margin="m-0"
+                }}
+
+                {{ if configuration:address_unit }}
+                    {{ partial:typography/paragraph
+                        content="Suite {configuration:address_unit}"
+                        size="lg"
+                        margin="m-0"
+                    }}
+                {{ /if }}
+
+                {{ partial:typography/paragraph
+                    content="{configuration:address_city}, {configuration:address_state} {configuration:address_zip}"
+                    size="lg"
+                    margin="m-0"
+                }}
+            </div>
+
+            <div class="flex flex-col items-start">
+                {{ partial:components/contact_item
+                    :label="configuration:phone"
+                    link="tel:{{ configuration:phone }}"
+                }}
+
+                {{ partial:components/contact_item
+                    :label="configuration:email"
+                    link="mailto:{{ configuration:email }}"
+                    icon="mail"
+                }}
+            </div>
+        </div>
+    </div>
+{{ /if }}

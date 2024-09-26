@@ -1,7 +1,6 @@
 title: 'Component: Card'
 fields:
-  -
-    handle: type
+  - handle: type
     field:
       options:
         custom: Custom
@@ -13,8 +12,7 @@ fields:
       listable: hidden
       instructions_position: above
       read_only: false
-  -
-    handle: title
+  - handle: title
     field:
       input_type: text
       antlers: false
@@ -26,35 +24,34 @@ fields:
       read_only: false
       if:
         type: custom
-  -
-    handle: media
+  - handle: media
     field:
-      fields:
-        -
-          import: background
-      mode: stacked
-      max_rows: 1
-      add_row: 'Add Media'
-      reorderable: true
+      container: assets
+      mode: grid
+      restrict: false
+      allow_uploads: false
+      max_files: 1
+      type: assets
+      listable: false
       display: Media
-      type: grid
-      icon: grid
-      listable: hidden
       instructions_position: above
-      read_only: false
+      visibility: visible
+      replicator_preview: true
+      show_set_alt: false
+      hide_display: false
+      width: 50
+      show_filename: true
       if:
         type: custom
-  -
-    handle: action
+  - handle: action
     field:
       fields:
-        -
-          import: links
+        - import: links
       mode: stacked
       max_rows: 1
       add_row: 'Add Link Action'
       reorderable: false
-      display:  Action
+      display: Action
       type: grid
       icon: grid
       listable: hidden

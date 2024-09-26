@@ -1,0 +1,22 @@
+{{#
+    @name Theme
+    @desc Sets the theme on the block or module.
+#}}
+
+{{ if theme === "#F01539" }}
+    bg-primary text-white
+    {{ button_theme = "white" }}
+
+{{ elseif theme === "#ffffff" }}
+    bg-white text-neutral
+    {{ blinker_theme = "tertiary" }}
+    {{ button_theme = "red" }}
+    {{ title_color = "text-primary" }}
+
+{{ elseif theme === "#817E9E" }}
+    bg-neutral-200 text-white
+    {{ button_theme = "white" }}
+
+{{ else }}
+    bg-neutral text-white
+{{ /if }}

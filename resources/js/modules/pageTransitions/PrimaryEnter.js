@@ -1,19 +1,16 @@
 export default () => {
-    document.body.classList.add('no-scroll')
+    const loader = document.querySelector('[data-transition-primary]')
+    const cover = loader.querySelector('[data-cover]')
+    const logo = loader.querySelector('[data-logo]')
 
-    const initialLoad = gsap.timeline({
-        defaults: { ease: 'circ.inOut' },
+    const tl = gsap.timeline({
         onComplete: () => {
-            document.body.classList.remove('no-scroll')
+            smoother.paused(false)
+            avalanche.loaded = true
         },
     })
 
-    const loaderWrapper = document.querySelector('[data-loader-wrapper]')
-    const curtainYellow = document.querySelector('[data-curtain-yellow]')
-    const curtainBlue = document.querySelector('[data-curtain-blue]')
-
-    initialLoad
-        .to(curtainBlue, { duration: 0.6, xPercent: 101 })
-        .to(curtainYellow, { duration: 0.6, xPercent: 101 }, '<0.2')
-        .set(loaderWrapper, { autoAlpha: 0 })
+    tl.to(cover, { opacity: 0, duration: 0.4, ease: 'circ.in' })
+        .to(logo, { opacity: 0, yPercent: -200, scale: 1.2, duration: 0.5, ease: 'circ.in' }, '<')
+        .set(loader, { autoAlpha: 0 })
 }

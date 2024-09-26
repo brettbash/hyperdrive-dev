@@ -1,7 +1,6 @@
 title: 'Block: Split'
 fields:
-  -
-    handle: alignment
+  - handle: alignment
     field:
       options:
         left: 'Text / Media'
@@ -11,32 +10,31 @@ fields:
       type: button_group
       icon: button_group
       listable: hidden
-  -
-    handle: media
+  - handle: media
     field:
-      fields:
-        -
-          import: background
-      mode: stacked
-      max_rows: 1
-      add_row: 'Add Media'
-      reorderable: false
+      container: assets
+      mode: grid
+      restrict: false
+      allow_uploads: false
+      max_files: 1
+      type: assets
+      listable: false
       display: Media
-      type: grid
-      icon: grid
-      listable: hidden
       instructions_position: above
-      read_only: false
-  -
-    handle: html_content
+      visibility: visible
+      replicator_preview: true
+      show_set_alt: false
+      hide_display: false
+      width: 50
+      show_filename: true
+  - handle: html_content
     field:
       html: '<hr>'
       display: Content
       type: html
       icon: html
       listable: hidden
-  -
-    handle: subtitle
+  - handle: subtitle
     field:
       input_type: text
       antlers: false
@@ -45,8 +43,7 @@ fields:
       icon: text
       listable: false
       instructions_position: above
-  -
-    handle: title
+  - handle: title
     field:
       input_type: text
       antlers: false
@@ -54,12 +51,8 @@ fields:
       type: text
       icon: text
       listable: hidden
-  -
-    handle: text
+  - handle: text
     field: common.text_plain
-  -
-    import: buttons
-  -
-    import: block_spacing
-  -
-    import: anchor
+  - import: buttons
+  - import: block_spacing
+  - import: anchor

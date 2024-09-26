@@ -1,48 +1,33 @@
 title: 'Module: Hero'
 fields:
-  -
-    handle: media
+  - handle: type
     field:
-      fields:
-        -
-          import: background
-      mode: stacked
-      max_rows: 1
-      add_row: 'Add Media'
-      reorderable: true
-      display: Media
-      type: grid
-      icon: grid
+      options:
+        primary: Primary
+        secondary: Secondary
+      display: Type
+      default: primary
+      type: button_group
+      icon: button_group
       listable: hidden
       instructions_position: above
-      read_only: false
-  -
-    handle: size
+      visibility: visible
+      replicator_preview: true
+      hide_display: false
+  - handle: subtitle
     field:
-      options:
-        full: Full
-        compact: Compact
-      display: Size
-      default: full
-      type: button_group
-      icon: button_group
+      input_type: text
+      antlers: false
+      display: Subtitle
+      type: text
+      icon: text
       listable: hidden
-      width: 50
-  -
-    handle: alignment
-    field:
-      options:
-        left: Left
-        center: Center
-        right: Right
-      display: 'Content Alignment'
-      default: left
-      type: button_group
-      icon: button_group
-      listable: hidden
-      width: 50
-  -
-    handle: title
+      instructions_position: above
+      visibility: visible
+      replicator_preview: true
+      hide_display: false
+      width: 33
+  - handle: title
     field:
       input_type: text
       antlers: false
@@ -51,9 +36,28 @@ fields:
       icon: text
       listable: hidden
       instructions_position: above
-      read_only: false
-  -
-    handle: text
+      visibility: visible
+      replicator_preview: true
+      hide_display: false
+      width: 66
+  - handle: text
     field: common.text_plain
-  -
-    import: buttons
+    config:
+  - import: buttons
+  - handle: media
+    field:
+      container: assets
+      mode: grid
+      restrict: false
+      allow_uploads: false
+      max_files: 1
+      type: assets
+      listable: false
+      display: Media
+      instructions_position: above
+      visibility: visible
+      replicator_preview: true
+      show_set_alt: false
+      hide_display: false
+      width: 50
+      show_filename: true

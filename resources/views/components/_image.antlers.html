@@ -1,0 +1,31 @@
+{{#
+    @name Image
+    @desc Used to display an image; mainly used by the picture component.
+    @param* image - An image URL.
+    @param class - String. Add optional CSS classes.
+    @param cover - Boolean. Whether the image should cover the parent. Uses the focus point.
+    @param alt - String. Image's alt text.
+    @param lazy - Boolean. Whether the image should be natively lazy loaded.
+    @type component
+#}}
+
+<img
+    src="{{ image }}"
+    class="
+        {{ cover ?= "absolute inset-0 w-full h-full object-cover" }}
+        {{ class }}
+    "
+    {{ if cover }}
+        style="object-position: {{ focus | background_position }}"
+    {{ /if }}
+
+    {{ if alt }}
+        alt="{{ alt ensure_right='.' }}"
+    {{ else }}
+        aria-hidden="true"
+    {{ /if }}
+
+    {{ if lazy }}
+        loading="lazy"
+    {{ /if }}
+/>

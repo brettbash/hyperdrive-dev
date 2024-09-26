@@ -1,55 +1,83 @@
 {{#
-	@name Picture
-	@desc The picture component.
+    @name Picture
+    @desc A responsive imageset in a picture element or just an img element
+    @param* image - An image URL.
+    @param sizes - String. The sizes picture attribute. Something like `(min-width: 768px) 55vw, 90vw` or `auto` for example.
+    @param static_image - Boolean. Using just an image URL in an img tag instead of a picture element with Glide image processing.
+    @param class - String. Add optional CSS classes - Passes into Image component.
+    @param cover - Boolean. Whether the image should cover the parent. Uses the focus point.
+    @param alt - String. Image's alt text.
+    @param srcset_from The path to a partial with an alternative srcset definition array. Something like `snippets/srcset_full_width` for example.
+    @param bg - String. Sets a background color for transparent images.
+    @param blur - Integer. Adds a blur effect to the image. Use values between 0 and 100.
+    @param brightness - String. Adjusts the image brightness. Use values between -100 and +100, where 0 represents no change.
+    @param contrast - String. Adjusts the image contrast. Use values between -100 and +100, where 0 represents no change.
+    @param filter - String. Applies a filter effect to the image. Accepts `greyscale` or `sepia`.
+    @param gamma - Float. Adjusts the image gamma. Use values between 0.1 and 9.99.
+    @param sharpen - Integer. Sharpen the image. Use values between 0 and 100.
+    @param pixelate - Integer. Applies a pixelation effect to the image. Use values between 0 and 1000.
+    @param lazy - - Boolean. Whether the image should be natively lazy loaded.
+    @type component
 #}}
 
 {{ if image }}
+    {{ srcset = null }}
+    {{ partial src="{ srcset_from ?: "snippets/srcset_default" }" }}
+    {{ sizes = sizes or "(min-width: 1280px) 100vw, (min-width: 768px) 50vw, 90vw" }}
+
     <picture>
         {{ asset :url="image" }}
-            {{ if extension == 'svg' || extension == 'gif' || static_image }}
-                <img class="{{ class }}" src="{{ url }}" alt="{{ alt }}">
+            {{ if extension === "svg" || extension === "gif" || static_image }}
+                {{ partial:components/image
+                    :image="url"
+                }}
+
             {{ else }}
                 <source
                     srcset="
-                        {{ glide:url preset='xs-webp' }} 320w,
-                        {{ glide:url preset='sm-webp' }} 480w,
-                        {{ glide:url preset='md-webp' }} 768w,
-                        {{ glide:url preset='lg-webp' }} 1280w,
-                        {{ glide:url preset='xl-webp' }} 1440w,
-                        {{ glide:url preset='2xl-webp' }} 1680w"
+                        {{ srcset scope="size" }}
+                            {{
+                                glide:url
+                                preset="{ size:size }-webp"
+                                :bg="bg"
+                                :blur="blur"
+                                :brightness="brightness"
+                                :contrast="contrast"
+                                :filter="filter"
+                                :gamma="gamma"
+                                :pixelate="pixelate"
+                                :sharpen="sharpen"
+                            }} {{ size:width }}w{{ !last ?= ',' }}
+                        {{ /srcset }}
+                    "
                     sizes="{{ sizes }}"
                     type="image/webp"
                 >
 
                 <source
                     srcset="
-                        {{ glide:url preset='xs' }} 320w,
-                        {{ glide:url preset='sm' }} 480w,
-                        {{ glide:url preset='md' }} 768w,
-                        {{ glide:url preset='lg' }} 1280w,
-                        {{ glide:url preset='xl' }} 1440w,
-                        {{ glide:url preset='2xl' }} 1680w"
+                        {{ srcset scope="size" }}
+                            {{
+                                glide:url
+                                preset="size:size"
+                                :bg="bg"
+                                :blur="blur"
+                                :brightness="brightness"
+                                :contrast="contrast"
+                                :filter="filter"
+                                :gamma="gamma"
+                                :pixelate="pixelate"
+                                :sharpen="sharpen"
+                            }} {{ size:width }}w{{ !last ?= ',' }}
+                        {{ /srcset }}
+                    "
                     sizes="{{ sizes }}"
-                    {{ if extension == 'png' }}
-                        type="image/png"
-                    {{ else }}
-                        type="image/jpeg"
-                    {{ /if }}
+                    type="{{ image.mime_type }}"
                 >
 
-                <img
-                    {{ if cover }}
-                        class="object-cover {{ class }}"
-                        style="object-position: {{ focus | background_position }}"
-                    {{ else }}
-                        class="{{ class }}"
-                    {{ /if }}
-                    src="{{ glide:url preset='lg' }}"
-                    alt="{{ alt ensure_right='.' }}"
-                    {{ if lazy }}
-                        loading="lazy"
-                    {{ /if }}
-                >
+                {{ partial:components/image
+                    image="{ glide:url preset='lg' }"
+                }}
             {{ /if }}
         {{ /asset }}
     </picture>

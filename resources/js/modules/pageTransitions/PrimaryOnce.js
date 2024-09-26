@@ -1,19 +1,23 @@
 export default () => {
-    document.body.classList.add('no-scroll')
+    smoother.paused(true)
+    const loader = document.querySelector('[data-transition-primary-once]')
+    const curtains = loader.querySelectorAll('[data-curtain')
+    const logo = loader.querySelector('[data-logo]')
 
-    const initialLoad = gsap.timeline({
+    const tl = gsap.timeline({
         defaults: { ease: 'circ.inOut' },
         onComplete: () => {
-            document.body.classList.remove('no-scroll')
+            smoother.paused(false)
+            avalanche.loaded = true
         },
     })
 
-    const loaderWrapper = document.querySelector('[data-loader-wrapper]')
-    const curtainYellow = document.querySelector('[data-curtain-yellow]')
-    const curtainBlue = document.querySelector('[data-curtain-blue]')
-
-    initialLoad
-        .to(curtainBlue, { duration: 0.8, xPercent: 101 })
-        .to(curtainYellow, { duration: 0.6, xPercent: 101 }, '<0.6')
-        .set(loaderWrapper, { autoAlpha: 0 })
+    tl.fromTo(
+        logo,
+        { opacity: 0, yPercent: 20, scale: 0.9 },
+        { opacity: 1, yPercent: 0, scale: 1, duration: 0.6, ease: 'circ.out' },
+    )
+        .to(curtains, { duration: 0.8, xPercent: 101, stagger: 0.2 })
+        .to(logo, { opacity: 0, yPercent: -5, scale: 1.8, duration: 0.4, ease: 'quad.in' }, '<+=0.5')
+        .set(loader, { autoAlpha: 0 })
 }

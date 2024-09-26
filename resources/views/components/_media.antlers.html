@@ -1,0 +1,66 @@
+{{#
+    @name Media
+    @desc Image or looping video
+    @param* url - An image or video URL.
+    @param position - String. CSS position classes.
+    @param size - String. CSS size classes.
+    @param class - String. Add optional CSS classes.
+    @param video_position - String. CSS position cljsses for the video tag.
+    @param video_width - String. CSS width classes for the video tag.
+    @param video_class - String. Add optional CSS classes for the video tag.
+    @param image_class - String. Add optional CSS classes for the img tag.
+    @param attribute - String. Javascript attributes.
+    @param no_cover - Boolean. Removes object cover and focus positioning. Default is 'false' so assets are set to cover.
+    @type component
+#}}
+
+<div
+    {{ attribute }}
+    class="
+        {{ position or "absolute inset-0" }}
+        {{ size or "w-full h-full" }}
+        {{ class }}
+    "
+>
+    {{# π ----
+    // :: VIDEO
+    // : ---------------------------------- #}}
+    {{
+        if extension === "mp4"
+        || extension === "webm"
+        || extension === "mov"
+        || extension === "mkv"
+        || extension === "avi"
+    }}
+        <video
+            x-data
+            x-ref="video"
+            x-init="$refs.video.play()"
+            class="
+                {{ video_position or "absolute inset-0" }}
+                {{ video_width or "w-full" }}
+                {{ !no_cover ?= "h-full object-cover" }}
+                {{ video_class }}
+            "
+            {{ if !no_cover }}
+                style="object-position: {{ focus | background_position }}"
+            {{ /if }}
+            playsinline
+            autoplay
+            muted
+            loop
+        >
+            <source src="{{ url }}" />
+        </video>
+
+    {{# π ----
+    // :: IMAGE
+    // : ---------------------------------- #}}
+    {{ else }}
+        {{ partial:components/picture
+            :image="url"
+            :class="image_class or 'w-full h-full'"
+            :cover="!no_cover"
+        }}
+    {{ /if }}
+</div>

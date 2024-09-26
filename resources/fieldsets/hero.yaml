@@ -42,7 +42,6 @@ fields:
       width: 66
   - handle: text
     field: common.text_plain
-    config:
   - import: buttons
   - handle: media
     field:

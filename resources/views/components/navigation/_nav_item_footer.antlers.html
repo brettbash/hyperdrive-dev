@@ -1,6 +1,6 @@
 {{#
-	@name Nav Item Small
-	@desc Small nav item used in the header and footer
+	@name Footer Nav Item
+	@desc Small nav item used in the footer
     @type component
 #}}
 
@@ -8,7 +8,7 @@
     href="{{ url }}"
     class="
         {{ color ?? 'text-white' }}
-        {{ hover ?? 'lg:hover:text-primary' }}
+        {{ color_hover ?? 'lg:hover:text-primary' }}
         transition-colors
     "
 >

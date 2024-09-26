@@ -29,10 +29,8 @@
     <div
         x-data="animate()"
         x-init="
-            translate = 'y';
-            yStart = -50;
             scrollTrigger = false;
-            delay = $store.enterDelay + 0.2;
+            delay = avalanche.delay.enter + 0.2;
             mounted();
         "
         x-cloak
@@ -50,9 +48,8 @@
             {{ partial:navigation/nav_primary }}
         </div>
 
-        <div class="flex items-center space-x-10">
+        <div class="flex">
             {{ partial:components/buttons/button_hamburger }}
         </div>
-
     </div>
 </header>

@@ -1,93 +1,80 @@
-sections:
+tabs:
   general:
     display: General
-    fields:
+    sections:
       -
-        handle: section_general
-        field:
-          type: section
-          listable: hidden
-          display: 'General configuration'
-          instructions: 'Global site configuration options.'
-      -
-        handle: email
-        field:
-          input_type: email
-          antlers: false
-          display: 'Primary Email'
-          type: text
-          icon: text
-          listable: hidden
-          width: 50
-      -
-        handle: phone
-        field:
-          input_type: tel
-          antlers: false
-          display: Phone
-          type: text
-          icon: text
-          listable: hidden
-          width: 50
-      -
-        handle: address_street
-        field:
-          input_type: text
-          antlers: false
-          display: Street
-          type: text
-          icon: text
-          listable: false
-          width: 66
-      -
-        handle: address_unit
-        field:
-          input_type: text
-          antlers: false
-          display: Suite/Unit
-          type: text
-          icon: text
-          listable: false
-          width: 33
-      -
-        handle: address_city
-        field:
-          input_type: text
-          antlers: false
-          display: City
-          type: text
-          icon: text
-          listable: false
-          width: 50
-      -
-        handle: address_state
-        field:
-          input_type: text
-          antlers: false
-          display: State
-          type: text
-          icon: text
-          listable: false
-          width: 25
-      -
-        handle: address_zip
-        field:
-          input_type: text
-          antlers: false
-          display: Zip
-          type: text
-          icon: text
-          listable: false
-          width: 25
+        fields:
+          -
+            handle: hidden_nav_on_desktop
+            field:
+              type: toggle
+              display: 'Hidden Nav on Desktop'
+              width: 50
+          -
+            handle: section_general
+            field:
+              type: section
+              display: 'General configuration'
+              instructions: 'Global site configuration options.'
+          -
+            handle: email
+            field:
+              input_type: email
+              display: 'Primary Email'
+              type: text
+              width: 50
+          -
+            handle: phone
+            field:
+              input_type: tel
+              display: Phone
+              type: text
+              width: 50
+          -
+            handle: address_street
+            field:
+              display: Street
+              type: text
+              listable: false
+              width: 66
+          -
+            handle: address_unit
+            field:
+              display: Suite/Unit
+              type: text
+              listable: false
+              width: 33
+          -
+            handle: address_city
+            field:
+              display: City
+              type: text
+              listable: false
+              width: 50
+          -
+            handle: address_state
+            field:
+              display: State
+              type: text
+              listable: false
+              width: 25
+          -
+            handle: address_zip
+            field:
+              display: Zip
+              type: text
+              listable: false
+              width: 25
   error_messages:
     display: 'Error messages'
-    fields:
+    sections:
       -
-        handle: section_404
-        field:
-          type: section
-          listable: hidden
-          display: '404 error'
-      -
-        import: error_message
-        prefix: '404_'
+        fields:
+          -
+            handle: section_404
+            field:
+              type: section
+              display: '404 error'
+          -
+            import: error_message
+            prefix: '404_'

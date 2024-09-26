@@ -1,7 +1,6 @@
 title: 'Common reusable fields'
 fields:
-  -
-    handle: image
+  - handle: image
     field:
       mode: list
       container: assets
@@ -12,8 +11,7 @@ fields:
       localizable: true
       listable: hidden
       display: Image
-  -
-    handle: entry
+  - handle: entry
     field:
       max_items: 1
       mode: default
@@ -21,8 +19,7 @@ fields:
       localizable: true
       listable: false
       display: Entry
-  -
-    handle: text_rich
+  - handle: text_rich
     field:
       buttons:
         - h2
@@ -51,8 +48,7 @@ fields:
       enable_input_rules: true
       enable_paste_rules: true
       antlers: false
-  -
-    handle: text_basic
+  - handle: text_basic
     field:
       buttons:
         - bold
@@ -79,15 +75,13 @@ fields:
       enable_input_rules: true
       enable_paste_rules: true
       antlers: false
-  -
-    handle: text_plain
+  - handle: text_plain
     field:
       type: textarea
       localizable: true
       listable: hidden
       display: Text
-  -
-    handle: size
+  - handle: size
     field:
       options:
         md: Normal

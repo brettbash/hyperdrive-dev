@@ -19,3 +19,9 @@ data:
       prefix: 'https://www.youtube.com/'
       type: youtube
       enabled: true
+    -
+      id: m1juzfwc
+      url: brettbash
+      prefix: 'https://www.x.com/'
+      type: x
+      enabled: true

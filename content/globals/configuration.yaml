@@ -1,4 +1,5 @@
 title: Configuration
 data:
+  hidden_nav_on_desktop: true
   404_title: 'Page not found'
   404_text: 'The page you were looking for is not available (anymore).'

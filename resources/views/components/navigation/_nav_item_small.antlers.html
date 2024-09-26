@@ -1,14 +1,20 @@
 {{#
 	@name Nav Item Small
 	@desc Small nav item used in the header and footer
+    @type component
 #}}
 
 <a
     href="{{ url }}"
-    class="text-white hover:text-primary transition-colors"
+    class="
+        {{ color ?? 'text-white' }}
+        {{ hover ?? 'lg:hover:text-primary' }}
+        transition-colors
+    "
 >
     {{ partial:typography/h6
         as="div"
         :content="title"
+        color="false"
 	}}
 </a>

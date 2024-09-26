@@ -1,6 +1,4 @@
 export default () => {
-    Alpine.store('isTouch', 'ontouchstart' in document.documentElement && navigator.userAgent.match(/Mobi/))
-
     Alpine.store('parseHtmlEntities', str =>
         str?.replace(/&#([0-9]{1,4});/gi, (match, numStr) => String.fromCharCode(parseInt(numStr, 10))),
     )

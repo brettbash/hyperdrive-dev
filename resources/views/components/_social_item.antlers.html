@@ -8,7 +8,12 @@
     rel="noopener"
     aria-label="{{ config:app:name }} {{ trans:strings.on }} {{ type | title }}"
     target="_blank"
-    class="inline-flex items-center w-5 text-white hover:text-primary transition-colors duration-300 ease-in-out-quad"
+    class="
+        {{ color ?? 'text-white' }}
+        {{ hover ?? 'lg:hover:text-primary' }}
+        inline-flex items-center w-5
+        transition-colors duration-300 ease-in-out-quad
+    "
 >
     {{ svg:visuals/socials/{{ type }} }}
 </a>

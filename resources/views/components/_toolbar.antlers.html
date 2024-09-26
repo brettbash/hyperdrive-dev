@@ -30,9 +30,9 @@
             <span class="breakpoint"></span>
         </span>
 
-        {{ if logged_in == true }}
+        {{ if logged_in }}
             <a
-                href="{{ edit_url }}"
+                :href="$store.overlay.toolbar.editUrl"
                 title="Edit entry in CP"
                 aria-label="Edit entry in CP"
                 target="_blank"

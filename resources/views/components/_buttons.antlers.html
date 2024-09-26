@@ -1,28 +1,48 @@
 {{#
 	@name Buttons
-	@desc Multiple buttons component calling in `resources/views/components/_button.antlers.html`.
+    @desc Multiple buttons component calling in single button components
+    @type component
 #}}
+
+{{ if animation_delay }}
+    {{ fallback_delay = "avalanche.delay.default + {animation_delay}" }}
+{{ else }}
+    {{ fallback_delay = "avalanche.delay.default" }}
+{{ /if }}
+
 
 {{ if buttons }}
     <div
-        {{ attribute }}
-
-        {{ if is_article }}
+        {{ if attribute }}
+            {{ attribute }}
+        {{ else }}
             x-data="animate()"
-            x-init="mounted()"
-            x-ref="element"
+            x-init="
+                element = [...$refs.buttons.querySelectorAll('[data-button]')];
+                stagger = 0.15;
+                scrollTrigger = {{ !no_scroll_trigger ? "true" : "false" }};
+                delay = {{ delay or fallback_delay }};
+                trigger = {{ trigger or "$refs.buttons" }};
+                mounted();
+            "
+            x-ref="buttons"
         {{ /if }}
 
         class="
             {{ is_article ?= "size-md" }}
-            flex sm:inline-flex flex-col md:flex-row justify-start md:items-center flex-wrap space-y-4 md:space-y-0 md:space-x-8
             {{ class }}
+            flex sm:inline-flex flex-col md:flex-row
+            justify-start md:items-center flex-wrap
+            space-y-4 md:space-y-0 md:space-x-8
         "
     >
         {{ buttons }}
-            {{ partial:components/button
-                :attribute="button_attribute"
-            }}
+            <div data-button>
+                {{ partial:components/button
+                    :attribute="button_attribute"
+                    magnetic="true"
+                }}
+            </div>
         {{ /buttons }}
     </div>
 {{ /if }}

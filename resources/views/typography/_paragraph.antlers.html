@@ -6,17 +6,15 @@
 <{{ as or "p" }}
     {{ attribute }}
     class="
-        {{ margin or "mt-0 mb-5 last:mb-0" }}
-
         {{ if size === "lg" }}
-            text-xl
+            text-sm
         {{ else }}
-            text-base
+            text-xs
         {{ /if }}
-
-        leading-normal
         {{ color or "text-inherit" }}
+        {{ margin or "mt-0 mb-5 last:mb-0" }}
         {{ class }}
+        leading-loose
     "
 >
     {{ content | nl2br }}

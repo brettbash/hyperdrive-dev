@@ -8,7 +8,7 @@
     x-data
     x-init="
         {{ if logged_in or environment === 'development' }}
-            $store.overlay.toolbar.editUrl = '';
+            $store.overlay.toolbar.editUrl = '{{ edit_url }}';
         {{ /if }}
 
         {{ if hero.type == 'primary' }}

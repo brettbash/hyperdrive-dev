@@ -2,7 +2,7 @@ export default () => {
     avalanche.delay = {
         ...avalanche.delay,
         default: 0.25,
-        enter: 1,
+        enter: 1.4,
     }
 
     avalanche.textClass.words = {

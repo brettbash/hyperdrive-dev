@@ -1,26 +1,23 @@
 {{#
     @name Button: Hamburger
     @desc Hamburger button that toggles the hidden navigation.
-    @type Component
+    @type component
 #}}
 
 <button
     x-data="{
         hovered: false,
     }"
-
     @mouseleave="
-        mm.add(avalanche.breakpoint(avalanche.screens.lg), () => {
+        if (!avalanche.isTouch) {
             hovered = false;
-        });
+        };
     "
-
     @mouseenter="
-        mm.add(avalanche.breakpoint(avalanche.screens.lg), () => {
+        if (!avalanche.isTouch) {
             hovered = true;
-        });
+        };
     "
-
     @click="$store.overlay.nav.toggle()"
     :aria-label="$store.overlay.nav.open ? 'Close Nav' : 'Open Nav'"
     class="
@@ -30,7 +27,6 @@
         group
     "
 >
-
     <div class="relative w-full h-full overflow-hidden">
         <div
             x-data="animate()"
@@ -42,7 +38,7 @@
                 };
 
                 scrollTrigger = false;
-                delay = avalanche.delay.enter + {{ delay }};
+                delay = avalanche.delay.enter + {{ delay ?? 0 }};
                 mounted();
             "
             x-ref="element"
@@ -62,7 +58,6 @@
                 x-transition:leave-end="-translate-x-over"
                 class="relative flex flex-col justify-center items-end w-full h-full gap-2 overflow-hidden"
             >
-
                 <div
                     class="
                         w-full h-px
@@ -72,7 +67,6 @@
                         transition duration-200
                     "
                 ></div>
-
                 <div
                     class="
                         w-full h-px
@@ -97,7 +91,6 @@
                 x-transition:leave-end="-translate-x-over"
                 class="absolute inset-0"
             >
-
                 {{ partial:components/close }}
             </div>
         </div>
